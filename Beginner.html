@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <title>WEB Project</title>
+        <link rel="stylesheet" href="Proiect.css">
+        <link rel="stylesheet" href="Beginner.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5e6801e0f3.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section class="sub-header1">
+            <nav>
+                <a href="Proiect.html"><img src = "images/logo.png"></a>
+                <p> e-Gardening </p>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="Proiect.html">HOME</a></li>
+                        <li><a href="Proiect.html#lesson">LEARN</a></li>
+                        <li><a href="">TIPS & TRICKS</a></li>
+                        <li><a href="">Q&A</a></li>
+                        <li><a href="">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i> 
+            </nav>
+        <h1>Beginner</h1>
+        </section>
+        
+
+
+    <!--- Lessons -->
+    <section class="lesson"> 
+        <h1>Organic Garden</h1>
+        <p>Are you thinking of starting a garden, but doing it the old fashioned way with no pesticides? Organic Gardening 
+            can be an extremely fun experience, but there are some specific steps you'll want to take before getting started.</p>
+    
+        <div class="row">
+            <a href="GardenBasics.html" class="lesson-col-beginner" style="background-image: linear-gradient(rgba(4, 20, 1, 0.759),rgba(25, 104, 7, 0.7)), url(images/gardenbasics.jpg);">
+                <h3>Garden Basics</h3>
+                <p>75%</p>
+            </a>
+            <a href="GrowingZone.html" class="lesson-col-beginner" style="background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/growingzone.jpg);">
+                <h3>Growing Zone</h3>
+                <p>22%</p> <!---AICI TRB SA LUAM PROCENTELE DIN BAZA DE DATE--->
+            </a>
+            <a href="GardenBeds.html" class="lesson-col-beginner" style="background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/gardenbeds.jpg);">
+                <h3>Garden Beds</h3>
+                <p>0%</p>
+            </a>
+        </div>
+        <div class="row">
+            <div class="lesson-col-beginner">
+                <h3>Lesson4</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson5</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson6</h3>
+                <p>0%</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="lesson-col-beginner">
+                <h3>Lesson7</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson8</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson9</h3>
+                <p>0%</p>
+            </div>
+        </div>
+        <h1>Top 5</h1>
+        <h3> Hardworking Gardeners</h3>
+        <div class="container-img">
+            <img src="images/podium.png">
+        </div>
+    </section>
+
+
+<!--------Footer-------------->
+<hr>
+<section class="footer">
+    <h4>About us</h4>
+    <p>We are two eager students who are trully passionate about everything related to gardening.</p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by Madalina & Isabela.</p>
+</section>
+
+<!--JavaScript for Toggle Menu-->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() {
+            navLinks.style.right="0";
+        }
+        function hideMenu() {
+            navLinks.style.right="-200px";
+        }
+    </script>
+</body>
+</html>

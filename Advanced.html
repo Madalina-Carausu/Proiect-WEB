@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <title>WEB Project</title>
+        <link rel="stylesheet" href="Proiect.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5e6801e0f3.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section class="sub-header1">
+            <nav>
+                <a href="Proiect.html"><img src = "images/logo.png"></a>
+                <p> e-Gardening </p>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="Proiect.html">HOME</a></li>
+                        <li><a href="">LEARN</a></li>
+                        <li><a href="">TIPS & TRICKS</a></li>
+                        <li><a href="">Q&A</a></li>
+                        <li><a href="">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i> 
+            </nav>
+        <h1>Advanced</h1>
+        </section>
+        
+
+
+    <!--- Lessons -->
+    <section class="lesson"> 
+        <h1>Choose a category</h1>
+        <p>Ceva text pt asta</p>
+    
+        <div class="row">
+            <div class="lesson-col-beginner">
+                <h3>Lesson1</h3>
+                <p>75%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson2</h3>
+                <p>22%</p> <!---AICI TRB SA LUAM PROCENTELE DIN BAZA DE DATE--->
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson3</h3>
+                <p>0%</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="lesson-col-beginner">
+                <h3>Lesson4</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson5</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson6</h3>
+                <p>0%</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="lesson-col-beginner">
+                <h3>Lesson7</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson8</h3>
+                <p>0%</p>
+            </div>
+            <div class="lesson-col-beginner">
+                <h3>Lesson9</h3>
+                <p>0%</p>
+            </div>
+        </div>
+    </section>
+
+
+<!--------Footer-------------->
+<hr>
+<section class="footer">
+    <h4>About us</h4>
+    <p>We are two eager students who are trully passionate about everything related to gardening.</p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by Madalina & Isabela.</p>
+</section>
+
+<!--JavaScript for Toggle Menu-->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() {
+            navLinks.style.right="0";
+        }
+        function hideMenu() {
+            navLinks.style.right="-200px";
+        }
+    </script>
+</body>
+</html>
