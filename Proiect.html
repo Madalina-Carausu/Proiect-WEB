@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <title>WEB Project</title>
+        <link rel="stylesheet" href="Proiect.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+    </head>
+    <body>
+    <section class="header">
+        <nav>
+            <a href="Proiect.html"><img src = "images/logo.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="">HOME</a></li>
+                    <li><a href="">LEARN</a></li>
+                    <li><a href="">TIPS & TRICKS</a></li>
+                    <li><a href="">Q&A</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+
+        <div class="text-box">
+            <h1>World's Best Gardening Tool</h1>
+            <p>Get all the information you need about gardening, whether it's about <br>your veggie patch, fruit trees, or ornamental flowers.</p>
+            <a href="" class="login-btn">Login To Learn More</a>
+        </div>
+    </section>
+
+
+    <!--- Lessons -->
+    <section class="lesson">
+        <h1>Our Lessons</h1>
+        <p>Looking for general information about gardening, watering schedules, or just want to enrich your general knowledge ? Find exactly what you need right here.</p>
+    
+        <div class="row">
+            <div class="lesson-col">
+                <h3>Beginner</h3>
+                <p>Description for Beginner</p>
+            </div>
+            <div class="lesson-col">
+                <h3>Intermediate</h3>
+                <p>Description for Intermediate</p>
+            </div>
+            <div class="lesson-col">
+                <h3>Advanced</h3>
+                <p>Description for Advanced</p>
+            </div>
+        </div>
+    
+    </section>
+
+    <!---tips and tricks-->
+    <section class="tipsAndTricks">
+        <h1>Tips & Tricks</h1>
+        <p>Something about tips and tricks</p>
+        <div class="row">
+            <div class="tips-col">
+                <img src="images/flowers.jpg" >
+                <div class="layer">
+                    <h3>About Flowers</h3>
+                </div>
+            </div>
+            <div class="tips-col">
+                <img src="images/vegetables.jpg" >
+                <div class="layer">
+                    <h3>About Vegetables</h3>
+                </div>
+            </div>
+            <div class="tips-col">
+                <img src="images/soil.jpg" >
+                <div class="layer">
+                    <h3>About Soil</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!------------Q&A---------->
+
+    <section class="q_a">
+        <h1>Frequent Questions and Answers</h1>
+        <p>Here you can find the answers to all your curiosities.</p>
+        
+        <div class="row">
+            <div class="q_a-col">
+                <img src="images/womanUser.png">
+                <div>
+                    <h3>Q: This users question?</h3>
+                    <p>A: This answer[more]</p>
+                    <h3>Samantha Williams</h3>
+                </div>
+            </div>
+            <div class="q_a-col">
+                <img src="images/manUser.png">
+                <div>
+                    <h3>Q: This users question?</h3>
+                    <p>A: This answer[more]</p>
+                    <h3>James Miller</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-------Contact???   O punem?----->
+
+
+
+
+<!--------Footer-------------->
+<section class="footer">
+    <h4>About us</h4>
+    <p>We are two eager students who are trully passionate about everything related to gardening.</p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by Madalina & Isabela.</p>
+</section>
+
+<!--JavaScript for Toggle Menu-->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() {
+            navLinks.style.right="0";
+        }
+        function hideMenu() {
+            navLinks.style.right="-200px";
+        }
+    </script>
+</body>
+</html>
