@@ -67,6 +67,11 @@
     color: #f48b36;
 }
 
+.middle a:hover{
+    text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.607);
+    font-size: 16px;
+}
+
 .middle input[type="checkbox"] {
     text-align: center;
     color: #777;
