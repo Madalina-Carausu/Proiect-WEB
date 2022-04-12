@@ -1,0 +1,193 @@
+
+/*--------------modules--------------*/
+
+.title-of-module {
+    width: 80%;
+    margin: auto;
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+.title-of-module a {
+    text-decoration: none;
+}
+
+.title-of-module-col {
+    flex-basis: 48%;
+    padding: 30px 2px;
+}
+
+.title-of-module-col .container-img {
+    width: 100%;
+}
+
+.title-of-module-col img {
+    width: 100%;
+}
+
+.title-of-module-col a {
+    color: #f48b36;
+}
+
+.title-of-module-col h1 {
+    padding-top: 0;
+}
+
+.title-of-module-col p {
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 15px 0 25px;
+}
+
+.title-of-module-col ul li {
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 2px;
+}
+
+.middle {
+    margin-top: 5%;
+    display: block;
+}
+
+.middle h1 {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.middle p {
+    text-align: center;
+}
+
+.middle a {
+    color: #f48b36;
+}
+
+.middle input[type="checkbox"] {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.container-checkbox {
+    text-align: left;
+    color: #777;
+    font-size: 14px;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+  }
+  
+  /* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+  
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+    background-color: #f48b36;
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/*--------------Modul 1 page--------------*/
+
+.sub-header1-1{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(images/gardenbasics.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+.sub-header1-1  h1{
+    margin-top: 30px;
+}
+
+
+
+
+/*--------------Modul 2 page--------------*/
+.sub-header1-2{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(images/growingzone.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+.sub-header1-2  h1{
+    margin-top: 30px;
+}
+
+
+
+/*--------------Modul 3 page--------------*/
+.sub-header1-3{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.836),rgba(4, 17, 1, 0.781)), url(images/gardenbeds.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+.sub-header1-3  h1{
+    margin-top: 30px;
+}

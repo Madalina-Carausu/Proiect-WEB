@@ -1,0 +1,47 @@
+/*--------------beginner page--------------*/
+
+.sub-header1 {
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.7)), url(images/beginner.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header1  h1 {
+    margin-top: 30px;
+}
+
+
+.lesson-col-beginner {
+    flex-basis: 31%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 50px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.lesson-col-beginner:hover {
+    box-shadow: 0 0 20px 0px rgb(224, 137, 6);
+    transition: 1s;
+}
+
+.lesson-col-beginner:hover h3 {
+    color: #ff9832f4;
+    transition: 1s;
+}
+
+.lesson-col-beginner h3 {
+    color: #e3c4a5;
+    transition: 1s;
+}
+
+.lesson-col-beginner p {
+    color: #e3c4a5;
+    font-size: 25px;
+
+}
