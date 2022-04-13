@@ -115,7 +115,7 @@
 
 .about_form a:hover{
     text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.607);
-    font-size: 18px;
+    
 }
 
 .about_form_footer{
@@ -142,7 +142,6 @@
 
 .about_form_footer a:hover{
     text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.607);
-    font-size: 18px;
 }
 
 /*maine: text pe bune peste tot
