@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html itemscope itemtype="https://schema.org/WebPage">
     <head>
         <meta name="viewport" content="with=device-width, initial-scale=1.0">
         <title>WEB Project</title>
@@ -18,26 +18,26 @@
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
-                        <li><a href="Proiect.html">HOME</a></li>
-                        <li><a href="Proiect.html#lesson">LEARN</a></li>
-                        <li><a href="Beginner.html">BEGINNER</a></li>
-                        <li><a href="Proiect.html#tipsAndTricks">TIPS & TRICKS</a></li>
-                        <li><a href="Proiect.html#q_a">Q&A</a></li>
-                        <li><a href="Proiect.html#contact">CONTACT</a></li>
+                        <li><a href="Proiect.html" itemprop="relatedLink">HOME</a></li>
+                        <li><a href="Proiect.html#lesson" itemprop="relatedLink">LEARN</a></li>
+                        <li><a href="Beginner.html" itemprop="relatedLink">BEGINNER</a></li>
+                        <li><a href="Proiect.html#tipsAndTricks" itemprop="relatedLink">TIPS & TRICKS</a></li>
+                        <li><a href="Proiect.html#q_a" itemprop="relatedLink">Q&A</a></li>
+                        <li><a href="Proiect.html#contact" itemprop="relatedLink">CONTACT</a></li>
                     </ul>
                 </div>
                 <i class="fa-solid fa-bars" onclick="showMenu()"></i> 
             </nav>
-        <h1>Garden Basics </h1>
+        <h1 itemprop="headline">Garden Basics </h1>
         </section>
         
 
 
-    <section class="title-of-module"> 
-        <div class="row">
+    <section class="title-of-module" itemprop="hasPart" itemscope itemtype="https://schema.org/Course"> 
+        <div class="row" itemprop="hasPart" itemscope itemtype="https://schema.org/Article">
             <div class="title-of-module-col" id="organicGardening">
-                <h1>What is Organic Gardening?</h1>
-                <p>
+                <h1 itemprop="headline">What is Organic Gardening?</h1>
+                <p itemprop="articleBody">
                     A lot of people these days overcomplicate organic gardening. We’ve forgotten that our ancestors figured 
                     out how to grow food with little more than their eyes to observe nature and their hands to feel the Earth.
                     There is <b>plenty of time to learn, grow, and perfect your gardening skills</b>.
@@ -53,13 +53,13 @@
                 </p>
             </div>
             <div class="title-of-module-col container-img">
-                <img src="images/img1-gardenbasics.jpg">
+                <img itemprop="image" src="images/img1-gardenbasics.jpg">
             </div>
         </div>
         <div class="row">
-            <div class="title-of-module-col">
-                <h1>Organic Gardening Rules</h1>
-                <p>
+            <div class="title-of-module-col" itemprop="hasPart" itemscope itemtype="https://schema.org/Article">
+                <h1 itemprop="headline">Organic Gardening Rules</h1>
+                <p itemprop="articleBody">
                     The term “organic” is technically<b> regulated by the USDA</b> and refers to a whole set of growing practices, including: 
                 
                     <ul>
@@ -74,9 +74,9 @@
                     </ul>
                 </p>
             </div>
-            <div class="title-of-module-col" id="organicGardeningTools">
-                <h1>Most Important Tools </h1>
-                <p>
+            <div class="title-of-module-col" id="organicGardeningTools" itemprop="hasPart" itemscope itemtype="https://schema.org/Article">
+                <h1 itemprop="headline">Most Important Tools </h1>
+                <p itemprop="articleBody">
                     There are a number of different tools that are important for every organic gardener to have. Each of these tools<b> serves a
                      different purpose</b>, and won’t go to waste as you start building your first organic garden.
                     <ul>
@@ -96,14 +96,14 @@
 
 
 
-        <div class="row">
+        <div class="row"  itemprop="hasPart" itemscope itemtype="https://schema.org/Article" >
             
             <div class="title-of-module-col container-img">
-                <img src="images/tools.jpg">
+                <img itemprop="image" src="images/tools.jpg">
             </div>
             <div class="title-of-module-col">
-                <h1>Designing Your Garden</h1>
-                <p>
+                <h1 itemprop="headline">Designing Your Garden</h1>
+                <p itemprop="articleBody">
                     Starting an organic garden can be super exciting, but it’s important not to dig in without a plan!
                     An organic garden is an investment for many years to come, so you want to make sure your hard
                     work is not in vain. It’s also helpful to<b> understand the fundamentals of organic gardening</b> so
@@ -132,7 +132,7 @@
             </div>
         </div>
         <div class="middle" style="text-align: center;">
-           <p> If you checked all the above requirements then you are ready for the <a href="GrowingZone.html">next module</a>!</p>
+           <p> If you checked all the above requirements then you are ready for the <a itemprop="url" href="GrowingZone.html">next module</a>!</p>
         </div>
     </section>
 
@@ -140,14 +140,23 @@
 <!--------Footer-------------->
 <hr>
 <section class="footer">
-    <h4>About us</h4>
-    <p>We are two eager students who are trully passionate about everything related to gardening.</p>
-    <div class="icons">
-        <i class="fa-brands fa-facebook-f"></i>
-        <i class="fa-brands fa-twitter"></i>
-        <i class="fa-brands fa-instagram"></i>
+    <div itemprop="hasPart" itemscope itemtype="https://schema.org/AboutPage">
+        <h4 itemprop="headline">About us</h4>
+        <p itemprop="description">We are two eager students who are trully passionate about everything related to gardening.</p>
+        <div class="icons">
+            <i class="fa-brands fa-facebook-f"><a href="" itemprop="relatedLink"></a></i>
+            <i class="fa-brands fa-twitter"><a href="" itemprop="relatedLink"></a></i>
+            <i class="fa-brands fa-instagram"><a href="" itemprop="relatedLink"></a></i>
+        </div>
     </div>
-    <p>Made with <i class="fa fa-heart-o"></i> by Madalina & Isabela.</p>
+    <p>Made with <i class="fa fa-heart-o"></i> by 
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="givenName">Madalina</span>
+        </span>
+         & 
+         <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="givenName">Isabela</span>
+        </span>.</p>
 </section>
 
 <!--JavaScript for Toggle Menu-->
