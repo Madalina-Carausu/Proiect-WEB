@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html itemscope itemtype="https://schema.org/WebPage">
+<html itemscope itemtype="https://schema.org/WebPage" lang="en">
     <head>
         <meta name="viewport" content="with=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
@@ -16,9 +16,9 @@
         <script src="https://kit.fontawesome.com/5e6801e0f3.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <section class="header" id="head">
+        <div class="header" id="head">
             <nav>
-                <a href="Proiect.html" itemtype="https://schema.org/URL"><img src = "images/logo.png"></a>
+                <a href="Proiect.html" itemprop="url"><img src = "images/logo.png" alt="logo image"></a>
                 <p> e-Gardening </p>
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
@@ -45,10 +45,10 @@
                     </div>
                     <div class="container">
                     <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
+                    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
     
                     <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
                             
                     <button type="submit" class="login-in-login">Login</button>
                     <label>
@@ -62,13 +62,13 @@
                     </div>
                 </form>
             </div>
-        </section>
+        </div>
         
 
 
-    <!--- Lessons -->
+<!-- Lessons -->
     <section class="lesson" id="lesson">
-        <h1>Our Lessons</h1>
+        <h2>Our Lessons</h2>
         <p>Looking for general information about gardening, watering schedules, or just want to enrich your general knowledge ? Find exactly what you need right here.</p>
     
         <div class="row">
@@ -94,25 +94,25 @@
     
     </section>
 
-    <!---tips and tricks-->
+    <!--tips and tricks-->
     <section class="tipsAndTricks" id="tipsAndTricks" itemprop="hasPart" itemscope itemtype="https://schema.org/Article">
-        <h1 itemprop="headline">Tips & Tricks</h1>
+        <h2 itemprop="headline">Tips & Tricks</h2>
         <p itemprop="about">Whether you’re new to growing or a seasoned expert, our collection of gardening tips will help. Enjoy! </p>
         <div class="row">
             <div class="tips-col" itemprop="hasPart">
-                <img src="images/flowers.jpg" >
+                <img src="images/flowers.jpg" alt="flowers image">
                 <div class="layer">
                     <h3>Flowers</h3>
                 </div>
             </div>
             <div class="tips-col" itemprop="hasPart">
-                <img src="images/vegetables.jpg" >
+                <img src="images/vegetables.jpg" alt="vegetables image">
                 <div class="layer">
                     <h3>Vegetables</h3>
                 </div>
             </div>
             <div class="tips-col" itemprop="hasPart">
-                <img src="images/soil.jpg" >
+                <img src="images/soil.jpg" alt="soil image">
                 <div class="layer">
                     <h3>Soil</h3>
                 </div>
@@ -120,35 +120,31 @@
         </div>
     </section>
 
-    <!------------Q&A---------->
+    <!--Q&A-->
 
     <section class="q_a" id="q_a" itemprop="hasPart" itemscope itemtype="https://schema.org/QAPage">
-        <h1 itemprop="headline">Frequent Questions and Answers</h1>
+        <h2 itemprop="headline">Frequent Questions and Answers</h2>
         <p> <a class = "link_to_qa" href="QA.html" itemprop="relatedLink">Here</a> you can find the answers to all your curiosities.</p>
         
         <div class="row">
             <div class="q_a-col">
                 <span itemscope itemtype="https://schema.org/Person">
-                    <img itemprop="image" src="images/womanUser.png">
+                    <img itemprop="image" src="images/womanUser.png" alt="user image">
                 </span>
                 <div>
-                    <h3 itemprop="comment" itemtype="https://schema.org/Question">Q: What does "Organic Gardening" mean?</h3>
-                    <p itemprop="comment" itemtype="https://schema.org/Answer">A: Organic gardening is all about growing plants in tune with Nature.<a href="QA.html#first_question" itemprop="relatedLink">[more]</a></p>
-                    <span itemscope itemtype="https://schema.org/Person">
-                        <h3 itemprop="name">Samantha Williams</h3>
-                    </span>
+                    <h3 itemprop="comment" itemscope itemtype="https://schema.org/Question">Q: What does "Organic Gardening" mean?</h3>
+                    <p itemprop="comment" itemscope itemtype="https://schema.org/Answer">A: Organic gardening is all about growing plants in tune with Nature.<a href="QA.html#first_question" itemprop="relatedLink">[more]</a></p>
+                    <h3 itemscope itemtype="https://schema.org/Person" itemprop="name">Samantha Williams</h3>
                 </div>
             </div>
             <div class="q_a-col">
                 <span itemscope itemtype="https://schema.org/Person">
-                    <img itemprop="image" src="images/manUser2.png">
+                    <img itemprop="image" src="images/manUser2.png" alt="user image">
                 </span>
                 <div>
-                    <h3 itemprop="comment" itemtype="https://schema.org/Question">Q: What Planting Zone Do I Live In?</h3>
-                    <p itemprop="comment" itemtype="https://schema.org/Answer">A: Use the USDA Hardiness Zone map, simply enter your zip code and use the colored key to determine your zone.<a href="QA.html#second_question" itemprop="relatedLink">[more]</a></p>
-                    <span itemscope itemtype="https://schema.org/Person">
-                        <h3 itemprop="name">Avery Glass</h3>
-                    </span>
+                    <h3 itemprop="comment" itemscope itemtype="https://schema.org/Question">Q: What Planting Zone Do I Live In?</h3>
+                    <p itemprop="comment" itemscope itemtype="https://schema.org/Answer">A: Use the USDA Hardiness Zone map, simply enter your zip code and use the colored key to determine your zone.<a href="QA.html#second_question" itemprop="relatedLink">[more]</a></p>
+                    <h3 itemscope itemtype="https://schema.org/Person" itemprop="name">Avery Glass</h3>
                 </div>
             </div>
         </div>
@@ -156,15 +152,15 @@
 
 
 
-<!-------Contact----->
+<!--Contact-->
 <section class="contact" id="contact" itemprop="hasPart" itemscope itemtype="https://schema.org/ContactPage">
-    <h1 itemprop="description" >If You Want More Information</h1>
+    <h2 itemprop="description" >If You Want More Information</h2>
     <a href="" class="login-btn" itemprop="relatedLink">CONTACT US</a>
 </section>
 
 
 
-<!--------Footer-------------->
+<!--Footer-->
 <hr>
 <section class="footer">
     <div itemprop="hasPart" itemscope itemtype="https://schema.org/AboutPage">
