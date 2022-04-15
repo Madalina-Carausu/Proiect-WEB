@@ -25,6 +25,18 @@
     transition: 0.5s;
 }
 
+.module1 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.759),rgba(25, 104, 7, 0.7)), url(images/gardenbasics.jpg);
+}
+
+.module2 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/growingzone.jpg);
+}
+
+.module3 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/gardenbeds.jpg);
+}
+
 .lesson-col-beginner:hover {
     box-shadow: 0 0 20px 0px rgb(224, 137, 6);
     transition: 1s;
@@ -45,3 +57,5 @@
     font-size: 25px;
 
 }
+
+
