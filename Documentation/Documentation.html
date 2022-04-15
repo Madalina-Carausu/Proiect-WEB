@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="Documentation.css">
+</head>
+
+<body>
+
+    <article>
+        <header>
+            <h1>
+                e-Gardening
+            </h1>
+        </header>
+
+        <div role="contentinfo">
+            <section typeof="sa:AuthorsList">
+                <h2>Authors</h2>
+                <ul>
+                    <li typeof="sa:ContributorRole" property="schema:author">
+                        <span typeof="schema:Person">
+                            <meta property="schema:givenName" content="Ana">
+                            <meta property="schema:additionalName" content="Madalina">
+                            <meta property="schema:familyName" content="Carausu">
+                            <span property="schema:name">Madalina Carausu</span>
+                        </span>
+                        <ul>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="ana.carausu@info.uaic.ro"
+                                    property="schema:email">ana.carausu@info.uaic.ro</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li typeof="sa:ContributorRole" property="schema:author">
+                        <span typeof="schema:Person">
+                            <meta property="schema:givenName" content="Andreea">
+                            <meta property="schema:additionalName" content="Isabela">
+                            <meta property="schema:familyName" content="Haiura">
+                            <span property="schema:name">Isabela Haiura</span>
+                        </span>
+                        <ul>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="andreea.haiura@info.uaic.ro"
+                                    property="schema:email">andreea.haiura@info.uaic.ro</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </section>
+        </div>
+
+        <section>
+            <h3>1. Introduction</h3>
+            <section>
+                <h4>1.1 Purpose</h4>
+                <p>
+                    The purpose of this document is to offer a detailed documentation about the e-Gardening Web Application.
+                    It will go through all the functionalities of the Web Site and it will provide 
+                    information and explanation about each web page.
+                </p>
+            </section>
+
+            <section>
+                <h4>1.2 Document Conventions</h4>
+                <p>
+                    This Document was created based on the IEEE template for System Requirement
+                    Specification Documents.
+                </p>
+            </section>
+
+            <section>
+                <h4>1.3 Intended Audience and Reading Suggestions</h4>
+                <p>
+                    Normal users who wish to use the application for learning how to garden.
+                </p>
+            </section>
+
+            <section>
+                <h4>1.4 Product Scope</h4>
+                <p>
+                    e-Gardening has been developed for the purpose of teaching the users how to garden properly.
+                </p>
+            </section>
+
+            <section>
+                <h4>1.5 References</h4>
+                <ol>
+                    <li typeof="schema:WebPage" role="doc-biblioentry"
+                        resource="https://github.com/Madalina-Carausu/Proiect-WEB" property="schema:citation">
+                        <cite property="schema:name">
+                            <a href="https://github.com/Madalina-Carausu/Proiect-WEB">e-Gardening Github page</a>
+                        </cite>
+                    </li>
+                    <li typeof="schema:WebPage" role="doc-biblioentry"
+                        resource="https://github.com/rick4470/IEEE-SRS-Tempate#42-system-feature-2-and-so-on"
+                        property="schema:citation">
+                        <cite property="schema:name">
+                            <a href="https://github.com/rick4470/IEEE-SRS-Tempate#42-system-feature-2-and-so-on">IEEE
+                                Template for System Requirements Specification Documents</a>
+                        </cite>
+                    </li>
+                </ol>
+            </section>
+
+
+
+        </section>
+
+        <section>
+            <h3>2. Overall Description</h3>
+            <section>
+                <h4>2.1 Product Description</h4>
+                <p>
+                    The e-Gardening application was developed in order to help people more or less passionate about
+                    gardening improve their knowledge and abilities using the courses on the site.
+                </p>
+            </section>
+
+            <section>
+                <h4>2.2 Product Functions</h4>
+                <p>
+                    The web application offers three level courses each of them having ten modules. The levels are: 
+                    Beginner, Intermediate and Advanced. These modules include general information about gardening,
+                    relevant images, tasks and pieces of advice. In this application the user can log in and have access 
+                    a private profile where he can add what plants he would like to grow and the application will
+                    send him notifications regarding each plant’s needs. Any user can also addres questions about 
+                    anything related to gardening and he will receive an answer as soon as possible. All the questions
+                    and answers are placed on a special page.
+                </p>
+                <p>Home page: central point of navigation to the rest of the pages within the website</p>
+                <ul>
+                    <li>
+                        login button: redirects to a login pop-up;
+                    </li>
+                    <li>
+                        beginner: redirects the user to the Beginner course;
+                    </li>
+                    <li>
+                        intermediate: redirects the user to the Intermediate course;
+                    </li>
+                    <li>
+                        advanced: redirects the user to the Advanced course;
+                    </li>
+                    <li>
+                        flowers: redirects the user to the Tips and Tricks about flowers;
+                    </li>
+                    <li>
+                        vegetables: redirects the user to the Tips and Tricks about vegetables;
+                    </li>
+                    <li>
+                        soil: redirects the user to the Tips and Tricks about soil;
+                    </li>
+                    <li>
+                        q&a: redirects the user to the Frequent Questions and Answers page;
+                    </li>
+                    <li>
+                        contact us button: redirects the user to the Contact page.
+                    </li>
+                </ul>
+
+                Login pop-up:
+                <ul>
+                    <li>
+                        remember me: stores the credentials so that the user won’t have to re-enter them the next time
+                        he visits;
+                    </li>
+                    <li>
+                        login: finalizes the login action, logging the user if the credentials are correct and then
+                        the user can have access to his profile and his progress will be saved;
+                    </li>
+                    <li>
+                        create account: redirects to a sign up page;
+                    </li>
+                    <li>
+                        forgot password: redirects to a forgot password page.
+                    </li>
+                </ul>
+
+                SignUp page:
+                <ul>
+                    <li>
+                        create account: creates the user account if the information entered is valid and then redirects
+                        to the home page.
+                    </li>
+                </ul>
+
+                Forgot password page:
+                <ul>
+                    <li>
+                        change password: changes the user’s password if the information entered is valid and then redirects
+                        to the home page.
+                    </li>
+                </ul>
+
+
+                Beginner page:
+                <ul>
+                    <li>
+                        Garden Basics: redirects to Garden Basics page;
+                    </li>
+                    <li>
+                        Growing Zone: redirects to Growing Zone page;
+                    </li>
+                    <li>
+                        Garden Beds: redirects to Garden Beds page;
+                    </li>
+                    <li>
+                        Module x: redirects to Module x page.
+                    </li>
+                </ul>
+
+                Intermediate page:
+                <ul>
+                    <li>
+                        Module x: redirects to Module x page.
+                    </li>
+                </ul>
+
+                Advanced page:
+                <ul>
+                    <li>
+                        Module x: redirects to Module x page.
+                    </li>
+                </ul>
+
+                My profile page:
+                <ul>
+                    <li>
+                        add plant: adds a plant to the user’s virtual garden if it is available for his level;
+                    </li>
+                    <li>
+                        stop notifications: the user will no longer get notifications from the website.
+                    </li>
+                </ul>
+
+                Q&A page:
+                <ul>
+                    <li>
+                        form: redirects the user to a form where he can address his question;
+                    </li>
+                    <li>
+                        read more: redirects the user to a module relevant for his question.
+                    </li>
+                </ul>
+
+            </section>
+
+            <section>
+                <h4>2.2.1 How to use the product</h4>
+                <ul>
+                    <li>
+                        Home page data flow.
+                    </li>
+                    <img src="./diagrams/homePageDiagram.png" class="homeImage" alt="home page diagram image">
+                    <li>
+                        Other pages data flow (in this example the Q&A page).
+                    </li>
+                    <img src="./diagrams/normalPageDiagram.png" class="normalImage" alt="normal page diagram image">
+                    <li>
+                        Login data flow.
+                    </li>
+                    <img src="./diagrams/loginDiagram.png" class="loginImage" alt="login diagram image">
+                    <li>
+                        Logout data flow.
+                    </li>
+                    <img src="./diagrams/logoutDiagram.png" class="logoutImage" alt="login diagram image">
+                </ul>
+            </section>
+
+            <section>
+                <h4>2.3 User Classes and Characteristics</h4>
+                <ul>
+                    <li>
+                        Guest: simple viewer of the website;
+                    </li>
+                    <li>
+                        User: user with an associated account that can have a profile and can see his progress.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>2.4 Operating Environment</h4>
+                <p>
+                    The developed product can be used on any device with a connection to the Internet and a browser
+                    installed.
+                </p>
+            </section>
+
+            <section>
+                <h4>2.5 Design and Implementation Constraints</h4>
+                <p>
+                    e-Gardening uses html, css and javascript for its visualization engine and it will be developed in NodeJS. 
+                    It will store the data into two databases: one for the users passwords and one for the users profiles, 
+                    tips and tricks, information for the modules and questions and answers.
+                </p>
+            </section>
+
+        </section>
+
+        <section>
+            <h3>3. External Interface Requirements</h3>
+
+            <section>
+                <h4>3.1 User Interfaces</h4>
+
+                <section>
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Home page</figcaption>
+                        <img src="./screenshots/homePage.png" alt="Home page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Login pop-up</figcaption>
+                        <img src="./screenshots/loginPopUp.png" alt="Login pop-up screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Beginner page</figcaption>
+                        <img src="./screenshots/beginnerPage.png" alt="Beginner page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Garden Basics page</figcaption>
+                        <img src="./screenshots/gardenBasicsPage.png" alt="Garden Basics page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Growing Zone page</figcaption>
+                        <img src="./screenshots/growingZonePage.png" alt="Growing Zone page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Garden Beds page</figcaption>
+                        <img src="./screenshots/gardenBedsPage.png" alt="Garden Beds page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Q&A page</figcaption>
+                        <img src="./screenshots/qaPage.png" alt="Q&A page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s My profile page</figcaption>
+                        <img src="./screenshots/profilePage.png" alt="My profile page screenshot" class="profileImage">
+                    </figure>
+                   
+                </section>
+            </section>
+
+            <section>
+                <h4>3.2 Software Interfaces</h4>
+                <p>
+                    The minimum software requirements of e-Gardening are a working browser and connection to the
+                    Internet.
+                </p>
+            </section>
+
+            <section>
+                <h4>3.4 Communications Interfaces</h4>
+                <p>
+                    e-Gardening requires Internet connection. The communication standard that is to be used is HTTP.
+                </p>
+            </section>
+
+        </section>
+
+        <section>
+            <h3>4. System Features</h3>
+
+            <section>
+                <h4>4.1 Home page</h4>
+                <p>
+                    Guests and users can read a little about our courses, tips and tricks, questions and answers and 
+                    they can navigate to other linked pages.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.2 Login pop-up</h4>
+                <p>
+                    Users of the app can login by entering their credentials and therefore access other functionalities
+                    of the app.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.3 SignUp page</h4>
+                <p>
+                    Guests can create an account and then use it to log in into the application and access all the
+                    features provided by the website.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.4 Beginner page</h4>
+                <p>
+                    Guests can view the modules available and the users can also see their progress.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.5 Intermediate page</h4>
+                <p>
+                    Guests can view the modules available and the users can also see their progress.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.6 Advanced page</h4>
+                <p>
+                    Guests can view the modules available and the users can also see their progress.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.7 Garden Basics page</h4>
+                <p>
+                    Guests and users can view the information about an organic garden.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.8 Growing Zone page</h4>
+                <p>
+                    Guests and users can view the information about where to place your garden.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.9 Garden Beds page</h4>
+                <p>
+                    Guests and users can view the information about how to make different garden beds.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.10 Flowers page</h4>
+                <p>
+                    Guests and users can view some tips and tricks regarding the flowers.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.11 Vegetables page</h4>
+                <p>
+                    Guests and users can view some tips and tricks regarding the vegetables.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.11 Soil page</h4>
+                <p>
+                    Guests and users can view some tips and tricks regarding the soil.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.12 Q&A page</h4>
+                <p>
+                    Guests and users can view the frequent asked questions and answers and 
+                    can also address their own questions.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.13 My profile page</h4>
+                <p>
+                    Users can view their progress, their plants status and can add new 
+                    available plants to their virtual garden.
+                </p>
+            </section>
+
+            <section>
+                <h4>4.14 Contact page</h4>
+                <p>
+                    Guests and users can view the authors contact information.
+                </p>
+            </section>
+
+        </section>
+
+        <section>
+            <h3>5. Other Nonfunctional Requirements</h3>
+
+            <section>
+                <h4>5.1 Safety Requirements</h4>
+                <p>
+                    To ensure that no one of e-Gardening’s users loses any data while using the application.
+                </p>
+            </section>
+
+            <section>
+                <h4>5.2 Security Requirements</h4>
+                <p>
+                    e-Gardening doesn’t have any security requirements and thus any type of user can use it without any
+                    additional privileges.
+                </p>
+            </section>
+
+            <section>
+                <h4>5.3 Software Quality Attributes</h4>
+                <ul>
+                    <li>Adaptability</li>
+                    <li>Availability</li>
+                    <li>Maintanability</li>
+                    <li>Portability</li>
+                    <li>Reusability</li>
+                </ul>
+            </section>
+
+        </section>
+
+        <section>
+            <h3>Contribution</h3>
+            <section>
+                <h4>Carausu Madalina:</h4>
+                <ul>
+                    <li>Website design implementation</li>
+                    <li>Home page</li>
+                    <li>Q&A page</li>
+                    <li>Semantics and metadata</li>
+                    <li>Documentation</li>
+                </ul>
+                <h4>Haiura Isabela:</h4>
+                <ul>
+                    <li>Website design implementation</li>
+                    <li>Beginner page</li>
+                    <li>Garden Basics page</li>
+                    <li>Growing Zone page</li>
+                    <li>Garden Beds page</li>
+                    <li>Login pop-up</li>
+                    <li>Documentation</li>
+                </ul>
+            </section>
+        </section>
+
+
+    </article>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+*{
+    background-color: black;
+    color: rgba(255, 255, 255, 0.719);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+h1{
+    color: white;
+}
+h2{
+    color: white;
+}
+h3{
+    color: white;
+}
+p{
+    text-align: justify;
+}
+img{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.homeImage{
+    width: 75%;
+    height: auto;
+}
+
+.normalImage{
+    width: 50%;
+    height: auto;
+}
+
+.loginImage{
+    width: 60%;
+    height: auto;
+}
+
+.logoutImage{
+    width: 50%;
+    height: auto;
+}
+
+.screenshot{
+    width: 70%;
+}
+.profileImage{
+    width: 50%;
+}
