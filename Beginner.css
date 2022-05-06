@@ -45,6 +45,25 @@
     background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/breakingground.jpg);
 }
 
+.module5 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/planningyourgarden.jpg);
+}
+
+.module6 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/cropplanning.jpg);
+}
+
+.module7 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/chooseseedsorstarts.jpg);
+}
+
+.module8 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/plantingyourorganicgarden.jpg);
+}
+
+.module9 {
+    background-image: linear-gradient(rgba(4, 20, 1, 0.863),rgba(25, 104, 7, 0.7)), url(images/plantingyourorganicgarden.jpg);
+}
 
 .lesson-col-beginner:hover {
     box-shadow: 0 0 20px 0px rgb(224, 137, 6);

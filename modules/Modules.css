@@ -1,6 +1,13 @@
 
 /*--------------modules--------------*/
 
+h1{
+    margin-top: 30px;
+}
+ h2{
+    margin-top: 30px;
+}
+
 .title-of-module {
     width: 80%;
     margin: auto;
@@ -46,6 +53,14 @@
 }
 
 .title-of-module-col ul li {
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 2px;
+}
+
+.title-of-module-col ol li {
     color: #777;
     font-size: 14px;
     font-weight: 300;
@@ -162,6 +177,9 @@
     -ms-transform: rotate(45deg);*/
     transform: rotate(45deg);
 }
+.orange{
+    color: #f48b36;
+}
 
 
 /*--------------Modul 1 page--------------*/
@@ -175,12 +193,6 @@
     position: relative;
     text-align: center;
     color: #fff;
-}
-.sub-header1-1  h1{
-    margin-top: 30px;
-}
-.sub-header1-1  h2{
-    margin-top: 30px;
 }
 
 
@@ -196,12 +208,6 @@
     text-align: center;
     color: #fff;
 }
-.sub-header1-2  h1{
-    margin-top: 30px;
-}
-.sub-header1-2  h2{
-    margin-top: 30px;
-}
 
 
 
@@ -216,13 +222,10 @@
     text-align: center;
     color: #fff;
 }
-.sub-header1-3  h1{
-    margin-top: 30px;
-}
-.sub-header1-3  h2{
-    margin-top: 30px;
-}
 
+
+
+/*--------------Modul 4 page--------------*/
 .sub-header1-4{
     min-height: 50vh;
     width: 100%;
@@ -233,9 +236,63 @@
     text-align: center;
     color: #fff;
 }
-.sub-header1-4  h1{
-    margin-top: 30px;
+
+
+
+/*--------------Modul 5 page--------------*/
+.sub-header1-5{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(7, 27, 3, 0.899),rgba(4, 17, 1, 0.822)), url(../images/planningyourgarden.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
 }
-.sub-header1-4  h2{
-    margin-top: 30px;
+
+
+
+/*--------------Modul 6 page--------------*/
+.sub-header1-6{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(7, 27, 3, 0.899),rgba(4, 17, 1, 0.822)), url(../images/cropplanning.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
 }
+
+
+
+/*--------------Modul 7 page--------------*/
+.sub-header1-7{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(7, 27, 3, 0.899),rgba(4, 17, 1, 0.822)), url(../images/chooseseedsorstarts.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+
+
+
+/*--------------Modul 8 page--------------*/
+.sub-header1-8{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(7, 27, 3, 0.899),rgba(4, 17, 1, 0.822)), url(../images/plantingyourorganicgarden.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+
+

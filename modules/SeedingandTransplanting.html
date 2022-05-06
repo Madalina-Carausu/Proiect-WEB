@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="description" content="Free gardening courses">
+        <meta name="keywords" content="Course, Garden, Gardening, Plant, Vegetables, ">
+        <meta name="author" content="Madalina Carausu and Isabela Haiura">
+
+        <title>WEB Project</title>
+
+        <link rel="stylesheet" href="../Proiect.css">
+        <link rel="stylesheet" href="Modules.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5e6801e0f3.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="sub-header1-2">
+            <nav>
+                <a href="../Proiect.html"><img src = "../images/logo.png" alt="logo image"></a>
+                <p> e-Gardening </p>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="../Proiect.html">HOME</a></li>
+                        <li><a href="../Proiect.html#lesson">LEARN</a></li>
+                        <li><a href="../Beginner.html">BEGINNER</a></li>
+                        <li><a href="../Proiect.html#tipsAndTricks">TIPS & TRICKS</a></li>
+                        <li><a href="../QA.html">Q&A</a></li>
+                        <li><a href="../Proiect.html#contact">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i> 
+            </nav>
+        <h1>Seeding and Transplanting</h1>
+        </div>
+    <section class="title-of-module"> 
+        <div class="row">
+            <div class="title-of-module-col">
+                <h2>How to Direct Sow</h2>
+                <ol>
+                    <li> Prepare your beds with a thin 1-2” layer of compost or topsoil at the top. </li>
+                    <li> Rake it nice and smooth. </li>
+                    <li> Use the handle of the rake to draw a shallow line in the soil. </li>
+                    <li> Carefully pour your seed packet into a shallow bowl or cup. </li>
+                    <li> Drop your seeds at the recommended spacing (or a little denser- you can always thin later). </li>
+                    <li> Cover with a light layer of soil, ensuring that seeds won’t peak above the soil level when watered in. But also be sure they aren’t too deep or they will have trouble reaching up for the light. </li>
+                    <li> Water thoroughly and keep moist, but not soggy, until germination. </li>
+                    <li> Use small scissors or needle-tip pruners to thin to the desired spacing. </li>
+                </ol>
+            </div>
+            <div class="title-of-module-col container-img">
+                <img src="../images/img1-seeding.jpg" alt="seeding image">
+            </div>
+        </div>
+
+        <div class="row">    
+            <div class="title-of-module-col">
+                <h2>How to Transplant </h2>
+                <ol>
+                    <li> Prepare the garden beds by weeding and raking clean. </li>
+                    <li> Gently loosen seedling starts from their cells by squeezing the bottom of the tray until it releases the root ball 
+                        (careful not to disturb the roots). </li>
+                    <li> Use a Hori Hori planting knife to create a hole about as deep as the root ball. Most plants should be transplanted to 
+                        the same soil level as they were in their cell packs. The main exception is tomatoes, which can be planted deep and will 
+                        root all along the stem. </li>
+                    <li> Use your tape measure to properly space the rest of the plants (they will look far apart, but don’t worry- they’ll fill 
+                        in the space as they grow!). </li>
+                    <li> Thoroughly “water in” the new transplants to help them connect with their new soil. </li>
+                    <li> Optional, protect with row cover (anchored with bricks, sandbags, or landscape staples) until your plants are established. </li>
+                </ol>
+            </div>
+            <div class="title-of-module-col container-img">
+                <img src="../images/img2-transplanting.jpg" alt="transplanting image">
+            </div> 
+        </div>
+        <div class="middle">
+            <h2 class="tasks">
+                Tasks:
+            </h2>
+            <br>
+            <p>
+                <label class="container-checkbox">
+                    <input type="checkbox" id="1-4-checkbox1">
+                    <span class="checkmark"></span>
+                    TASK1!
+                </label>
+                <br> 
+                <label class="container-checkbox">   
+                    <input type="checkbox" id="1-4-checkbox2">
+                    <span class="checkmark"></span>
+                    TASK2!
+                </label>
+                <br> 
+                <label class="container-checkbox">   
+                    <input type="checkbox" id="1-4-checkbox3">
+                    <span class="checkmark"></span>
+                    TASK3!
+                </label>
+                <br> 
+                <label class="container-checkbox">   
+                    <input type="checkbox" id="1-4-checkbox4">
+                    <span class="checkmark"></span>
+                    TASK4!
+                    <br><br><br>
+                </label>
+                <!--<input type="submit" value="Submit">-->
+            </p>
+            <p> Congratulations! you have completed <a href="../Beginner.html">all modules</a> in this part!</p>
+        </div>
+    </section>
+
+
+<!--Footer-->
+<hr>
+<section class="footer">
+    <h4>About us</h4>
+    <p>We are two eager students who are trully passionate about everything related to gardening.</p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by Madalina & Isabela.</p>
+</section>
+
+<!--JavaScript for Toggle Menu-->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() {
+            navLinks.style.right="0";
+        }
+        function hideMenu() {
+            navLinks.style.right="-200px";
+        }
+    </script>
+</body>
+</html>

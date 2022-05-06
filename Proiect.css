@@ -129,6 +129,37 @@ nav .fa-solid {
     color: #fff;
     transition: 1s;
 }
+@media(max-width: 800px){
+    .text-box h1 {
+        font-size: 20px;
+    }
+    .text-box h2 {
+        font-size: 20px;
+    }
+    .contact h1{
+        font-size: 24px;
+    }
+    .contact h2{
+        font-size: 24px;
+    }
+    .q_a-col img{
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+    .row{
+        flex-direction: column;
+    }
+    img{
+        width: 80%;
+    }
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
 
 @media(max-width: 700px){
     .text-box h1 {
@@ -137,16 +168,13 @@ nav .fa-solid {
     .text-box h2 {
         font-size: 20px;
     }
-
     nav p {
         margin-left: -91%;
         margin-top: 80px;
     }
-
     .nav-links ul li {
         display: block;
     }
-
     .nav-links {
         position: absolute;
         background: #f48b36;
@@ -158,7 +186,6 @@ nav .fa-solid {
         z-index: 2; 
         transition: 1s;
     }
-
     nav .fa-solid { 
         display: block;
         color: #fff;
@@ -166,9 +193,31 @@ nav .fa-solid {
         font-size: 22px;
         cursor: pointer;
     }
-
     .nav-links ul {
         padding: 30px;
+    }
+    .contact h1{
+        font-size: 24px;
+    }
+    .contact h2{
+        font-size: 24px;
+    }
+    .q_a-col img{
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+    .row{
+        flex-direction: column;
+    }
+    img{
+        width: 80%;
+    }
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
     }
 }
 
@@ -287,18 +336,6 @@ span.psw {
     from {transform: scale(0)} 
     to {transform: scale(1)}
 }
-  
-@media (max-width: 700px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-
-    .cancelbtn {
-        width: 100%;
-    }
-}
-
 
 /*----- lessons -----*/
 
@@ -330,6 +367,15 @@ p {
 .container-img {
     justify-content: center;
     align-items: center;
+}
+
+.container-img-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-img-table .imgg{
+    width: 85%;
 }
 
 img {
@@ -367,15 +413,7 @@ h3 {
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
 }
 
-@media(max-width: 700px) {
-    .row{
-        flex-direction: column;
-    }
 
-    img{
-        width: 80%;
-    }
-}
 
 
 /*---------tips & tricks ------*/
@@ -491,12 +529,6 @@ h3 {
     text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.607);
 }
 
-@media(max-width: 700px) {
-    .q_a-col img{
-        margin-left: 0px;
-        margin-right: 15px;
-    }
-}
 
 
 /*--------------contact--------------*/
@@ -521,15 +553,6 @@ h3 {
     color: #fff;
     margin-bottom: 40px;
     padding: 0;
-}
-
-@media(max-width: 700px) {
-    .contact h1{
-        font-size: 24px;
-    }
-    .contact h2{
-        font-size: 24px;
-    }
 }
 
 
