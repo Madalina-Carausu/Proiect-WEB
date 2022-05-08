@@ -24,6 +24,10 @@ h1{
     padding: 30px 2px;
 }
 
+.addmargin {
+    margin-top: -5%;
+}
+
 .title-of-module-col .container-img {
     width: 100%;
 }
@@ -72,12 +76,7 @@ h1{
     margin-top: 5%;
     display: block;
 }
-.margin-top-4 {
-    margin-top:4%;
-}
-.margin-top-2 {
-    margin-top: 2%;
-}
+
 .middle-style {
     text-align: center;
 }
@@ -177,9 +176,18 @@ h1{
     -ms-transform: rotate(45deg);*/
     transform: rotate(45deg);
 }
-.orange{
-    color: #f48b36;
+
+@media(max-width: 800px){
+    .title-of-module-col .addmargin{
+        margin-top: 0%;
+    }
+    .title-of-module-col .no{
+        display: none;
+    } 
 }
+
+
+/*--------------BEGINNER--------------*/
 
 
 /*--------------Modul 1 page--------------*/
@@ -293,6 +301,81 @@ h1{
     text-align: center;
     color: #fff;
 }
+
+
+
+/*--------------INTERMEDIATE--------------*/
+
+
+/*--------------Modul 1 page--------------*/
+
+.sub-header2-1{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(../images/gardenbasics.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header2-2{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(../images/allnaturalpestsprays.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header2-3{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(../images/preventingdisease.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header2-4{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(../images/organicamendments.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header2-5{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(../images/endofseasontips.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header2-6{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.84)), url(../images/typesofseeds.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+
 
 
 

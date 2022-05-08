@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="description" content="Free gardening courses">
+        <meta name="keywords" content="Course, Garden, Gardening, Plant, Vegetables, ">
+        <meta name="author" content="Madalina Carausu and Isabela Haiura">
+
+        <title>WEB Project</title>
+
+        <link rel="stylesheet" href="../Proiect.css">
+        <link rel="stylesheet" href="Modules.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5e6801e0f3.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="sub-header2-5">
+            <nav>
+                <a href="../Proiect.html"><img src = "../images/logo.png" alt="logo image"></a>
+                <p> e-Gardening </p>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="../Proiect.html">HOME</a></li>
+                        <li><a href="../Proiect.html#lesson">LEARN</a></li>
+                        <li><a href="../Intermediate.html">INTERMEDIATE</a></li>
+                        <li><a href="../Proiect.html#tipsAndTricks">TIPS & TRICKS</a></li>
+                        <li><a href="../QA.html">Q&A</a></li>
+                        <li><a href="../Proiect.html#contact">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i> 
+            </nav>
+        <h1>End of Season Tips</h1>
+        </div>
+    <section class="title-of-module"> 
+        <div class="row">
+            <div class="title-of-module-col">
+                <h2>Remove Plant Material</h2>
+                <p>
+                    Instead of letting plants sit and rot all winter, it is best to cut them at the base (leaving the roots intact) and compost the material. This <b>helps prevent disease and keeps hungry winter animals away</b>. Some crops, like kale, garlic, and cabbage, can be left in the garden all winter long for continuous harvests (depending on your climate).     
+                </p>
+                <h2>Annual Compost Additions</h2>
+                <p>
+                    At the end or beginning of every season, I <b>add a small layer of compost</b> to all of my garden beds to keep the soil happy and nurtured. It is important to source high-quality compost or learn to make your own. Worm compost (vermicast) or professionally composted manure are great options for replenishing nutrients and helping to build soil structure.     
+                </p>
+                <h2>Putting Your Garden to Bed</h2>
+                <p>
+                    To put your gardens “to sleep” at the end of the season, I highly recommend mulching the soil surface to protect it from winter rain or snow. The <b>best mulch is fallen maple leaves</b>. You can also use an unsprayed dried straw, a tarp, or a cover crop like peas and oats.      
+                </p>
+            </div>
+            <div class="title-of-module-col">
+                <div class="container-img">
+                    <img src="../images/img1-endofseasontips.jpg" alt="end of season image">
+                </div>
+                <p>
+                    At the end of the growing season, you can finally rest and <b>relish in your diverse harvests</b>. Hopefully, you preserved some pickled cucumbers, dried tomatoes, frozen pesto, and other tokens of summer’s abundance. To maximize your yields for the next season, it is important to prepare the beds for winter. 
+                </p>
+                <h2 class="tasks">
+                    Tasks:
+                </h2>
+                <br>
+                <p>
+                    <label class="container-checkbox">
+                        <input type="checkbox" id="checkbox1">
+                        <span class="checkmark"></span>
+                        Make sure you find your zone!
+                    </label>
+                    <br>
+                    <label class="container-checkbox">
+                        <input type="checkbox" id="checkbox2">
+                        <span class="checkmark"></span>
+                        Make sure you know where you can put your garden!
+                    </label>
+                    <!--<input type="submit" value="Submit">-->
+                </p>
+            </div>
+        </div>
+
+        <div class="middle middle-style">
+            <p> If you checked all the above requirements then you are ready for the <a href="IntermediateTypesofSeeds.html">next module</a>!</p>
+         </div>
+    </section>
+
+
+<!--Footer-->
+<hr>
+<section class="footer">
+    <h4>About us</h4>
+    <p>We are two eager students who are trully passionate about everything related to gardening.</p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by Madalina & Isabela.</p>
+</section>
+
+<!--JavaScript for Toggle Menu-->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() {
+            navLinks.style.right="0";
+        }
+        function hideMenu() {
+            navLinks.style.right="-200px";
+        }
+    </script>
+</body>
+</html>
