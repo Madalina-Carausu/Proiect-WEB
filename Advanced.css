@@ -1,0 +1,197 @@
+.sub-header1 {
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.7)), url(images/qa.jpg);
+    background-position: bottom;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header1  h1 {
+    margin-top: 30px;
+}
+
+.lesson-col-advanced {
+    flex-basis: 31%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 50px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    background-image: linear-gradient(rgba(4, 20, 1, 0.759),rgba(25, 104, 7, 0.7)), url(images/growingzone.jpg);
+}
+.lesson-col-advanced:hover {
+    box-shadow: 0 0 20px 0px rgb(224, 137, 6);
+    transition: 1s;
+}
+
+.lesson-col-advanced:hover h3 {
+    color: #ff9832f4;
+    transition: 1s;
+}
+
+.lesson-col-advanced h3 {
+    color: #e3c4a5;
+    transition: 1s;
+}
+
+.lesson-col-advanced p {
+    color: #e3c4a5;
+    font-size: 25px;
+
+}
+
+.bodyAdvanced{
+    width: 80%;
+    margin: auto;
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+.bodyAdvanced h3{
+    width: 70%;
+    text-align: justify;
+    color: rgb(71, 71, 71);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.bodyAdvanced p{
+    text-align: justify;
+}
+
+.bodyAdvanced img{
+    background:transparent;
+    width: 40%;
+    height: auto;
+    border-radius: 10%;
+    margin: 5%;
+}
+
+.oneLine{
+    display: flex;
+    align-items: center;
+}
+
+.vegImg{
+    width: 20%;
+}
+
+.oneLineText{
+    display: inline;
+}
+
+.middle {
+    margin-top: 5%;
+    display: block;
+}
+
+.tasks {
+    color: #f48b36;
+}
+.middle h1 {
+    margin-top: 30px;
+    text-align: center;
+}
+.middle h2 {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.middle p {
+    text-align: center;
+    padding-left: 35%;
+}
+
+.middle a {
+    color: #f48b36;
+}
+
+.middle a:hover{
+    text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.607);
+}
+
+.middle input[type="checkbox"] {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.container-checkbox {
+    text-align: left;
+    color: #777;
+    font-size: 14px;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+  }
+  
+  /* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+  
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+    background-color: #f48b36;
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    /*-webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);*/
+    transform: rotate(45deg);
+}
+.orange{
+    color: #f48b36;
+}
+
+#bottomText {
+    padding-left: 10px;
+}

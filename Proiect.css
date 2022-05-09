@@ -175,6 +175,10 @@ nav .fa-solid {
     .nav-links ul li {
         display: block;
     }
+    .nav-links ul li::after{
+        background: white;
+    }
+    
     .nav-links {
         position: absolute;
         background: #f48b36;

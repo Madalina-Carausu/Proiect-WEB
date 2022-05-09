@@ -4,7 +4,8 @@
 h1{
     margin-top: 30px;
 }
- h2{
+
+h2{
     margin-top: 30px;
 }
 
@@ -13,6 +14,10 @@ h1{
     margin: auto;
     padding-top: 80px;
     padding-bottom: 50px;
+}
+
+.title-of-module h3{
+    text-align: justify;
 }
 
 .title-of-module a {

@@ -1,0 +1,45 @@
+.tipsBody{
+    width: 80%;
+    margin: auto;
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+.tipsBody h3{
+    width: 70%;
+    text-align: justify;
+    color: rgb(71, 71, 71);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.tipsBody p{
+    text-align: justify;
+}
+
+.tipsBody ul {
+    list-style: inside;
+    padding-left: 10%;
+    padding-right: 25%;
+}
+
+.tipsBody img{
+    background:transparent;
+    width: 40%;
+    height: auto;
+    border-radius: 10%;
+    margin: 5%;
+}
+
+.oneLine{
+    display: flex;
+    align-items: center;
+}
+
+.imgAdvanced{
+    width: 20%;
+}
+
