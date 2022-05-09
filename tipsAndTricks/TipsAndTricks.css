@@ -43,3 +43,24 @@
     width: 20%;
 }
 
+@media(max-width: 800px){
+    .sub-header1 h1{
+        font-size: 30px;
+    }
+
+    .oneLine{
+        flex-direction: column;
+    }
+
+    .oneLine img{
+        width: 100%;
+    }
+
+    .tipsBody h3{
+        width: 90%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+}
+

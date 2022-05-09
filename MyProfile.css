@@ -1,0 +1,199 @@
+.sub-header-profile {
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.7)), url(images/qa.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.myProfile-unlocked-plants {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px; 
+ }
+
+.row-myProfile {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.row-myProfile p {
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.col-myProfile-profile {
+    flex-basis: 31%;
+    background: #ffbd52e2;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    text-align: left;
+}
+
+.col-myProfile-unlocked {
+    flex-basis: 31%;
+    background: #ffc466b0;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    text-align: left;
+}
+
+.col-myProfile-locked{
+    flex-basis: 31%;
+    background: rgba(0, 0, 0, 0.495);
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    text-align: left;
+    opacity: 50%;
+}
+
+.col-myProfile-locked {
+    cursor: pointer;
+}
+
+
+.titleAndImage{
+    display: flex;
+}
+
+.titleAndImage img{
+    height: 70px;
+    width: auto;
+    margin-left: 5px;
+    margin-right: 5px; /*30px daca vreau numele mai departe de img*/
+    border-radius: 50%;
+}
+
+.col-myProfile-unlocked-title{
+    padding-left: 10%;
+    padding-top: 8%;
+    font-weight: 700;
+    font-size: large;
+    text-align: center;
+}
+
+.text {
+    margin-top: 5%;
+    display: block;
+}
+
+.status {
+    color: black;
+    font-weight: 600;
+    padding-left: 5%;
+}
+
+
+.text input[type="checkbox"] {
+    text-align: center;
+    color: rgba(132, 184, 120, 0.705);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 22px;
+}
+
+.container-checkbox {
+    text-align: left;
+    color: black;
+    font-size: 12px;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    padding-bottom: 10px;
+  }
+  
+  /* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgba(132, 184, 120, 0.705);
+}
+  
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+    background-color: rgba(132, 184, 120, 0.941);
+}
+  
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+    background-color: rgba(132, 184, 120, 0.941);
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    /*-webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);*/
+    transform: rotate(45deg);
+}
+.orange{
+    color: #f48b36;
+}
+
+.myProfile-body hr{
+    border: 0;
+    height: 1px; /* Firefox... */
+    background-color: black;
+    box-shadow: none;
+}
+
+.myProfile-locked-plants{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px; 
+    
+}
+
+.myProfile-locked-plants p{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+}

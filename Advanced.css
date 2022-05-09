@@ -195,3 +195,18 @@
 #bottomText {
     padding-left: 10px;
 }
+
+@media(max-width: 800px){
+    .sub-header1 h1{
+        font-size: 30px;
+    }
+
+    .oneLine{
+        flex-direction: column;
+    }
+
+    .oneLine img{
+        width: 100%;
+    }
+
+}

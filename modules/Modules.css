@@ -39,6 +39,7 @@ h2{
 
 .title-of-module-col img {
     width: 100%;
+    border-radius: 10%;
 }
 
 .title-of-module-col a {
@@ -59,6 +60,7 @@ h2{
     font-weight: 300;
     line-height: 22px;
     padding: 15px 0 25px;
+    text-align: justify;
 }
 
 .title-of-module-col ul li {
@@ -67,6 +69,7 @@ h2{
     font-weight: 300;
     line-height: 22px;
     padding: 2px;
+    text-align: justify;
 }
 
 .title-of-module-col ol li {
