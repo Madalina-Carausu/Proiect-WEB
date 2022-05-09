@@ -197,3 +197,15 @@
     font-size: 25px;
     font-weight: 700;
 }
+
+@media(max-width: 800px){
+    .sub-header1 h1{
+        font-size: 30px;
+    }
+
+    .row-myProfile{
+        flex-direction: column;
+    }
+
+
+}
