@@ -43,6 +43,6 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(1234, "localhost", () => {
-  console.log("Listening on port 1234");
+server.listen(5500, "localhost", () => {
+  console.log("Listening on port 5500");
 });
