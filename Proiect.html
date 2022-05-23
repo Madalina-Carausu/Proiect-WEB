@@ -39,7 +39,7 @@
                 <div class="login-btn" id="loginButton" onclick="document.getElementById('login').style.display='flex'">Login To Learn More</div>
             </div>
             <div id="login" class="modal">
-                <form class="modal-content animate" action="/action_page.php" method="post">
+                <form class="modal-content animate" action="/login_popup" method="post">
                     <div class="imgcontainer">
                         <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
                     </div>
@@ -58,6 +58,40 @@
     
                     <div class="container" style="background-color:#f1f1f1">
                     <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('singup').style.display='flex'; document.getElementById('login').style.display='none'" class="signup">Sign up</button>
+                    <div id="rasp"></div>
+                    <span class="psw" style="color: black;">Forgot <a href="#">password?</a></span>
+                    </div>
+                </form>
+            </div>
+
+            <div id="singup" class="modal signup_margin">
+                <form class="modal-content animate" action="/signup_popup" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('singup').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+    
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+                    <label for="email"><b>E-mail</b></label>
+                    <input type="email" placeholder="Enter e-mail" name="email" id="email" required>
+
+                    <label for="phone"><b>Phone Number</b></label>
+                    <input type="tel" placeholder="Enter Phone Number" name="phone" id="phone" required>
+                            
+                    <button type="submit" class="login-in-login">Sign up</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember" style="color:black"> Remember me
+                    </label>
+                    </div>
+    
+                    <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('singup').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('login').style.display='flex'; document.getElementById('singup').style.display='none'" class="signup">Login</button>
                     <span class="psw" style="color: black;">Forgot <a href="#">password?</a></span>
                     </div>
                 </form>
