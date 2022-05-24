@@ -4,7 +4,8 @@ const url = require("url");
 const fs = require("fs");
 const qs = require('querystring');
 
-var mongoose = require("mongoose")
+var mongoose = require("mongoose");
+const { reduce } = require("lodash");
 
 mongoose.connect('mongodb://Localhost:27017/mydb');
 
@@ -12,6 +13,10 @@ var db = mongoose.connection;
 
 db.on('error', () => console.log("Error in Connecting to Database"));
 db.once('open',()=>console.log("Connected to Database"));
+
+
+var response="";
+var response2="";
 
 const server = http.createServer((req, res) => {
   //handle the request and send back a static file
@@ -22,15 +27,17 @@ const server = http.createServer((req, res) => {
   if (path == "") {
     path = "Proiect.html";
   }
-  //console.log(`Requested path ${path} `);
 
   let file = __dirname + "/" + path;
-  if(path.slice(-17)=="Beginner-response")//expresii regulate
+
+  if(path=="Beginner-response")//expresii regulate
   {
       res.end("0");//baza de date
   }
   else
-    if(path.slice(-11)=="login_popup"){
+    if(path=="login_popup" && req.method=="POST"){
+      path="Proiect.html";
+      file = __dirname + "/" + path;
       var body = '';
       req.on('data', function (data) {
           body += data;
@@ -40,8 +47,8 @@ const server = http.createServer((req, res) => {
 
       req.on('end', function () {
           var post = qs.parse(body);
-          var name = post.uname;
-          var password = post.psw;
+          var name = post.name;
+          var password = post.pswd;
 
           db.collection('users').findOne({"name":name},function(err, result) {
               if (err) {throw err;}
@@ -49,25 +56,41 @@ const server = http.createServer((req, res) => {
                   db.collection('users').findOne({"password":password},function(err, result) {
                       if (err) {throw err;}
                       if(result!=null){
-                        console.log("Login succesfully!")
-                        return res.end("Login succesfully!");
+                        response="Login succesfully!";
+                        console.log(response)
+                        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Proiect_MyProfile.html' });
+                        res.end(response);
                       }
                       else
                       {
-                        console.log("Login failed!")
-                        return res.end("Login failed!");
+                        response="Login failed!";
+                        console.log(response)
+                        res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
+                        res.end(response);
                       }
                   })
               }
               else{
-                  console.log("Login failed!")
-                  return res.end("Login failed!");
+                  response="Login failed!";
+                  console.log(response)
+                  res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
+                  res.end(response);
               }
           });
       });
+  
     }
     else
-    if(path.slice(-12)=="signup_popup"){
+    if(path=="login_popup" && req.method=="GET"){
+        const objectToSend = {"response": response}
+        const jsonContent = JSON.stringify(objectToSend);
+        res.end(jsonContent);
+        response="";
+    }
+    else
+    if(path.slice(-12)=="signup_popup" && req.method=="POST"){
+      path="Proiect.html";
+      file = __dirname + "/" + path;
       var body = '';
       req.on('data', function (data) {
           body += data;
@@ -92,26 +115,39 @@ const server = http.createServer((req, res) => {
           db.collection('users').findOne({"name":data.name},function(err, result) {
             if (err) {throw err;}
             if(result==null){
-                console.log("Can signup!")
                 db.collection('users').insertOne(data, (err, collection) => {
                     if(err){
                         throw err;
                     }
-                    console.log("Recod Inserted Successfully");//inserted to the db
-                    //res.end("Recod Inserted Successfully");
-                    return res.end("Recod Inserted Successfully");
+                    response2="Recod Inserted Successfully";
+                    console.log(response2);
+                    res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
+                    res.end(response2);
                 });
             }
             else
             {
-                console.log("Signup failed!")
-                return req.end("Signup failed!");
-                //res.end("Signup failed!");
-                //return "Signup failed!";
-                //return res.redirect('signup_fail.html')
+                response2="Sign up failed!";
+                console.log(response2);
+                res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
+                res.end(response2);
             }
         });
       });
+    }
+    else
+    if(path=="signup_popup" && req.method=="GET"){
+        const objectToSend = {"response": response2}
+        const jsonContent = JSON.stringify(objectToSend);
+        res.end(jsonContent);
+        response2="";
+    }
+    else
+    if(path=="logout" && req.method=="POST"){
+        res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
+        res.end("success");
+        response="";
+        response2="";
     }
     else{
     //async read file function uses callback
@@ -124,7 +160,6 @@ const server = http.createServer((req, res) => {
         //specify the content type in the response
         //console.log(`Returning ${path}`);
         res.setHeader("X-Content-Type-Options", "nosniff");
-        
           switch (path.slice(-3)) {
           case "tml":
             res.writeHead(200, { "Content-type": "text/html" });  break;
@@ -142,39 +177,3 @@ const server = http.createServer((req, res) => {
 server.listen(1234, "localhost", () => {
   console.log("Listening on port 1234");
 });
-
-
-/*
-app.post("/sign_up", (req, res) => {
-    var name = req.body.name;
-    var email = req.body.email;
-    var phno = req.body.phno;
-    var password = req.body.password;
-
-    var data = {
-        "name": name,
-        "email": email,
-        "phno": phno,
-        "password": password
-    }
-
-    db.collection('users').findOne({"email":data.email},function(err, result) {
-        if (err) {throw err;}
-        if(result==null){
-            console.log("Can signup!")
-            db.collection('users').insertOne(data, (err, collection) => {
-                if(err){
-                    throw err;
-                }
-                console.log("Recod Inserted Successfully");//inserted to the db
-                return res.redirect('signup_success.html')//res.blob(img)
-            });
-        }
-        else
-        {
-            console.log("Signup failed!")
-            return res.redirect('signup_fail.html')
-        }
-    });
-})
-*/

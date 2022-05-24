@@ -23,6 +23,7 @@
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
+                        <li><a href="MyProfile.html" itemprop="url" id="my_profile">MY PROFILE</a></li>
                         <li><a href="#head" itemprop="url">HOME</a></li>
                         <li><a href="#lesson" itemprop="url">LEARN</a></li>
                         <li><a href="#tipsAndTricks" itemprop="url">TIPS & TRICKS</a></li>
@@ -36,66 +37,10 @@
             <div class="text-box">
                 <h1 itemprop="headline">World's Best Gardening Tool</h1>
                 <p itemprop="about">Get all the information you need about gardening, whether it's about <br>your veggie patch, fruit trees, or ornamental flowers.</p>
-                <div class="login-btn" id="loginButton" onclick="document.getElementById('login').style.display='flex'">Login To Learn More</div>
-            </div>
-            <div id="login" class="modal">
-                <form class="modal-content animate" action="/login_popup" method="post">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    </div>
-                    <div class="container">
-                    <label for="name"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="name" id="name" required>
-    
-                    <label for="pswd"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="pswd" id="pswd" required>
-                            
-                    <button type="submit" class="login-in-login">Login</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" style="color:black"> Remember me
-                    </label>
-                    </div>
-    
-                    <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="button" onclick="document.getElementById('signup').style.display='flex'; document.getElementById('login').style.display='none'" class="signup">Sign up</button>
-                    <div id="rasp"></div>
-                    <span class="psw" style="color: black;">Forgot <a href="#">password?</a></span>
-                    </div>
-                </form>
-            </div>
-
-            <div id="signup" class="modal signup_margin">
-                <form class="modal-content animate" action="/signup_popup" method="post">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    </div>
-                    <div class="container">
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
-    
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-                    <label for="email"><b>E-mail</b></label>
-                    <input type="email" placeholder="Enter e-mail" name="email" id="email" required>
-
-                    <label for="phone"><b>Phone Number</b></label>
-                    <input type="tel" placeholder="Enter Phone Number" name="phone" id="phone" required>
-                            
-                    <button type="submit" class="login-in-login">Sign up</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" style="color:black"> Remember me
-                    </label>
-                    </div>
-    
-                    <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="button" onclick="document.getElementById('login').style.display='flex'; document.getElementById('signup').style.display='none'" class="signup">Login</button>
-                    <div id="rasp2"></div>
-                    <span class="psw" style="color: black;">Forgot <a href="#">password?</a></span>
-                    </div>
-                </form>
+                <form action="/logout" method="post"> 
+                    <input type="submit" id="submiteForm" class="noneClass" >
+                    <label for="submiteForm" class="login-btn" >Logout</label> 
+                </form>  
             </div>
         </div>
         
@@ -231,39 +176,7 @@
         }
         function hideMenu() {
             navLinks.style.right="-200px";
-        }
-
-        const moduleDisplay=document.getElementById("rasp");
-        
-        fetch("login_popup", { 
-            mode: 'no-cors',
-        })  .then(response => {
-            return response.json()
-        })
-            .then(data => {
-                if(data.response.length>0)
-                    document.getElementById("login").style.display="flex";
-                const message = data.response;
-                moduleDisplay.insertAdjacentHTML("beforeend", message)
-            })
-            .catch(err => console.log(err)); 
-
-        const moduleDisplay2=document.getElementById("rasp2");
-        
-        fetch("signup_popup", { 
-            mode: 'no-cors',
-        })  .then(response => {
-            return response.json()
-        })
-            .then(data => {
-                if(data.response.length>0)
-                    document.getElementById("signup").style.display="flex";
-                const message = data.response;
-                moduleDisplay2.insertAdjacentHTML("beforeend", message)
-            })
-            .catch(err => console.log(err)); 
-           
-
+        }  
     </script>
 </body>
 </html>

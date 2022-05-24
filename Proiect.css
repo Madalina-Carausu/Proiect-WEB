@@ -225,6 +225,13 @@ nav .fa-solid {
     }
 }
 
+#login {
+    display: none;
+}
+
+.noneClass{
+    display: none;
+}
 
 /*----- login -----*/
 
