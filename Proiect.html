@@ -224,46 +224,7 @@
 </section>
 
 <!--JavaScript for Toggle Menu-->
-    <script>
-        var navLinks = document.getElementById("navLinks");
-        function showMenu() {
-            navLinks.style.right="0";
-        }
-        function hideMenu() {
-            navLinks.style.right="-200px";
-        }
-
-        const moduleDisplay=document.getElementById("rasp");
-        
-        fetch("login_popup", { 
-            mode: 'no-cors',
-        })  .then(response => {
-            return response.json()
-        })
-            .then(data => {
-                if(data.response.length>0)
-                    document.getElementById("login").style.display="flex";
-                const message = data.response;
-                moduleDisplay.insertAdjacentHTML("beforeend", message)
-            })
-            .catch(err => console.log(err)); 
-
-        const moduleDisplay2=document.getElementById("rasp2");
-        
-        fetch("signup_popup", { 
-            mode: 'no-cors',
-        })  .then(response => {
-            return response.json()
-        })
-            .then(data => {
-                if(data.response.length>0)
-                    document.getElementById("signup").style.display="flex";
-                const message = data.response;
-                moduleDisplay2.insertAdjacentHTML("beforeend", message)
-            })
-            .catch(err => console.log(err)); 
-           
-
+    <script type="module" src="Proiect.js">
     </script>
 </body>
 </html>

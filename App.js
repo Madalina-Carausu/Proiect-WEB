@@ -17,6 +17,8 @@ db.once('open',()=>console.log("Connected to Database"));
 
 var response="";
 var response2="";
+var username="";
+var login=0;
 
 const server = http.createServer((req, res) => {
   //handle the request and send back a static file
@@ -24,15 +26,90 @@ const server = http.createServer((req, res) => {
   let parsedURL = url.parse(req.url, true);
   //remove the leading and trailing slashes
   let path = parsedURL.path.replace(/^\/+|\/+$/g, "");
-  if (path == "") {
-    path = "Proiect.html";
+  if(login==0){
+    if (path == "") {
+      path = "Proiect.html";
+    }
+  }
+  else{
+    if (path == "") {
+      path = "Proiect_MyProfile.html";
+    }
+    else
+      if (path == "Proiect.html") {
+        path = "Proiect_MyProfile.html";
+      }
   }
 
   let file = __dirname + "/" + path;
 
+/*db.collection('collection').count({ test: "test1" }, (err, counter) => {
+    if (err) {}
+    assert.equal(null, err);
+    console.log('Total no.of docs matched ::', counter)
+    resultArray.push(counter); 
+}, function () {
+    client.close();
+    console.log("resultArray", resultArray);
+}); 
+    
+    db.collection('courses').find({"level":"Beginner"}).toArray(function(err, result) {
+      if (err) {throw err}
+      if(result!=null){
+        console.log(result)
+        res.end(JSON.stringify(result));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+    })*/
+    if(path=="Advanced-response"){
+      db.collection('courses').find({"level":"Advanced"}).toArray(function(err, result) {
+        if (err) {throw err}
+        if(result!=null){
+          res.end(JSON.stringify(result));  
+        }
+        else{
+          res.end(JSON.stringify("Eroare"));  
+        }
+      })
+    }
+    else
+    if(path=="response-module"){
+  
+      db.collection('users').find({"name":username}).toArray(function(err, result) {
+        if (err) {throw err}
+        if(result!=null){
+          res.end(JSON.stringify(result));  
+        }
+        else{
+          res.end(JSON.stringify("Eroare"));  
+        }
+      })
+    }else
+  if(path=="Intermediate-response"){
+    db.collection('courses').find({"level":"Intermediate"}).toArray(function(err, result) {
+      if (err) {throw err}
+      if(result!=null){
+        res.end(JSON.stringify(result));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+    })
+  }
+  else
   if(path=="Beginner-response")//expresii regulate
   {
-      res.end("0");//baza de date
+    db.collection('courses').find({"level":"Beginner"}).toArray(function(err, result) {
+      if (err) {throw err}
+      if(result!=null){
+        res.end(JSON.stringify(result));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+    })
   }
   else
     if(path=="login_popup" && req.method=="POST"){
@@ -57,6 +134,8 @@ const server = http.createServer((req, res) => {
                       if (err) {throw err;}
                       if(result!=null){
                         response="Login succesfully!";
+                        username=name;
+                        login=1;
                         console.log(response)
                         res.writeHead(302, { "Location": "http://" + 'localhost:1234/Proiect_MyProfile.html' });
                         res.end(response);
@@ -82,13 +161,15 @@ const server = http.createServer((req, res) => {
     }
     else
     if(path=="login_popup" && req.method=="GET"){
-        const objectToSend = {"response": response}
-        const jsonContent = JSON.stringify(objectToSend);
-        res.end(jsonContent);
-        response="";
+        if(response!=""){
+          const objectToSend = {"response": response, "username":username};
+          response="";
+          const jsonContent = JSON.stringify(objectToSend);
+          res.end(jsonContent);
+        }
     }
     else
-    if(path.slice(-12)=="signup_popup" && req.method=="POST"){
+    if(path=="signup_popup" && req.method=="POST"){
       path="Proiect.html";
       file = __dirname + "/" + path;
       var body = '';
@@ -137,10 +218,12 @@ const server = http.createServer((req, res) => {
     }
     else
     if(path=="signup_popup" && req.method=="GET"){
-        const objectToSend = {"response": response2}
-        const jsonContent = JSON.stringify(objectToSend);
-        res.end(jsonContent);
-        response2="";
+        if(response2!=""){
+          const objectToSend = {"response": response2}
+          response2="";
+          const jsonContent = JSON.stringify(objectToSend);
+          res.end(jsonContent);  
+        }
     }
     else
     if(path=="logout" && req.method=="POST"){
@@ -148,6 +231,45 @@ const server = http.createServer((req, res) => {
         res.end("success");
         response="";
         response2="";
+        username="";
+        login=0;
+    }
+    else
+    if(path.substring(0,4)=="task" && req.method=="POST"){
+      const taskText=path;
+      path="Proiect.html";
+      file = __dirname + "/" + path;
+      var body = '';
+      req.on('data', function (data) {
+          body += data;
+          if (body.length > 1e6)
+              request.connection.destroy();
+      });
+      
+      req.on('end', function () {
+          var post = qs.parse(body);
+          var task = post.task;
+          let value=0;
+          if(task!=null&&task!=undefined)
+          {
+            for(let i=0;i<task.length;i++){
+              value = value + Number(task[i]);
+            }
+          }
+          db.collection('users').findOne({"name":username},function(err, result) {
+              if (err) {throw err;}
+              if(result!=null){
+                db.collection('users').updateOne({"name" : username}, 
+                  {'$set' : {taskText : value }})  
+                    res.writeHead(302, { "Location": "http://localhost:1234/Beginner.html" });
+                    res.end(response);
+              }
+              else{
+                  res.writeHead(302, { "Location": "http://localhost:1234/Beginner.html" });
+                  res.end(response);
+              }
+          });
+      });
     }
     else{
     //async read file function uses callback
@@ -162,11 +284,11 @@ const server = http.createServer((req, res) => {
         res.setHeader("X-Content-Type-Options", "nosniff");
           switch (path.slice(-3)) {
           case "tml":
-            res.writeHead(200, { "Content-type": "text/html" });  break;
+            res.writeHead(200, { "Content-type": ["text/html"] });  break;
           case "css":
-            res.writeHead(200, { "Content-type": "text/css" });  break;
+            res.writeHead(200, { "Content-type": ["text/css"] });  break;
           case ".js":
-            res.writeHead(200, { "Content-type": "application/javascript" });  break;
+            res.writeHead(200, { "Content-type": ["application/javascript"] });  break;
         }
         res.end(content);
       }
