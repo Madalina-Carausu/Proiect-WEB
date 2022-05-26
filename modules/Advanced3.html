@@ -25,6 +25,7 @@
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
+                        <li><a href="../MyProfile.html" itemprop="url" id="my_profile">MY PROFILE</a></li>
                         <li><a href="../Proiect.html" itemprop="relatedLink">HOME</a></li>
                         <li><a href="../Proiect.html#lesson" itemprop="relatedLink">LEARN</a></li>
                         <li><a href="../Advanced.html" itemprop="relatedLink">ADVANCED</a></li>
@@ -80,31 +81,33 @@
                 </h2>
                 <br>
                 <p>
-                    <label class="container-checkbox">
-                        <input type="checkbox" id="checkbox1">
-                        <span class="checkmark"></span>
-                        TASK1!
-                    </label>
-                    <br> 
-                    <label class="container-checkbox">   
-                        <input type="checkbox" id="checkbox2">
-                        <span class="checkmark"></span>
-                        TASK2!
-                    </label>
-                    <br> 
-                    <label class="container-checkbox">   
-                        <input type="checkbox" id="checkbox3">
-                        <span class="checkmark"></span>
-                        TASK3!
-                    </label>
-                    <br> 
-                    <label class="container-checkbox">   
-                        <input type="checkbox" id="checkbox4">
-                        <span class="checkmark"></span>
-                        TASK4!
-                        <br><br><br>
-                    </label>
-                    <!--<input type="submit" value="Submit">-->
+                    <form action="/task3_3" method="post">
+                        <label class="container-checkbox">
+                            <input name="task" type="checkbox" value="1" id="checkbox1">
+                            <span class="checkmark"></span>
+                            Task1!
+                        </label>
+                        <br> 
+                        <label class="container-checkbox">   
+                            <input name="task" type="checkbox" value="1" id="checkbox2">
+                            <span class="checkmark"></span>
+                            Task2!
+                        </label>
+                        <br> 
+                        <label class="container-checkbox">   
+                            <input name="task" type="checkbox" value="1" id="checkbox3">
+                            <span class="checkmark"></span>
+                            Task3!
+                        </label>
+                        <br> 
+                        <label class="container-checkbox">   
+                            <input name="task" type="checkbox" value="1" id="checkbox4">
+                            <span class="checkmark"></span>
+                            Task4!
+                        </label>
+                        <br> 
+                        <input type="submit" class="submitClass">
+                    </form>
                 </p>
             <p id="bottomText"> If you checked all the above requirements then you are ready for the <a href="Advanced4.html">next module</a>!</p>
             </div>
@@ -134,14 +137,6 @@
 </section>
 
 <!--JavaScript for Toggle Menu-->
-    <script>
-        var navLinks = document.getElementById("navLinks");
-        function showMenu() {
-            navLinks.style.right="0";
-        }
-        function hideMenu() {
-            navLinks.style.right="-200px";
-        }
-    </script>
+    <script src="Modules.js"></script>
 </body>
 </html>

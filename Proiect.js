@@ -12,9 +12,7 @@ const moduleDisplay2=document.getElementById("rasp2");
 if(moduleDisplay!=null){
     fetch("login_popup", { 
         mode: 'no-cors',
-    })  .then(response => {
-        return response.json()
-        })
+    })  .then(response => {return response.json();})
         .then(data => {
             if(data.response.length>0)
             {

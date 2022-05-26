@@ -25,6 +25,7 @@
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
+                        <li><a href="../MyProfile.html" itemprop="url" id="my_profile">MY PROFILE</a></li>
                         <li><a href="../Proiect.html" itemprop="relatedLink">HOME</a></li>
                         <li><a href="../Proiect.html#lesson" itemprop="relatedLink">LEARN</a></li>
                         <li><a href="../Beginner.html" itemprop="relatedLink">BEGINNER</a></li>
@@ -136,8 +137,21 @@
                             <input name="task" type="checkbox" value="1" id="checkbox2">
                             <span class="checkmark"></span>
                             Make sure you understand the fundamentals of organic gardening! 
-                            <br><br><br>
+
                         </label>
+                        <br> 
+                        <label class="container-checkbox">   
+                            <input name="task" type="checkbox" value="1" id="checkbox3">
+                            <span class="checkmark"></span>
+                            Task3!
+                        </label>
+                        <br> 
+                        <label class="container-checkbox">   
+                            <input name="task" type="checkbox" value="1" id="checkbox4">
+                            <span class="checkmark"></span>
+                            Task4!
+                        </label>
+                        <br> 
                         <input type="submit" class="submitClass">
                     </form>
                 </p>
@@ -172,14 +186,6 @@
 </section>
 
 <!--JavaScript for Toggle Menu-->
-    <script>
-        var navLinks = document.getElementById("navLinks");
-        function showMenu() {
-            navLinks.style.right="0";
-        }
-        function hideMenu() {
-            navLinks.style.right="-200px";
-        }
-    </script>
+    <script src="Modules.js"></script>
 </body>
 </html>

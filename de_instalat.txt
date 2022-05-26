@@ -1,7 +1,0 @@
-npm install -g nodemon
-
-nodemon App
-
-npm init
-
-npm install lodash

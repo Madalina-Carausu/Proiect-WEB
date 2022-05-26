@@ -471,6 +471,10 @@ h3 {
     background: rgba(226, 87, 0, 0.7);
 }
 
+#my_profile {
+    display: none;
+}
+
 .layer h3 {
     width: 100%;
     font-weight: 500;

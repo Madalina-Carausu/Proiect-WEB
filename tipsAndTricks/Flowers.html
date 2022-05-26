@@ -25,6 +25,7 @@
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
+                        <li><a href="../MyProfile.html" itemprop="url" id="my_profile">MY PROFILE</a></li>
                         <li><a href="../Proiect.html">HOME</a></li>
                         <li><a href="../Proiect.html#lesson">LEARN</a></li>
                         <li><a href="../Proiect.html#tipsAndTricks">TIPS & TRICKS</a></li>
@@ -135,6 +136,16 @@
         function hideMenu() {
             navLinks.style.right="-200px";
         }
+        fetch("get_login", { 
+            mode: 'no-cors'
+        })  .then(response => {return response.json()})
+            .then(data => {
+                if(data!=null&&data!=undefined&&data.response!=null&&data.response!=undefined&&data.response==1)
+                    document.getElementById("my_profile").style.display="flex";
+                else
+                    document.getElementById("my_profile").style.display="none";
+            })
+            .catch(err => console.log(err));
     </script>
 </body>
 </html>
