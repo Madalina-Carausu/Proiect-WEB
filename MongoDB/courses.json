@@ -1,0 +1,169 @@
+[{
+  "_id": {
+    "$oid": "628e0d47ca1b065eb6e8fc6c"
+  },
+  "level": "Beginner",
+  "number": 1,
+  "display": "Garden Basics",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e0dc1ca1b065eb6e8fc6e"
+  },
+  "level": "Beginner",
+  "number": 2,
+  "display": "Growing Zone",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e0dd6ca1b065eb6e8fc70"
+  },
+  "level": "Beginner",
+  "number": 3,
+  "display": "Garden Beds",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e0deaca1b065eb6e8fc72"
+  },
+  "level": "Beginner",
+  "number": 4,
+  "display": "Breaking Ground",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e0dfbca1b065eb6e8fc74"
+  },
+  "level": "Beginner",
+  "number": 5,
+  "display": "Planning Your Garden",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e0e08ca1b065eb6e8fc76"
+  },
+  "level": "Beginner",
+  "number": 6,
+  "display": "Crop Planning",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e0e1bca1b065eb6e8fc78"
+  },
+  "level": "Beginner",
+  "number": 7,
+  "display": "Choose Seeds or Starts",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e0e28ca1b065eb6e8fc7a"
+  },
+  "level": "Beginner",
+  "number": 8,
+  "display": "Planting Your Organic Garden",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e4cc5a124280940da9ff2"
+  },
+  "level": "Beginner",
+  "number": 9,
+  "display": "Seeding and Transplanting",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e646aa124280940daa002"
+  },
+  "level": "Intermediate",
+  "number": 1,
+  "display": "Garden Maintenance",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e6481a124280940daa004"
+  },
+  "level": "Intermediate",
+  "number": 2,
+  "display": "All Natural Pest Sprays",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e6499a124280940daa006"
+  },
+  "level": "Intermediate",
+  "number": 3,
+  "display": "Preventing Disease",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e64a8a124280940daa008"
+  },
+  "level": "Intermediate",
+  "number": 4,
+  "display": "Organic Amendments",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e64b8a124280940daa00a"
+  },
+  "level": "Intermediate",
+  "number": 5,
+  "display": "End of Season Tips",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e64c3a124280940daa00c"
+  },
+  "level": "Intermediate",
+  "number": 6,
+  "display": "Types of Seeds",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e6819a124280940daa00f"
+  },
+  "level": "Advanced",
+  "number": 1,
+  "display": "Plan for Good Garden Production",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e682da124280940daa011"
+  },
+  "level": "Advanced",
+  "number": 2,
+  "display": "Use Space Efficiently",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e683da124280940daa013"
+  },
+  "level": "Advanced",
+  "number": 3,
+  "display": "Smarter Garden Harvesting",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e684ea124280940daa015"
+  },
+  "level": "Advanced",
+  "number": 4,
+  "display": "Limit Inputs of Time and Money",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e685fa124280940daa017"
+  },
+  "level": "Advanced",
+  "number": 5,
+  "display": "Plan to Stock Up",
+  "maxPoints": 4
+},{
+  "_id": {
+    "$oid": "628e6877a124280940daa019"
+  },
+  "level": "Advanced",
+  "number": 6,
+  "display": "Make the Most of Small or Shady Gardens",
+  "maxPoints": 2
+}]

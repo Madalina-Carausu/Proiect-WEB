@@ -82,10 +82,11 @@
 }
 
 .col-myProfile-unlocked-title{
-    padding-left: 10%;
+   
     padding-top: 20px;
     font-weight: 700;
     font-size: large;
+    width: 100%;
     text-align: center;
 }
 
@@ -189,13 +190,12 @@
     margin: auto;
     text-align: center;
     padding-top: 50px; 
-    
 }
 
 .myProfile-locked-plants p{
     text-align: center;
     font-size: 25px;
-    font-weight: 700;
+    font-weight: 300;
 }
 
 @media(max-width: 800px){

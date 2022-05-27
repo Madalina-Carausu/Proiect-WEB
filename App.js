@@ -42,9 +42,47 @@ const server = http.createServer((req, res) => {
 
   let file = __dirname + "/" + path;
 
+  if(path.substring(0, 6)=="Plants"){
+    //Plants-Beginner-response
+    if(path.slice(-8)=="Beginner"){
+      client.db("eGardening").collection('plants').find({"level":"Beginner"}).toArray(function(err, result) {
+        if (err) {throw err}
+        if(result!=null){
+          res.end(JSON.stringify(result));  
+        }
+        else{
+          res.end(JSON.stringify("Eroare"));  
+        }
+      })
+    }
+    else
+    if(path.slice(-12)=="Intermediate"){
+      client.db("eGardening").collection('plants').find({"level":"Intermediate"}).toArray(function(err, result) {
+        if (err) {throw err}
+        if(result!=null){
+          res.end(JSON.stringify(result));  
+        }
+        else{
+          res.end(JSON.stringify("Eroare"));  
+        }
+      })
+    }
+    else{
+      client.db("eGardening").collection('plants').find({"level":"Advanced"}).toArray(function(err, result) {
+        if (err) {throw err}
+        if(result!=null){
+          res.end(JSON.stringify(result));  
+        }
+        else{
+          res.end(JSON.stringify("Eroare"));  
+        }
+      })
+    }
+  }
+  else
   if(path.slice(-9)=="get_login")//modules/get_login  //tipsAndTricks/get_login   //get_login
   {
-    const objectToSend = {"response": login};
+    const objectToSend = {"response": login, "username":username};
     const jsonContent = JSON.stringify(objectToSend);
     res.end(jsonContent);
 

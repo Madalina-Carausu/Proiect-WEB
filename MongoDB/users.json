@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "628bef95eef5cd03ca76ed66"
+  },
+  "name": "Isabela",
+  "password": "isatha",
+  "email": "isa@yahoo.com",
+  "phone": "0754828000"
+},{
+  "_id": {
+    "$oid": "628cd37c6b661db2149beafe"
+  },
+  "name": "andreea",
+  "password": "andreutza",
+  "email": "andreea@tha",
+  "phone": "0333",
+  "task1_1": 1,
+  "task1_2": 2,
+  "task1_3": 3,
+  "task3_5": 0,
+  "task1_5": 2
+}]
