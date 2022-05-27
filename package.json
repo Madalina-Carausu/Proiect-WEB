@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/Madalina-Carausu/Proiect-WEB#readme",
   "dependencies": {
-    "lodash": "^4.17.21",
-    "mongoose": "^6.3.4"
+    "mongodb": "^4.6.0"
   }
 }

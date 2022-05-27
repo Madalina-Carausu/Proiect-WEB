@@ -39,9 +39,27 @@
 <!--Questions and answers-->
         <div class="about_form">
             <hr>
-            <p>If you have any questions, please don't hesitate to ask them ahead at this <a href="">form</a>.</p>
+            <p>If you have any questions, please don't hesitate to ask them ahead at this <a onclick="openForm()">form</a>.</p>
             <hr>
         </div>
+        <div class="form-popup" id="form-popup">
+            <form action="/form_questions" class="form-container animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('form-popup').style.display='none'" class="close" title="Close">&times;</span>
+                </div>
+              <h1>Send us your question</h1>
+              <label for="question"><b>Question</b></label>
+              <input type="text" placeholder="Enter Question" name="question" required>
+          
+              <button type="submit" class="btn">Send</button>
+              <p>Please note that your question will be taken into consideration only if you are <b>logged in</b>!</p>
+            </form>
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("form-popup").style.display = "block";
+            }
+        </script>
         <section class="q_list">
 
             <div class="q_row_colorat">
