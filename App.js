@@ -18,6 +18,7 @@ var response="";
 var response2="";
 var username="";
 var login=0;
+var admin=0; //wether or not the administrator is connected
 
 const server = http.createServer((req, res) => {
   //handle the request and send back a static file
@@ -88,6 +89,13 @@ const server = http.createServer((req, res) => {
 
   }
   else
+  if(path.slice(-9)=="get_admin")//modules/get_login  //tipsAndTricks/get_login   //get_login
+  {
+    const objectToSend = {"response": admin};
+    const jsonContent = JSON.stringify(objectToSend);
+    res.end(jsonContent);
+  }
+  else
   if(path.slice(-26)=="username-database-response"){
     client.db("eGardening").collection('users').findOne({"name":username}, function(err, result) {
       if (err) {throw err}
@@ -139,8 +147,9 @@ const server = http.createServer((req, res) => {
   else
   if(path=="login_popup" && req.method=="POST"){
     path="Proiect.html";
-    file = __dirname + "/" + path;
-    var body = '';
+    file = __dirname + "/" + path;              //abstactizare, sa am undeva o clasa cu ceva si sa caut acolo, sa nu mai fac +
+    var body = '';                              //functie in care dam tot request body ul
+                                                //mai putine if uri
     req.on('data', function (data) {
         body += data;
         if (body.length > 1e6)
@@ -162,6 +171,7 @@ const server = http.createServer((req, res) => {
                       response="Login succesfully!";
                       username=name;
                       login=1;
+                      if(username == "admin") admin = 1;
                       console.log(response)
                       res.writeHead(302, { "Location": "http://" + 'localhost:1234/Proiect_MyProfile.html' });
                       res.end(response);
@@ -305,6 +315,48 @@ const server = http.createServer((req, res) => {
         });
     });
   }
+  else
+  if(path == "form_questions" && req.method=="POST" ) {
+    var body = '';
+
+    if(username != "") {
+
+      req.on('data', function (data) {
+          body += data;
+          if (body.length > 1e6)
+              request.close();
+      });
+
+
+      req.on('end', function () {
+        var post = qs.parse(body);
+        var question = post.question;
+        var data = {
+          "question": question,
+          "username": username
+        }
+      
+        client.db("eGardening").collection('questions').insertOne(data, (err, collection) => {
+          if(err){
+              throw err;
+          }
+          response2="Recod Inserted Successfully";
+          console.log(response2);
+          res.writeHead(302, { "Location": "http://" + 'localhost:1234/QA.html' });
+          res.end(response2);
+        });
+        
+      });
+    }
+    else
+    {
+      response2="The user is not logged in";
+      console.log(response2);
+      res.writeHead(302, { "Location": "http://" + 'localhost:1234/QA.html' });
+      res.end(response2);
+    }
+  }
+
   else{
   //async read file function uses callback
   fs.readFile(file, function(err, content) {

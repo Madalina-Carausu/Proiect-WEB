@@ -18,8 +18,8 @@ fetch("Beginner-response", {
         while(i<data.length){
             let count=0;
             title1="";
-                title2="";
-                title3="";
+            title2="";
+            title3="";
             while(count<3&&i<data.length){
                 const number=data[i].number;
                 const maxPoints=data[i].maxPoints;
@@ -68,3 +68,14 @@ fetch("get_login", {
             document.getElementById("my_profile").style.display="none";
     })
     .catch(err => console.log(err));
+
+fetch("get_admin", { 
+    mode: 'no-cors'
+})  .then(response => {return response.json()})
+.then(data => {
+    if(data!=null&&data!=undefined&&data.response!=null&&data.response!=undefined&&data.response==1)
+        document.getElementById("admin").style.display="flex";
+    else
+        document.getElementById("admin").style.display="none";
+})
+.catch(err => console.log(err));

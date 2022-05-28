@@ -7,7 +7,8 @@
         <meta name="keywords" content="Course, Garden, Gardening, Plant, Vegetables, ">
         <meta name="author" content="Madalina Carausu and Isabela Haiura">
 
-        <title>WEB Project</title>
+        <title>e-Gardening</title>
+
         <link rel="stylesheet" href="Proiect.css">
         <link rel="stylesheet" href="QA.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +24,7 @@
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
+                        <li><a href="Admin.html" itemprop="url" id="admin">ADMIN</a></li>
                         <li><a href="MyProfile.html" itemprop="url" id="my_profile">MY PROFILE</a></li>
                         <li><a href="Proiect.html">HOME</a></li>
                         <li><a href="Proiect.html#lesson">LEARN</a></li>
@@ -43,23 +45,17 @@
             <hr>
         </div>
         <div class="form-popup" id="form-popup">
-            <form action="/form_questions" class="form-container animate">
+            <form action="/form_questions" method="post" class="form-container animate">
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('form-popup').style.display='none'" class="close" title="Close">&times;</span>
                 </div>
               <h1>Send us your question</h1>
               <label for="question"><b>Question</b></label>
               <input type="text" placeholder="Enter Question" name="question" required>
-          
               <button type="submit" class="btn">Send</button>
               <p>Please note that your question will be taken into consideration only if you are <b>logged in</b>!</p>
             </form>
         </div>
-        <script>
-            function openForm() {
-                document.getElementById("form-popup").style.display = "block";
-            }
-        </script>
         <section class="q_list">
 
             <div class="q_row_colorat">
@@ -256,25 +252,7 @@
             </span>.</p>
     </section>
 
-<!--JavaScript for Toggle Menu-->
-    <script>
-        var navLinks = document.getElementById("navLinks");
-        function showMenu() {
-            navLinks.style.right="0";
-        }
-        function hideMenu() {
-            navLinks.style.right="-200px";
-        }
-        fetch("get_login", { 
-            mode: 'no-cors'
-        })  .then(response => {return response.json()})
-            .then(data => {
-                if(data!=null&&data!=undefined&&data.response!=null&&data.response!=undefined&&data.response==1)
-                    document.getElementById("my_profile").style.display="flex";
-                else
-                    document.getElementById("my_profile").style.display="none";
-            })
-            .catch(err => console.log(err));
-    </script>
+<!--JavaScript -->
+<script src="QA.js"></script>
 </body>
 </html>

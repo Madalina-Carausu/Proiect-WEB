@@ -1,0 +1,94 @@
+.sub-header1 {
+    background-image: linear-gradient(rgba(8, 32, 3, 0.7),rgba(4, 17, 1, 0.7)), url(images/qa.jpg);
+}
+
+h2{
+    text-align: center;
+}
+
+.lesson{
+    padding-top: 0%;
+}
+/* Form: */
+select{
+    width: 50%;
+    height: 40px;
+    border: none;
+    margin-left: 3%;
+}
+
+.form-add-course {
+    display: block;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
+
+.form-container {
+    background-color: #467d70a5;
+    border: 1px solid #888;
+    width: 90%; /* Could be more or less, depending on screen size */
+    height: 53%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.form-container h1{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 27px;
+    text-align: center;
+}
+
+.form-container p{
+    margin-top: 0%;
+    font-size: 15px;
+    text-align:justify;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.form-container label {
+    margin-left: 5%;
+}
+
+.form-container input[type=text] {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-container input[type=file] {
+    width: 50%;
+    
+    margin-right: 5%;
+    border: none;
+}
+  
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+  
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #ff9832f4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    margin-bottom:2%;
+    margin-left: 30%;
+    margin-right: 30%;
+    opacity: 0.8;
+}
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover {
+    opacity: 1;
+  }  
+

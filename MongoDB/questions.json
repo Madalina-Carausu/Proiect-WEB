@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "62925bf48aa150644aa320b8"
+  },
+  "question": "Which one is the most difficult plant to grow?",
+  "username": "andreea"
+},{
+  "_id": {
+    "$oid": "62925c584d04ca2e38921792"
+  },
+  "question": "How many plants can I grow in a year?",
+  "username": "andreea"
+}]

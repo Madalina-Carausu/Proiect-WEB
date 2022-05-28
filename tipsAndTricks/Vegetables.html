@@ -7,7 +7,7 @@
         <meta name="keywords" content="Course, Garden, Gardening, Plant, Vegetables, ">
         <meta name="author" content="Madalina Carausu and Isabela Haiura">
 
-        <title>WEB Project</title>
+        <title>e-Gardening</title>
 
         <link rel="stylesheet" href="../Proiect.css">
         <link rel="stylesheet" href="../BegIntAdv.css">
@@ -25,6 +25,7 @@
                 <div class="nav-links" id="navLinks">
                     <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                     <ul>
+                        <li><a href="../Admin.html" itemprop="url" id="admin">ADMIN</a></li>
                         <li><a href="../MyProfile.html" itemprop="url" id="my_profile">MY PROFILE</a></li>
                         <li><a href="../Proiect.html">HOME</a></li>
                         <li><a href="../Proiect.html#lesson">LEARN</a></li>
@@ -136,6 +137,17 @@
                     document.getElementById("my_profile").style.display="none";
             })
             .catch(err => console.log(err));
+
+        fetch("get_admin", { 
+            mode: 'no-cors'
+        })  .then(response => {return response.json()})
+        .then(data => {
+            if(data!=null&&data!=undefined&&data.response!=null&&data.response!=undefined&&data.response==1)
+                document.getElementById("admin").style.display="flex";
+            else
+                document.getElementById("admin").style.display="none";
+        })
+        .catch(err => console.log(err));
     </script>
 </body>
 </html>

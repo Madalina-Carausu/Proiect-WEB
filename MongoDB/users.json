@@ -18,5 +18,13 @@
   "task1_2": 2,
   "task1_3": 3,
   "task3_5": 0,
-  "task1_5": 2
+  "task1_5": 2,
+  "task1_6": 1,
+  "task1_7": 2
+},{
+  "_id": {
+    "$oid": "629263c72125a7ef0ef493a1"
+  },
+  "name": "admin",
+  "password": "topsecret"
 }]
