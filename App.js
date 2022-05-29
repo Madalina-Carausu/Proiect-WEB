@@ -314,7 +314,6 @@ const server = http.createServer((req, res) => {
     req.on('data', function (data) {
         body += data;
         if (body.length > 1e6)
-            //request.connection.destroy();
             request.close();
     });
     
@@ -456,7 +455,7 @@ const server = http.createServer((req, res) => {
       var newName1 = Date.now().toString() + files.filename1.originalFilename;
       var newpath =  __dirname + '/images/' + newName1;
       
-      fs.rename(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath, function (err) {
         if (err) throw err;
         else 
         {
@@ -468,7 +467,7 @@ const server = http.createServer((req, res) => {
       var newName2 = Date.now().toString() + files.filename2.originalFilename;
       newpath =  __dirname + '/images/' + newName2;
       
-      fs.rename(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath, function (err) {
         if (err) throw err;
         else 
         {
@@ -481,7 +480,7 @@ const server = http.createServer((req, res) => {
       var newName3 = Date.now().toString() + files.filename3.originalFilename;
       newpath =  __dirname + '/images/' + newName3;
       
-      fs.rename(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath, function (err) {
         if (err) throw err;
         else 
         {
@@ -494,7 +493,7 @@ const server = http.createServer((req, res) => {
       var newName4 = Date.now().toString() + files.filename4.originalFilename;
       newpath =  __dirname + '/images/' + newName4;
       
-      fs.rename(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath, function (err) {
         if (err) throw err;
         else 
         {
@@ -604,7 +603,16 @@ const server = http.createServer((req, res) => {
       var newName = Date.now().toString() + files.filename_plant.originalFilename;
       var newpath =  __dirname + '/images/' + newName;
       
-      fs.rename(oldpath, newpath, function (err) {
+      /*fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        else 
+        {
+          response2="File uploaded and moved!" + newpath;
+          console.log(response2);
+        }
+      });*/
+
+      fs.copyFile(oldpath, newpath, function (err) {
         if (err) throw err;
         else 
         {
