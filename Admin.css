@@ -10,6 +10,7 @@ h2{
     padding-top: 0%;
 }
 /* Form: */
+
 select{
     width: 50%;
     height: 40px;
@@ -22,7 +23,24 @@ select{
     position: relative;
     justify-content: center;
     align-items: center;
-  }
+    margin-bottom: 10%;
+}
+
+.form-add-plant {
+    display: block;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+.form-answe-question {
+    display: block;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10%;
+}
 
 .form-container {
     background-color: #467d70a5;
@@ -63,8 +81,8 @@ select{
 
 .form-container input[type=file] {
     width: 50%;
-    
     margin-right: 5%;
+    margin-left: 5%;
     border: none;
 }
   

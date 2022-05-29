@@ -270,6 +270,7 @@ const server = http.createServer((req, res) => {
       response2="";
       username="";
       login=0;
+      if(username == "admin") admin = 0;
   }
   else
   if(path.substring(0,4)=="task" && req.method=="POST"){//expresii regulate
@@ -356,7 +357,111 @@ const server = http.createServer((req, res) => {
       res.end(response2);
     }
   }
+  else
+  if(path == "form_add_course" && req.method=="POST" ) {
+    var body = '';
 
+    req.on('data', function (data) {
+        body += data;
+        if (body.length > 1e6)
+            request.close();
+    });
+
+    req.on('end', function () {
+      var post = qs.parse(body);
+      var level = post.difficulty;
+      var display = post.title;
+      var title1 = post.title1;
+      var content1 = post.content1;
+      var filename1 = post.filename1;
+      var title2 = post.title2;
+      var content2 = post.content2;
+      var filename2 = post.filename2;
+      var title3 = post.title3;
+      var content3 = post.content3;
+      var filename3 = post.filename3;
+      var title4 = post.title4;
+      var content4 = post.content4;
+      var filename4 = post.filename4;
+      var task1 = post.task1;
+      var task2 = post.task2;
+      var task3 = post.task3;
+      var task4 = post.task4;
+
+      var data = {
+        "level" : level,
+        "display" : display,
+        "maxPoints" : 4,
+        "title1" : title1,
+        "content1" : content1,
+        "filename1" : filename1,
+        "title2" : title2,
+        "content2" : content2,
+        "filename2" : filename2,
+        "title3" : title3,
+        "content3" : content3,
+        "filename3" : filename3,
+        "title4" : title4,
+        "content4" : content4,
+        "filename4" : filename4,
+        "task1" : task1,
+        "task2" : task2,
+        "task3" : task3,
+        "task4" : task4
+      }
+    
+      client.db("eGardening").collection('courses').insertOne(data, (err, collection) => {
+        if(err){
+            throw err;
+        }
+        response2="Recod Inserted Successfully";
+        console.log(response2);
+        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-course' });
+        res.end(response2);
+      });
+      
+    });
+  }
+  else
+  if(path == "form_add_plant" && req.method=="POST" ) {
+    var body = '';
+
+    req.on('data', function (data) {
+        body += data;
+        if (body.length > 1e6)
+            request.close();
+    });
+
+    req.on('end', function () {
+      var post = qs.parse(body);
+      var level = post.difficulty;
+      var name = post.name;
+      var filename_plant = post.filename_plant;
+      var task1 = post.task1;
+      var task2 = post.task2;
+      var task3 = post.task3;
+
+      var data = {
+        "name" : name,
+        "task1" : task1,
+        "task2" : task2,
+        "task3" : task3,
+        "level" : level,
+        "image" : filename_plant
+      }
+    
+      client.db("eGardening").collection('plants').insertOne(data, (err, collection) => {
+        if(err){
+            throw err;
+        }
+        response2="Recod Inserted Successfully";
+        console.log(response2);
+        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-plant' });
+        res.end(response2);
+      });
+      
+    });
+  }
   else{
   //async read file function uses callback
   fs.readFile(file, function(err, content) {
