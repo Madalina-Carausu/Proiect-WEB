@@ -4,6 +4,7 @@ const http = require("http");
 const url = require("url");
 const fs = require("fs");
 const qs = require('querystring');
+var formidable = require('formidable');
 
 const { MongoClient } = require('mongodb');
 const uri = "mongodb://0.0.0.0:27017";
@@ -268,9 +269,9 @@ const server = http.createServer((req, res) => {
       res.end("success");
       response="";
       response2="";
+      if(username == "admin") admin = 0;
       username="";
       login=0;
-      if(username == "admin") admin = 0;
   }
   else
   if(path.substring(0,4)=="task" && req.method=="POST"){//expresii regulate
@@ -359,7 +360,7 @@ const server = http.createServer((req, res) => {
   }
   else
   if(path == "form_add_course" && req.method=="POST" ) {
-    var body = '';
+    /*var body = '';
 
     req.on('data', function (data) {
         body += data;
@@ -420,11 +421,118 @@ const server = http.createServer((req, res) => {
         res.end(response2);
       });
       
+    });*/
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+
+      var oldpath = files.filename1.filepath;
+      var newName1 = Date.now().toString() + files.filename1.originalFilename;
+      var newpath =  __dirname + '/images/' + newName1;
+      
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        else 
+        {
+          response2="File uploaded and moved!" + newpath;
+          console.log(response2);
+        }
+      });
+      oldpath = files.filename2.filepath;
+      var newName2 = Date.now().toString() + files.filename2.originalFilename;
+      newpath =  __dirname + '/images/' + newName2;
+      
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        else 
+        {
+          response2="File uploaded and moved!" + newpath;
+          console.log(response2);
+        }
+      });
+
+      oldpath = files.filename3.filepath;
+      var newName3 = Date.now().toString() + files.filename3.originalFilename;
+      newpath =  __dirname + '/images/' + newName3;
+      
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        else 
+        {
+          response2="File uploaded and moved!" + newpath;
+          console.log(response2);
+        }
+      });
+
+      oldpath = files.filename4.filepath;
+      var newName4 = Date.now().toString() + files.filename4.originalFilename;
+      newpath =  __dirname + '/images/' + newName4;
+      
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        else 
+        {
+          response2="File uploaded and moved!" + newpath;
+          console.log(response2);
+        }
+      });
+
+      var level = fields.difficulty;
+      var display = fields.title;
+      var title1 = fields.title1;
+      var content1 = fields.content1;
+      var filename1 = newName1.substring(0, newName1.length-4);
+      var title2 = fields.title2;
+      var content2 = fields.content2;
+      var filename2 = newName2.substring(0, newName2.length-4);
+      var title3 = fields.title3;
+      var content3 = fields.content3;
+      var filename3 = newName3.substring(0, newName3.length-4);
+      var title4 = fields.title4;
+      var content4 = fields.content4;
+      var filename4 = newName4.substring(0, newName4.length-4);
+      var task1 = fields.task1;
+      var task2 = fields.task2;
+      var task3 = fields.task3;
+      var task4 = fields.task4;
+
+      var data = {
+        "level" : level,
+        "display" : display,
+        "maxPoints" : 4,
+        "title1" : title1,
+        "content1" : content1,
+        "filename1" : filename1,
+        "title2" : title2,
+        "content2" : content2,
+        "filename2" : filename2,
+        "title3" : title3,
+        "content3" : content3,
+        "filename3" : filename3,
+        "title4" : title4,
+        "content4" : content4,
+        "filename4" : filename4,
+        "task1" : task1,
+        "task2" : task2,
+        "task3" : task3,
+        "task4" : task4
+      }
+    
+      client.db("eGardening").collection('courses').insertOne(data, (err, collection) => {
+        if(err){
+            throw err;
+        }
+        response2="Recod Inserted Successfully";
+        console.log(response2);
+        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-course' });
+        res.end(response2);
+      });
+      
     });
+
   }
   else
   if(path == "form_add_plant" && req.method=="POST" ) {
-    var body = '';
+    /*var body = '';
 
     req.on('data', function (data) {
         body += data;
@@ -460,6 +568,50 @@ const server = http.createServer((req, res) => {
         res.end(response2);
       });
       
+    });*/
+
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+
+      var oldpath = files.filename_plant.filepath;
+      var newName = Date.now().toString() + files.filename_plant.originalFilename;
+      var newpath =  __dirname + '/images/' + newName;
+      
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        else 
+        {
+          response2="File uploaded and moved!" + newpath;
+          console.log(response2);
+        }
+      });
+
+      var level = fields.difficulty;
+      var name = fields.name;
+      var filename_plant = newName.substring(0, newName.length-4);
+      var task1 = fields.task1;
+      var task2 = fields.task2;
+      var task3 = fields.task3;
+
+      var data = {
+        "name" : name,
+        "task1" : task1,
+        "task2" : task2,
+        "task3" : task3,
+        "level" : level,
+        "image" : filename_plant
+      }
+
+      client.db("eGardening").collection('plants').insertOne(data, (err, collection) => {
+        if(err){
+            throw err;
+        }
+        response2="Recod Inserted Successfully";
+        console.log(response2);
+        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-plant' });
+        res.end(response2);
+      });
+
     });
   }
   else{

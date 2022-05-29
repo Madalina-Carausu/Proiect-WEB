@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Madalina-Carausu/Proiect-WEB#readme",
   "dependencies": {
+    "formidable": "^2.0.1",
     "mongodb": "^4.6.0"
   }
 }
