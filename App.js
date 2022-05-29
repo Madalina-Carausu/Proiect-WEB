@@ -159,6 +159,19 @@ const server = http.createServer((req, res) => {
     })
   }
   else
+  if(path=="get_questions_and_answers" && req.method=="GET"){
+
+    client.db("eGardening").collection('questions').find({"answer" : {$ne: ""}}).toArray(function(err, result) {
+      if (err) {throw err}
+      if(result!=null){
+        res.end(JSON.stringify(result));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+    })
+  }
+  else
   if(path=="login_popup" && req.method=="POST"){
     path="Proiect.html";
     file = __dirname + "/" + path;              //abstactizare, sa am undeva o clasa cu ceva si sa caut acolo, sa nu mai fac +

@@ -33,3 +33,34 @@ fetch("get_admin", {
 function openForm() {
     document.getElementById("form-popup").style.display = "block";
 }
+
+const divQuestions = document.getElementById("q_list");
+fetch("get_questions_and_answers", { 
+    mode: 'no-cors' // 'cors' by default
+})  .then(response => {return response.json()})
+    .then(data => {
+        var value;
+        var i=0;
+        while(i<data.length){
+            value = "";      
+            const question = data[i].question;
+            const user = data[i].username;    
+            const answer = data[i].answer;                
+            i++;
+            value = `<div class="q_row_colorat">
+            <div class="q_row" >
+                <div class="user" >
+                    <img  src="images/generalUser.png" alt="user profile image">
+                    <div class="q_text">
+                        <h4>` + user +`</h4>
+                    </div>
+                </div>
+                <div class="q_text">
+                    <div class="question"><p>Q: ` + question + ` </p></div>
+                    <p>A: ` + answer + `<a href="./modules/BeginnerGardenBasics.html#organicGardening">[read more]</a></p>
+                </div>
+            </div>`;
+            divQuestions.insertAdjacentHTML("beforeend", value);
+        }
+    })
+    .catch(err => console.log(err));
