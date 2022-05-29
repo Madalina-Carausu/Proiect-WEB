@@ -170,8 +170,6 @@
     height: 10px;
     border: solid white;
     border-width: 0 3px 3px 0;
-    /*-webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);*/
     transform: rotate(45deg);
 }
 .orange{
@@ -195,7 +193,26 @@
 .myProfile-locked-plants p{
     text-align: center;
     font-size: 25px;
-    font-weight: 300;
+}
+
+.submitClass{
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    background-color: rgba(132, 184, 120, 0.705);
+    border: 0px;
+    padding: 5px 18px;
+    font-size: 13px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.1s;
+}
+input{
+    float: right;
+}
+
+.submitClass:hover {
+    background: rgba(132, 184, 120, 0.941);
 }
 
 @media(max-width: 800px){
