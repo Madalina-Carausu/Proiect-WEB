@@ -166,4 +166,27 @@
   "number": 6,
   "display": "Make the Most of Small or Shady Gardens",
   "maxPoints": 2
+},{
+  "_id": {
+    "$oid": "6293751de49d781509f7865b"
+  },
+  "level": "Intermediate",
+  "display": "What Not To Plant With Tomatoes",
+  "maxPoints": 4,
+  "title1": "What is Companion Planting?",
+  "content1": "Companion planting is growing specific vegetables, herbs, and flowers alongside your crops to help improve their health and vigor. There is significant evidence that companion plants work synergistically with your crop to reduce pest pressure and supply a range of other benefits.  Essentially, these support-plants create an ecosystem in your garden so you don’t have to work quite so hard to keep your plants healthy.",
+  "filename1": "1653830941960tomatoes",
+  "title2": "Does Companion Planting Work?",
+  "content2": "A number of scientific studies have demonstrated that companion planting with tomatoes can significantly reduce pest damage. Let’s take a look at some of these studies, and the companion plants that accompany them:",
+  "filename2": "1653830941960companionPlant",
+  "title3": "French Marigolds",
+  "content3": "French marigolds have been shown to protect tomatoes from whiteflies by releasing a natural compound called limonene.",
+  "filename3": "1653830941960frenchMarigolds",
+  "title4": "How Companions Help Tomatoes?",
+  "content4": "Organic gardening is all about mimicking nature through ecological growing methods. In nature, there are no chemical pesticides or fertilizer applications, instead the Earth uses its own “checks and balances” with plants that work in symbiosis to help eachother grow.  One of the easiest ways to create more symbiotic connections is through expanding the diversity of your garden with companion plants. In contrast to monoculture (growing lots of one species in a small space), polyculture plantings have been proven to reduce pest pressure by making it harder for them to find their hosts.  Interplantings of diverse species have been used for thousands of years to improve the health of farm fields, but recently this ancient practice is being revitalized as a means to reduce the use of pesticides.",
+  "filename4": "1653830941960companionTomatoes",
+  "task1": "Task 1",
+  "task2": "Task 2",
+  "task3": "Task 3",
+  "task4": "Task 4"
 }]

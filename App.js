@@ -146,6 +146,19 @@ const server = http.createServer((req, res) => {
     })
   }
   else
+  if(path=="get_questions" && req.method=="GET"){
+
+    client.db("eGardening").collection('questions').find({"answer" : ""}).toArray(function(err, result) {
+      if (err) {throw err}
+      if(result!=null){
+        res.end(JSON.stringify(result));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+    })
+  }
+  else
   if(path=="login_popup" && req.method=="POST"){
     path="Proiect.html";
     file = __dirname + "/" + path;              //abstactizare, sa am undeva o clasa cu ceva si sa caut acolo, sa nu mai fac +
@@ -335,7 +348,8 @@ const server = http.createServer((req, res) => {
         var question = post.question;
         var data = {
           "question": question,
-          "username": username
+          "username": username,
+          "answer" : ""
         }
       
         client.db("eGardening").collection('questions').insertOne(data, (err, collection) => {
@@ -526,7 +540,7 @@ const server = http.createServer((req, res) => {
         res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-course' });
         res.end(response2);
       });
-      
+
     });
 
   }
@@ -614,6 +628,39 @@ const server = http.createServer((req, res) => {
 
     });
   }
+  else
+  if(path == "form_answer_question" && req.method=="POST" ) {
+    
+    var body = '';
+
+    req.on('data', function (data) {
+        body += data;
+        if (body.length > 1e6)
+            request.close();
+    });
+
+    req.on('end', function () {
+      var post = qs.parse(body);
+      var questionAndFrom = post.chosen_question;
+      var answer = post.answer;
+      var question = questionAndFrom.slice(0, questionAndFrom.search(" ---"));
+      var user = questionAndFrom.slice(questionAndFrom.search("FROM")+5, questionAndFrom.length);
+    
+      client.db("eGardening").collection('questions').findOne({"question":question, "username" : user},function(err, result) {
+        if (err) {throw err;}
+        if(result!=null){
+          client.db("eGardening").collection('questions').updateOne({"question":question, "username" : user}, 
+            {'$set' : {"answer" : answer }});  
+          response2="Record Inserted Successfully";
+          console.log(response2);
+          res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#form-answer-question" });
+          res.end(response2);
+        }
+    });
+      
+    });
+  }
+
   else{
   //async read file function uses callback
   fs.readFile(file, function(err, content) {

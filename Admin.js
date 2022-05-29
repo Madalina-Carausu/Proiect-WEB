@@ -27,3 +27,25 @@ fetch("get_admin", {
             document.getElementById("admin").style.display="none";
     })
     .catch(err => console.log(err));
+
+    const selectDiv = document.getElementById("chosen_question");
+    fetch("get_questions", { 
+        mode: 'no-cors' // 'cors' by default
+    })  .then(response => {return response.json()})
+        .then(data => {
+            var option;
+            var value;
+            var i=0;
+            while(i<data.length){
+                option = "";  
+                value = "";      
+                const question = data[i].question;
+                const user = data[i].username;                    
+                i++;
+                value = question + ` --- FROM ` + user;
+                option = `<option value="` + value + `">` + value + `</option>`;
+                selectDiv.insertAdjacentHTML("beforeend", option);
+            }
+        })
+        .catch(err => console.log(err));
+    

@@ -178,4 +178,34 @@
   "task3": "Task3",
   "level": "Advanced",
   "image": "Vine&BushBerries"
+},{
+  "_id": {
+    "$oid": "62937076d186f6dd55e4e7ec"
+  },
+  "name": "Basil",
+  "task1": "Task 1",
+  "task2": "Task 2",
+  "task3": "Task 3",
+  "level": "Intermediate",
+  "image": "1653829750664basil"
+},{
+  "_id": {
+    "$oid": "62938e38a3bdbabadf00fba3"
+  },
+  "name": "Parsley ",
+  "task1": "Task 1",
+  "task2": "Task 2",
+  "task3": "Task 3",
+  "level": "Beginner",
+  "image": "1653837368566Parsley"
+},{
+  "_id": {
+    "$oid": "62938ed3a3bdbabadf00fba4"
+  },
+  "name": "ZZ Plant",
+  "task1": "Task 1",
+  "task2": "Task 2",
+  "task3": "Task 3",
+  "level": "Beginner",
+  "image": "1653837523439zz_plant"
 }]
