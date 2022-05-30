@@ -1,30 +1,107 @@
 [{
   "_id": {
-    "$oid": "628bef95eef5cd03ca76ed66"
-  },
-  "name": "Isabela",
-  "password": "isatha",
-  "email": "isa@yahoo.com",
-  "phone": "0754828000"
-},{
-  "_id": {
-    "$oid": "628cd37c6b661db2149beafe"
+    "$oid": "6294c4c2666e9590fb8db96c"
   },
   "name": "andreea",
-  "password": "andreutza",
-  "email": "andreea@tha",
+  "password": "$2b$10$gnWF6KsXda8LiVEQ90JeNua4K8S8SEkv2vf38mLhSV/rG/DYYpXne",
+  "email": "andreea_haiura@yahoo.com",
   "phone": "0333",
-  "task1_1": 1,
-  "task1_2": 2,
-  "task1_3": 3,
-  "task3_5": 0,
-  "task1_5": 2,
-  "task1_6": 1,
-  "task1_7": 2
+  "plants": [
+    {
+      "image": "SweetCorn",
+      "task1": true,
+      "task2": true,
+      "task3": false
+    },
+    {
+      "image": "Kale",
+      "task1": false,
+      "task2": false,
+      "task3": true
+    },
+    {
+      "image": "1653837523439zz_plant",
+      "task1": false,
+      "task2": true,
+      "task3": false
+    }
+  ],
+  "tasks": [
+    {
+      "task": "task1_1",
+      "value": 3,
+      "task1": true,
+      "task2": true,
+      "task3": false,
+      "task4": true
+    },
+    {
+      "task": "task1_6",
+      "value": 2,
+      "task1": true,
+      "task2": true,
+      "task3": false,
+      "task4": false
+    },
+    {
+      "task": "task1_2",
+      "value": 1,
+      "task1": false,
+      "task2": false,
+      "task3": false,
+      "task4": true
+    },
+    {
+      "task": "task2_2",
+      "value": 2,
+      "task1": false,
+      "task2": true,
+      "task3": true,
+      "task4": false
+    },
+    {
+      "task": "task3_1",
+      "value": 1,
+      "task1": false,
+      "task2": false,
+      "task3": true,
+      "task4": false
+    }
+  ]
 },{
   "_id": {
-    "$oid": "629263c72125a7ef0ef493a1"
+    "$oid": "6294c504666e9590fb8db96d"
   },
   "name": "admin",
-  "password": "topsecret"
+  "password": "$2b$10$rhNDYGZqOGGUl/uuHiRrRORKDZuXY3Sd5Sg7GfCXNpwgEv9tvR3dC",
+  "email": "admin@gmail.com",
+  "phone": "02",
+  "plants": [
+    {
+      "image": "SweetCorn",
+      "task1": true,
+      "task2": true,
+      "task3": false
+    }
+  ],
+  "tasks": []
+},{
+  "_id": {
+    "$oid": "62952a587ccb9469543162dc"
+  },
+  "name": "isabela",
+  "password": "$2b$10$XrrPp2FWAoL/KHdhN6Mxuu1Tb1dzkBmeONRIItugoML46Zx6jOZcG",
+  "email": "isa@gmail.com",
+  "phone": "02",
+  "plants": [],
+  "tasks": [
+    {
+      "task": "task1_6",
+      "value": 2,
+      "task1": true,
+      "task2": true,
+      "task3": false,
+      "task4": false
+    }
+  ]
 }]
