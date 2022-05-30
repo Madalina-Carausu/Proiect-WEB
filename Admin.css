@@ -126,24 +126,13 @@ select{
 .chooseFile:hover {
     background: rgba(55, 99, 89, 0.777);
 }
-
-#myFile4{
-    display: none;
-}
-
-#myFile3{
-    display: none;
-}
-
-#myFile2{
-    display: none;
-}
-
-#myFile1{
-    display: none;
-}
-
-#myFile_plant{
-    display: none;
-}
+/*
+#myFile_plant, #myFile1, #myFile2, #myFile3, #myFile4  {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}*/
 

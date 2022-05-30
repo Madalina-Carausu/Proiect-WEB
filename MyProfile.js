@@ -29,19 +29,21 @@ fetch("get_admin", {
             document.getElementById("admin").style.display="none";
     })
     .catch(err => console.log(err));
- 
 
 var person;
+
 fetch("username-database-response", { 
     mode: 'no-cors' // 'cors' by default
 })  .then(response => {return response.json()})
     .then(data => {
         person=data;  
+    
     var numberForBeginner=0;
     fetch("Beginner-response", { 
         mode: 'no-cors' 
     })  .then(response => {return response.json()})
         .then(data => {
+
             var value=0;
             var title='';
             for(let i=0;i<data.length;i++){
@@ -50,10 +52,13 @@ fetch("username-database-response", {
                     value=value+person[task];
             }
             numberForBeginner=((value*100)/(4*data.length)).toFixed(2);
+            if(person.plants!=undefined&&person.plants!=null&&person.plants.length>0)
+                document.getElementById("my_plants").insertAdjacentHTML("beforeend", person.plants.length);
+            else
+            document.getElementById("my_plants").insertAdjacentHTML("beforeend", 0);
             if(numberForBeginner!=100){
                 document.getElementById("my_level").insertAdjacentHTML("beforeend", "Beginner");
                 document.getElementById("my_percentage").insertAdjacentHTML("beforeend", numberForBeginner+"%");
-
 
                 fetch("Plants-Beginner", { 
                     mode: 'no-cors' 
@@ -65,61 +70,11 @@ fetch("username-database-response", {
                         let count=0;
             
                         if(i<data.length){
-                            title1 = `<div class="col-myProfile-unlocked" >
-                                        <div class="titleAndImage"> 
-                                            <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                            <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                        </div> 
-                                        <div class="text"> 
-                                            <div class="status">Status:</div> 
-                                            <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                <p> 
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                        <span class="checkmark"></span>`+ data[i].task1 +`
-                                                    </label>
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                        <span class="checkmark"></span>`+ data[i].task2 +`
-                                                    </label>
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                        <span class="checkmark"></span>`+ data[i].task3 +`
-                                                    </label> 
-                                                    <input type="submit" class="submitClass"> 
-                                                </p>
-                                            </form> 
-                                        </div>
-                                    </div> `;
+                            title1 = getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                         }
                         i++;
                         if(i<data.length){
-                            title2 = `<div class="col-myProfile-unlocked" >
-                                        <div class="titleAndImage"> 
-                                            <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                            <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                        </div> 
-                                        <div class="text"> 
-                                            <div class="status">Status:</div> 
-                                            <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                <p> 
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                        <span class="checkmark"></span>`+ data[i].task1 +`
-                                                    </label>
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                        <span class="checkmark"></span>`+ data[i].task2 +`
-                                                    </label>
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                        <span class="checkmark"></span>`+ data[i].task3 +`
-                                                    </label>  
-                                                    <input type="submit" class="submitClass">
-                                                </p>
-                                            </form> 
-                                        </div>
-                                    </div> `;
+                            title2 = getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                         }
                         title=title1+title2;
                         document.getElementById("col-myProfile-unlocked-2").insertAdjacentHTML("beforeend", title);
@@ -128,38 +83,21 @@ fetch("username-database-response", {
                             title1="";
                             count=0;
                             while(i<data.length&&count<3){
-                                title1 = title1 + `<div class="col-myProfile-unlocked" >
-                                    <div class="titleAndImage"> 
-                                        <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                        <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                    </div> 
-                                    <div class="text"> 
-                                        <div class="status">Status:</div> 
-                                        <form action="/plant_`+ data[i].name+`" method="post"> 
-                                            <p> 
-                                                <label class="container-checkbox"> 
-                                                    <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                    <span class="checkmark"></span>`+ data[i].task1 +`
-                                                </label>
-                                                <label class="container-checkbox"> 
-                                                    <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                    <span class="checkmark"></span>`+ data[i].task2 +`
-                                                </label>
-                                                <label class="container-checkbox"> 
-                                                    <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                    <span class="checkmark"></span>`+ data[i].task3 +`
-                                                </label>  
-                                                <input type="submit" class="submitClass">
-                                            </p>
-                                        </form> 
-                                    </div>
-                                </div> `;
+                                title1 = title1 + getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                 i++;
                                 count++;
                             }
                             title=`<div class="row-myProfile">`+ title1+`</div>`;
-                            console.log(title);
                             document.getElementById("rowForPlants").insertAdjacentHTML("beforeend", title);
+                            var arrayOfPlants = person.plants;
+                            if(arrayOfPlants.length>0){
+                                for (let i=0;i<arrayOfPlants.length;i++){
+                                    document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
+                                    document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
+                                    document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                }
+
+                            }
                         }
                     })
                     .catch(err => console.log(err));
@@ -178,32 +116,7 @@ fetch("username-database-response", {
                                 title1="";
                                 count=0;
                                 while(i<data.length&&count<3){
-                                    title1 = title1+`<div class="col-myProfile-locked" >
-                                        <div class="titleAndImage"> 
-                                            <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                            <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                        </div> 
-                                        <div class="text"> 
-                                            <div class="status">Status:</div> 
-                                            <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                <p> 
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                        <span class="checkmark"></span>`+ data[i].task1 +`
-                                                    </label>
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                        <span class="checkmark"></span>`+ data[i].task2 +`
-                                                    </label>
-                                                    <label class="container-checkbox"> 
-                                                        <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                        <span class="checkmark"></span>`+ data[i].task3 +`
-                                                    </label>  
-                                                    <input type="submit" class="submitClass">
-                                                </p>
-                                            </form> 
-                                        </div>
-                                    </div> `;
+                                    title1 = title1+getHtmlTextLocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                     i++;
                                     count++;
                                 }
@@ -220,40 +133,13 @@ fetch("username-database-response", {
                                 document.getElementById("rowForPlantsLocked").insertAdjacentHTML("beforeend", text);
                                 let i=0;
                                 var title1="";
-                                var title2="";
-                                var title3="";
                                 let count=0;
                     
                                 while(i<data.length){
                                     title1="";
                                     count=0;
                                     while(i<data.length&&count<3){
-                                        title1 = title1+`<div class="col-myProfile-locked" >
-                                            <div class="titleAndImage"> 
-                                                <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                            </div> 
-                                            <div class="text"> 
-                                                <div class="status">Status:</div> 
-                                                <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                    <p> 
-                                                        <label class="container-checkbox"> 
-                                                            <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                            <span class="checkmark"></span>`+ data[i].task1 +`
-                                                        </label>
-                                                        <label class="container-checkbox"> 
-                                                            <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                            <span class="checkmark"></span>`+ data[i].task2 +`
-                                                        </label>
-                                                        <label class="container-checkbox"> 
-                                                            <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                            <span class="checkmark"></span>`+ data[i].task3 +`
-                                                        </label>  
-                                                        <input type="submit" class="submitClass">
-                                                    </p>
-                                                </form> 
-                                            </div>
-                                        </div> `;
+                                        title1 = title1+getHtmlTextLocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                         i++;
                                         count++;
                                     }
@@ -272,7 +158,6 @@ fetch("username-database-response", {
                         var value=0;
                         for(let i=0;i<data.length;i++){
                             const task="task2_"+data[i].number;
-                            console.log(person)
                             if(person[task]!=undefined&&person[task]!=null)
                                 value=value+person[task];
                         }
@@ -293,62 +178,11 @@ fetch("username-database-response", {
                                 let count=0;
                     
                                 if(i<data.length){
-                                    console.log(data[i].name, "  ")
-                                    title1 = `<div class="col-myProfile-unlocked" >
-                                                <div class="titleAndImage"> 
-                                                    <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                    <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                </div> 
-                                                <div class="text"> 
-                                                    <div class="status">Status:</div> 
-                                                    <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                        <p> 
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                <span class="checkmark"></span>`+ data[i].task1 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                <span class="checkmark"></span>`+ data[i].task2 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                <span class="checkmark"></span>`+ data[i].task3 +`
-                                                            </label>  
-                                                            <input type="submit" class="submitClass">
-                                                        </p>
-                                                    </form> 
-                                                </div>
-                                            </div> `;
+                                    title1=getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                 }
                                 i++;
                                 if(i<data.length){
-                                    title2 = `<div class="col-myProfile-unlocked" >
-                                                <div class="titleAndImage"> 
-                                                    <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                    <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                </div> 
-                                                <div class="text"> 
-                                                    <div class="status">Status:</div> 
-                                                    <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                        <p> 
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                <span class="checkmark"></span>`+ data[i].task1 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                <span class="checkmark"></span>`+ data[i].task2 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                <span class="checkmark"></span>`+ data[i].task3 +`
-                                                            </label> 
-                                                            <input type="submit" class="submitClass"> 
-                                                        </p>
-                                                    </form> 
-                                                </div>
-                                            </div> `;
+                                    title2 = getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                 }
                                 title=title1+title2;
                                 document.getElementById("col-myProfile-unlocked-2").insertAdjacentHTML("beforeend", title);
@@ -357,32 +191,7 @@ fetch("username-database-response", {
                                     title1="";
                                     count=0;
                                     while(i<data.length&&count<3){
-                                        title1 = title1+`<div class="col-myProfile-unlocked" >
-                                            <div class="titleAndImage"> 
-                                                <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                            </div> 
-                                            <div class="text"> 
-                                                <div class="status">Status:</div> 
-                                                <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                    <p> 
-                                                        <label class="container-checkbox"> 
-                                                            <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                            <span class="checkmark"></span>`+ data[i].task1 +`
-                                                        </label>
-                                                        <label class="container-checkbox"> 
-                                                            <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                            <span class="checkmark"></span>`+ data[i].task2 +`
-                                                        </label>
-                                                        <label class="container-checkbox"> 
-                                                            <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                            <span class="checkmark"></span>`+ data[i].task3 +`
-                                                        </label> 
-                                                        <input type="submit" class="submitClass"> 
-                                                    </p>
-                                                </form> 
-                                            </div>
-                                        </div> `;
+                                        title1 = title1+getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                         i++;
                                         count++;
                                     }
@@ -405,38 +214,21 @@ fetch("username-database-response", {
                                         title1="";
                                         count=0;
                                         while(i<data.length&&count<3){
-                                             title1 = title1+`<div class="col-myProfile-unlocked" >
-                                                <div class="titleAndImage"> 
-                                                    <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                    <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                </div> 
-                                                <div class="text"> 
-                                                    <div class="status">Status:</div> 
-                                                    <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                        <p> 
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                <span class="checkmark"></span>`+ data[i].task1 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                <span class="checkmark"></span>`+ data[i].task2 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                <span class="checkmark"></span>`+ data[i].task3 +`
-                                                            </label>  
-                                                            <input type="submit" class="submitClass">
-                                                        </p>
-                                                    </form> 
-                                                </div>
-                                            </div> `;
+                                            title1 = title1+getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                             i++;
                                             count++;
                                         }
                                         title=`<div class="row-myProfile">`+ title1+`</div>`;
-                                        console.log(title);
                                         document.getElementById("rowForPlants").insertAdjacentHTML("beforeend", title);
+                                        
+                                        var arrayOfPlants = person.plants;
+                                        if(arrayOfPlants.length>0){
+                                            for (let i=0;i<arrayOfPlants.length;i++){
+                                                document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
+                                                document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
+                                                document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                            }
+                                        }
                                     }
                                 })
                                 .catch(err => console.log(err));
@@ -454,37 +246,11 @@ fetch("username-database-response", {
                                             title1="";
                                             count=0;
                                             while(i<data.length&&count<3){
-                                                title1 = title1+`<div class="col-myProfile-locked" >
-                                                    <div class="titleAndImage"> 
-                                                        <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                        <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                    </div> 
-                                                    <div class="text"> 
-                                                        <div class="status">Status:</div> 
-                                                        <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                            <p> 
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                    <span class="checkmark"></span>`+ data[i].task1 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                    <span class="checkmark"></span>`+ data[i].task2 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                    <span class="checkmark"></span>`+ data[i].task3 +`
-                                                                </label>  
-                                                                <input type="submit" class="submitClass">
-                                                            </p>
-                                                        </form> 
-                                                    </div>
-                                                </div> `;
+                                                title1 = title1+getHtmlTextLocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                                 i++;
                                                 count++;
                                             }
                                             title=`<div class="row-myProfile">`+ title1+`</div>`;
-                                            console.log(title);
                                             document.getElementById("rowForPlantsLocked").insertAdjacentHTML("beforeend", title);
                                         }
                                     })
@@ -499,7 +265,6 @@ fetch("username-database-response", {
                                 var value=0;
                                 for(let i=0;i<data.length;i++){
                                     const task="task3_"+data[i].number;
-                                    console.log(person)
                                     if(person[task]!=undefined&&person[task]!=null)
                                         value=value+person[task];
                                 }
@@ -519,61 +284,11 @@ fetch("username-database-response", {
                                     let count=0;
                         
                                     if(i<data.length){
-                                        title1 = `<div class="col-myProfile-unlocked" >
-                                                    <div class="titleAndImage"> 
-                                                        <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                        <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                    </div> 
-                                                    <div class="text"> 
-                                                        <div class="status">Status:</div> 
-                                                        <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                            <p> 
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                    <span class="checkmark"></span>`+ data[i].task1 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                    <span class="checkmark"></span>`+ data[i].task2 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                    <span class="checkmark"></span>`+ data[i].task3 +`
-                                                                </label> 
-                                                                <input type="submit" class="submitClass"> 
-                                                            </p>
-                                                        </form> 
-                                                    </div>
-                                                </div> `;
+                                        title1 = getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                     }
                                     i++;
                                     if(i<data.length){
-                                        title2 = `<div class="col-myProfile-unlocked" >
-                                                    <div class="titleAndImage"> 
-                                                        <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                        <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                    </div> 
-                                                    <div class="text"> 
-                                                        <div class="status">Status:</div> 
-                                                        <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                            <p> 
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                    <span class="checkmark"></span>`+ data[i].task1 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                    <span class="checkmark"></span>`+ data[i].task2 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                    <span class="checkmark"></span>`+ data[i].task3 +`
-                                                                </label>  
-                                                                <input type="submit" class="submitClass">
-                                                            </p>
-                                                        </form> 
-                                                    </div>
-                                                </div> `;
+                                        title2 = getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                     }
                                     title=title1+title2;
                                     document.getElementById("col-myProfile-unlocked-2").insertAdjacentHTML("beforeend", title);
@@ -582,37 +297,11 @@ fetch("username-database-response", {
                                         title1="";
                                         count=0;
                                         while(i<data.length&&count<3){
-                                            title1 = title1+`<div class="col-myProfile-unlocked" >
-                                                <div class="titleAndImage"> 
-                                                    <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                    <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                </div> 
-                                                <div class="text"> 
-                                                    <div class="status">Status:</div> 
-                                                    <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                        <p> 
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                <span class="checkmark"></span>`+ data[i].task1 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                <span class="checkmark"></span>`+ data[i].task2 +`
-                                                            </label>
-                                                            <label class="container-checkbox"> 
-                                                                <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                <span class="checkmark"></span>`+ data[i].task3 +`
-                                                            </label>  
-                                                            <input type="submit" class="submitClass">
-                                                        </p>
-                                                    </form> 
-                                                </div>
-                                            </div> `;
+                                            title1 = title1+getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                             i++;
                                             count++;
                                         }
                                         title=`<div class="row-myProfile">`+ title1+`</div>`;
-                                        console.log(title);
                                         document.getElementById("rowForPlants").insertAdjacentHTML("beforeend", title);
                                     }
                                 })
@@ -630,32 +319,7 @@ fetch("username-database-response", {
                                             title1="";
                                             count=0;
                                             while(i<data.length&&count<3){
-                                                title1 = title1+`<div class="col-myProfile-unlocked" >
-                                                    <div class="titleAndImage"> 
-                                                        <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                        <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                    </div> 
-                                                    <div class="text"> 
-                                                        <div class="status">Status:</div> 
-                                                        <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                            <p> 
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                    <span class="checkmark"></span>`+ data[i].task1 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                    <span class="checkmark"></span>`+ data[i].task2 +`
-                                                                </label>
-                                                                <label class="container-checkbox"> 
-                                                                    <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                    <span class="checkmark"></span>`+ data[i].task3 +`
-                                                                </label>  
-                                                                <input type="submit" class="submitClass">
-                                                            </p>
-                                                        </form> 
-                                                    </div>
-                                                </div> `;
+                                                title1 = title1+getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                                 i++;
                                                 count++;
                                             }
@@ -676,45 +340,87 @@ fetch("username-database-response", {
                                                 title1="";
                                                 count=0;
                                                 while(i<data.length&&count<3){
-                                                    title1 = title1+`<div class="col-myProfile-unlocked" >
-                                                        <div class="titleAndImage"> 
-                                                            <img src="images/`+ data[i].image+ `.png" alt="Eroare"> 
-                                                            <div class="col-myProfile-unlocked-title">`+data[i].name +`</div> 
-                                                        </div> 
-                                                        <div class="text"> 
-                                                            <div class="status">Status:</div> 
-                                                            <form action="/plant_`+ data[i].name+`" method="post"> 
-                                                                <p> 
-                                                                    <label class="container-checkbox"> 
-                                                                        <input name="task" type="checkbox" value="1" id="checkbox1">
-                                                                        <span class="checkmark"></span>`+ data[i].task1 +`
-                                                                    </label>
-                                                                    <label class="container-checkbox"> 
-                                                                        <input name="task" type="checkbox" value="1" id="checkbox2"> 
-                                                                        <span class="checkmark"></span>`+ data[i].task2 +`
-                                                                    </label>
-                                                                    <label class="container-checkbox"> 
-                                                                        <input name="task" type="checkbox" value="1" id="checkbox3">
-                                                                        <span class="checkmark"></span>`+ data[i].task3 +`
-                                                                    </label>  
-                                                                    <input type="submit" class="submitClass">
-                                                                </p>
-                                                            </form> 
-                                                        </div>
-                                                    </div> `;
-
+                                                    title1 = title1+getHtmlTextUnlocked(data[i].image,data[i].name,data[i].task1,data[i].task2,data[i].task3);
                                                     i++;
                                                     count++;
                                                 }
                                                 title=`<div class="row-myProfile">`+ title1+`</div>`;
                                                 document.getElementById("rowForPlants").insertAdjacentHTML("beforeend", title);
-                                                document.getElementById("rowForPlantsLocked").insertAdjacentHTML("beforeend", "You have all plants!");
+                                                document.getElementById("rowForPlantsLocked").insertAdjacentHTML("beforeend", "You have all plants!");  
+                                                var arrayOfPlants = person.plants;
+                                                if(arrayOfPlants.length>0){
+                                                    for (let i=0;i<arrayOfPlants.length;i++){
+                                                        document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
+                                                        document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
+                                                        document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                                    }
+                                                }
                                             }
                                         })
                                         .catch(err => console.log(err));
                     }
             }
+
         })
         .catch(err => console.log(err));
 })
 .catch(err => console.log(err));
+
+
+function getHtmlTextUnlocked(image, name, task1, task2, task3){
+    return `<div class="col-myProfile-unlocked" >
+    <div class="titleAndImage"> 
+        <img src="images/`+ image+ `.png" alt="Eroare"> 
+        <div class="col-myProfile-unlocked-title">`+name +`</div> 
+    </div> 
+    <div class="text"> 
+        <div class="status">Status:</div> 
+        <form action="/plant_`+ image+`" method="post"> 
+            <p> 
+                <label class="container-checkbox"> 
+                    <input name="task" type="checkbox" value="1" id="`+image+`_checkbox1">
+                    <span class="checkmark"></span>`+ task1 +`
+                </label>
+                <label class="container-checkbox"> 
+                    <input name="task" type="checkbox" value="2" id="`+image+`_checkbox2">
+                    <span class="checkmark"></span>`+ task2 +`
+                </label>
+                <label class="container-checkbox"> 
+                    <input name="task" type="checkbox" value="3" id="`+image+`_checkbox3">
+                    <span class="checkmark"></span>`+ task3 +`
+                </label>  
+                <input type="submit" class="submitClass">
+            </p>
+        </form> 
+    </div>
+</div> `;
+}
+function getHtmlTextLocked(image, name, task1, task2, task3){
+ return `<div class="col-myProfile-locked" >
+            <div class="titleAndImage"> 
+                <img src="images/`+ image+ `.png" alt="Eroare"> 
+                <div class="col-myProfile-unlocked-title">`+name +`</div> 
+            </div> 
+            <div class="text"> 
+                <div class="status">Status:</div> 
+                <form action="/plant_`+ image+`" method="post"> 
+                    <p> 
+                        <label class="container-checkbox"> 
+                            <input name="task" type="checkbox" value="1" id="`+image+`_checkbox1">
+                            <span class="checkmark"></span>`+ task1 +`
+                        </label>
+                        <label class="container-checkbox"> 
+                            <input name="task" type="checkbox" value="2" id="`+image+`_checkbox2">
+                            <span class="checkmark"></span>`+ task2 +`
+                        </label>
+                        <label class="container-checkbox"> 
+                            <input name="task" type="checkbox" value="3" id="`+image+`_checkbox3">
+                            <span class="checkmark"></span>`+ task3 +`
+                        </label>  
+                        <input type="submit" class="submitClass">
+                    </p>
+                </form> 
+            </div>
+        </div> `;
+}
+

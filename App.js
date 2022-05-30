@@ -44,6 +44,51 @@ const server = http.createServer((req, res) => {
 
   let file = __dirname + "/" + path;
 
+  if(path.substring(0, 6)=="plant_"&&req.method=="POST"){
+    
+    var body = '';
+    var image=path.substring(6, path.length);
+    req.on('data', function (data) {
+        body += data;
+        if (body.length > 1e6)
+            request.close();
+    });
+    
+    req.on('end', function () {
+        var post = qs.parse(body);
+        var task = post.task;
+        var task1=false;
+        var task2=false;
+        var task3=false;
+        if(task!=null&&task!=undefined)
+        {
+          for(let i=0;i<task.length;i++){
+            if(task[i]==1)
+              task1=true;
+            else
+              if(task[i]==2)
+                task2=true;
+              else
+                  task3=true;
+            
+          }
+          client.db("eGardening").collection('users').findOne({"name":username, "plants.image": image},  function(err, result) {
+            if (err) {throw err;}
+            if(result!=null){
+              client.db("eGardening").collection('users').updateMany({"name":username, "plants.image": image},  
+              {'$set' : { "plants.$.task1" : task1 , "plants.$.task2" : task2 , "plants.$.task3" : task3 }})  
+            }
+            else
+              client.db("eGardening").collection('users').updateOne({"name" : username}, 
+              {'$push' : {"plants":{ "image": image, "task1" : task1 , "task2" : task2 , "task3" : task3 }}})  
+          });
+        }
+        res.writeHead(302, { "Location": "http://localhost:1234/MyProfile.html"});
+        res.end();
+
+    })
+  }
+  else
   if(path.substring(0, 6)=="Plants"){
     //Plants-Beginner-response
     if(path.slice(-8)=="Beginner"){
@@ -180,7 +225,6 @@ const server = http.createServer((req, res) => {
     req.on('data', function (data) {
         body += data;
         if (body.length > 1e6)
-           // request.connection.destroy();
            request.close();
     });
 
@@ -239,7 +283,6 @@ const server = http.createServer((req, res) => {
     req.on('data', function (data) {
         body += data;
         if (body.length > 1e6)
-            //request.connection.destroy();
             request.close();
     });
 
@@ -254,13 +297,14 @@ const server = http.createServer((req, res) => {
           "name": name,
           "password": password,
           "email": email,
-          "phone": phone
+          "phone": phone,
+          "plants":[]
       }
 
       client.db("eGardening").collection('users').findOne({"name":data.name},function(err, result) {
           if (err) {throw err;}
           if(result==null){
-              db.collection('users').insertOne(data, (err, collection) => {
+            client.db("eGardening").collection('users').insertOne(data, (err, collection) => {
                   if(err){
                       throw err;
                   }
