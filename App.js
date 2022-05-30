@@ -4,7 +4,11 @@ const http = require("http");
 const url = require("url");
 const fs = require("fs");
 const qs = require('querystring');
+const bcrypt = require("bcrypt");
+
+const saltRounds = 10;
 var formidable = require('formidable');
+
 
 const { MongoClient } = require('mongodb');
 const uri = "mongodb://0.0.0.0:27017";
@@ -233,38 +237,29 @@ const server = http.createServer((req, res) => {
         var name = post.name;
         var password = post.pswd;
 
-        client.db("eGardening").collection('users').findOne({"name":name},function(err, result) {
+        client.db("eGardening").collection('users').findOne({"name":name}, async function(err, result) {
             if (err) {throw err;}
             if(result!=null){
-              client.db("eGardening").collection('users').findOne({"password":password},function(err, result) {
-                    if (err) {throw err;}
-                    if(result!=null){
-                      response="Login succesfully!";
-                      username=name;
-                      login=1;
-                      if(username == "admin") admin = 1;
-                      console.log(response)
-                      res.writeHead(302, { "Location": "http://" + 'localhost:1234/Proiect_MyProfile.html' });
-                      res.end(response);
-                    }
-                    else
-                    {
-                      response="Login failed!";
-                      console.log(response)
-                      res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
-                      res.end(response);
-                    }
-                })
-            }
-            else{
+              const cmp = await bcrypt.compare(password, result.password);
+              if(cmp){
+                response="Login succesfully!";
+                username=name;
+                login=1;
+                if(username == "admin") admin = 1;
+                console.log(response)
+                res.writeHead(302, { "Location": "http://" + 'localhost:1234/Proiect_MyProfile.html' });
+                res.end(response);
+              }
+              else
+              {
                 response="Login failed!";
                 console.log(response)
                 res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
                 res.end(response);
+              }
             }
-        });
-    });
-
+      });
+    })
   }
   else
   if(path=="login_popup" && req.method=="GET"){
@@ -286,21 +281,24 @@ const server = http.createServer((req, res) => {
             request.close();
     });
 
-    req.on('end', function () {
+    req.on('end', async function () {
         var post = qs.parse(body);
         var name = post.uname;
         var password = post.psw;
         var email=post.email;
         var phone=post.phone;
 
+        const hashedPwd = await bcrypt.hash(password, saltRounds);
+
         var data = {
           "name": name,
-          "password": password,
+          "password": hashedPwd,
           "email": email,
           "phone": phone,
           "plants":[]
       }
 
+      
       client.db("eGardening").collection('users').findOne({"name":data.name},function(err, result) {
           if (err) {throw err;}
           if(result==null){
