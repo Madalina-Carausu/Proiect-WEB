@@ -68,25 +68,25 @@
                 <p>
                     <form action="/task2_5" method="post">
                         <label class="container-checkbox">
-                            <input name="task" type="checkbox" value="1" id="checkbox1">
+                            <input name="task" type="checkbox" value="1" id="2_5_checkbox1">
                             <span class="checkmark"></span>
                             Task1!
                         </label>
                         <br> 
                         <label class="container-checkbox">   
-                            <input name="task" type="checkbox" value="1" id="checkbox2">
+                            <input name="task" type="checkbox" value="2" id="2_5_checkbox2">
                             <span class="checkmark"></span>
                             Task2!
                         </label>
                         <br> 
                         <label class="container-checkbox">   
-                            <input name="task" type="checkbox" value="1" id="checkbox3">
+                            <input name="task" type="checkbox" value="3" id="2_5_checkbox3">
                             <span class="checkmark"></span>
                             Task3!
                         </label>
                         <br> 
                         <label class="container-checkbox">   
-                            <input name="task" type="checkbox" value="1" id="checkbox4">
+                            <input name="task" type="checkbox" value="4" id="2_5_checkbox4">
                             <span class="checkmark"></span>
                             Task4!
                         </label>
@@ -118,5 +118,23 @@
 
 <!--JavaScript for Toggle Menu-->
     <script src="Modules.js"></script>
+    <script>
+        fetch("username-database-response", { 
+            mode: 'no-cors'
+        })  .then(response => {return response.json()})
+            .then(data => {
+                if(data!=undefined&&data!=null&&data!="Eroare"){
+                    data.tasks.filter(element =>  element.task=="task2_5").map(element => {
+                        if(element!=null&&element!=undefined){
+                            document.getElementById("2_5_checkbox1").checked=element.task1;
+                            document.getElementById("2_5_checkbox2").checked=element.task2;
+                            document.getElementById("2_5_checkbox3").checked=element.task3;
+                            document.getElementById("2_5_checkbox4").checked=element.task4;
+                        }
+                    })
+                }   
+            })
+            .catch(err => console.log(err));
+    </script>
 </body>
 </html>

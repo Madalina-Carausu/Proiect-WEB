@@ -7,53 +7,65 @@ function hideMenu() {
     navLinks.style.right="-200px";
 }
 const divIntermediate = document.getElementById("divForIntermediate");
-fetch("Intermediate-response", { 
-    mode: 'no-cors' // 'cors' by default
+
+var person;
+
+fetch("username-database-response", { 
+    mode: 'no-cors' 
 })  .then(response => {return response.json()})
     .then(data => {
-        var title1="", title2="", title3="";
-        var i=0;
-        while(i<data.length){
-            let count=0;
-            title1="";
-            title2="";
-            title3="";
-            while(count<3&&i<data.length){
-                const number=data[i].number;
-                const maxPoints=data[i].maxPoints;
-                if(count==0){
-                    title1 = `<a href="./modules/Intermediate`+number+`.html"`+ ` class="lesson-col-begintadv module2-`+number+`">`+
-                    `<h3>`+data[i].display+ `</h3>` + `<p id="m2-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
-                }
-                else
-                if(count==1){
-                    title2 = `<a href="./modules/Intermediate`+number+`.html"`+ ` class="lesson-col-begintadv module2-`+number+`">`+
-                    `<h3>`+data[i].display+ `</h3>` + `<p id="m2-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
-                }
-                else{
-                    title3 = `<a href="./modules/Intermediate`+number+`.html"`+ ` class="lesson-col-begintadv module2-`+number+`">`+
-                    `<h3>`+data[i].display+ `</h3>` + `<p id="m2-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
-                }
-
-                fetch("username-database-response", { 
-                    mode: 'no-cors' // 'cors' by default
-                })  .then(response => {return response.json()})
-                    .then(data => {
-                        const task="task2_"+number;
-                        if(data!=null&&data!=undefined&&data!="Eroare"&&data[task]!=undefined&&data[task]!=null)
-                            document.getElementById("m2-"+number).insertAdjacentHTML("beforeend", (data[task]*100/maxPoints)+"%");
+        person=data;
+        fetch("Intermediate-response", { 
+            mode: 'no-cors' // 'cors' by default
+        })  .then(response => {return response.json()})
+            .then(data => {
+                var title1="", title2="", title3="";
+                var i=0;
+                while(i<data.length){
+                    let count=0;
+                    title1="";
+                    title2="";
+                    title3="";
+                    while(count<3&&i<data.length){
+                        const number=data[i].number;
+                        const maxPoints=data[i].maxPoints;
+                        if(count==0){
+                            title1 = `<a href="./modules/Intermediate`+number+`.html"`+ ` class="lesson-col-begintadv module2-`+number+`">`+
+                            `<h3>`+data[i].display+ `</h3>` + `<p id="m2-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
+                        }
                         else
-                            document.getElementById("m2-"+number).insertAdjacentHTML("beforeend", "0%");
-                    })
-                    .catch(err => console.log(err));
-                count++;
-                i++;
-            }
-            const title=`<div class="row">`+title1+title2+title3+`</div>`
-            divIntermediate.insertAdjacentHTML("beforeend", title)
-        }
-    })
-    .catch(err => console.log(err));
+                        if(count==1){
+                            title2 = `<a href="./modules/Intermediate`+number+`.html"`+ ` class="lesson-col-begintadv module2-`+number+`">`+
+                            `<h3>`+data[i].display+ `</h3>` + `<p id="m2-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
+                        }
+                        else{
+                            title3 = `<a href="./modules/Intermediate`+number+`.html"`+ ` class="lesson-col-begintadv module2-`+number+`">`+
+                            `<h3>`+data[i].display+ `</h3>` + `<p id="m2-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
+                        }
+                        count++;
+                        i++;
+                    }
+                    const title=`<div class="row">`+title1+title2+title3+`</div>`
+                    divIntermediate.insertAdjacentHTML("beforeend", title)
+                }
+                for(let i=0;i<data.length;i++){
+                    const task="task2_"+data[i].number;
+                    if(person!="Eroare"&&person!=null&&person!=undefined){
+                        var element=person.tasks.filter(element => element.task==task);
+                        if(element!=null&&element!=undefined&&element.length>0)
+                            document.getElementById("m2-"+data[i].number).insertAdjacentHTML("beforeend", (Number(element[0].value)*100/data[i].maxPoints)+"%");
+                        else
+                            document.getElementById("m2-"+data[i].number).insertAdjacentHTML("beforeend", "0%");
+                    }
+                    else 
+                    {
+                        document.getElementById("m2-"+data[i].number).insertAdjacentHTML("beforeend", "0%");
+                    }
+                }
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
 
 fetch("get_login", { 
     mode: 'no-cors'

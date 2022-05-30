@@ -33,7 +33,7 @@ fetch("get_admin", {
 var person;
 
 fetch("username-database-response", { 
-    mode: 'no-cors' // 'cors' by default
+    mode: 'no-cors'
 })  .then(response => {return response.json()})
     .then(data => {
         person=data;  
@@ -46,10 +46,10 @@ fetch("username-database-response", {
 
             var value=0;
             var title='';
-            for(let i=0;i<data.length;i++){
-                const task="task1_"+data[i].number;
-                if(person[task]!=undefined&&person[task]!=null)
-                    value=value+person[task];
+            for(let i=0;i<person.tasks.length;i++){
+                if(person.tasks[i].task.substring(0, 5)=="task1"){
+                    value=value+Number(person.tasks[i].value);
+                }
             }
             numberForBeginner=((value*100)/(4*data.length)).toFixed(2);
             if(person.plants!=undefined&&person.plants!=null&&person.plants.length>0)
@@ -90,11 +90,14 @@ fetch("username-database-response", {
                             title=`<div class="row-myProfile">`+ title1+`</div>`;
                             document.getElementById("rowForPlants").insertAdjacentHTML("beforeend", title);
                             var arrayOfPlants = person.plants;
-                            if(arrayOfPlants.length>0){
+                            if(arrayOfPlants!=undefined&&arrayOfPlants!=null){
                                 for (let i=0;i<arrayOfPlants.length;i++){
-                                    document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
-                                    document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
-                                    document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                    if(document.getElementById(arrayOfPlants[i].image+"_checkbox1")!=null&&document.getElementById(arrayOfPlants[i].image+"_checkbox1")!=undefined)
+                                    {
+                                        document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
+                                        document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
+                                        document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                    }
                                 }
 
                             }
@@ -156,12 +159,11 @@ fetch("username-database-response", {
                 })  .then(response => {return response.json()})
                     .then(data => {
                         var value=0;
-                        for(let i=0;i<data.length;i++){
-                            const task="task2_"+data[i].number;
-                            if(person[task]!=undefined&&person[task]!=null)
-                                value=value+person[task];
+                        for(let i=0;i<person.tasks.length;i++){
+                            if(person.tasks[i].task.substring(0, 5)=="task2")
+                                value=value+Number(person.tasks[i].value);
                         }
-                        numberForIntermediate=((value*100)/(4*data.length)).toFixed(2);
+                        numberForIntermediate=((person.tasks.length*100)/(4*data.length)).toFixed(2);
                     })
                     .catch(err => console.log(err));
             
@@ -222,12 +224,16 @@ fetch("username-database-response", {
                                         document.getElementById("rowForPlants").insertAdjacentHTML("beforeend", title);
                                         
                                         var arrayOfPlants = person.plants;
-                                        if(arrayOfPlants.length>0){
+                                        if(arrayOfPlants!=undefined&&arrayOfPlants!=null){
                                             for (let i=0;i<arrayOfPlants.length;i++){
-                                                document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
-                                                document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
-                                                document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                                if(document.getElementById(arrayOfPlants[i].image+"_checkbox1")!=null&&document.getElementById(arrayOfPlants[i].image+"_checkbox1")!=undefined)
+                                                {
+                                                    document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
+                                                    document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
+                                                    document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                                }
                                             }
+
                                         }
                                     }
                                 })
@@ -263,10 +269,9 @@ fetch("username-database-response", {
                         })  .then(response => {return response.json()})
                             .then(data => {
                                 var value=0;
-                                for(let i=0;i<data.length;i++){
-                                    const task="task3_"+data[i].number;
-                                    if(person[task]!=undefined&&person[task]!=null)
-                                        value=value+person[task];
+                                for(let i=0;i<person.tasks.length;i++){
+                                    if(person.tasks[i].task.substring(0, 5)=="task3")
+                                        value=value+Number(person.tasks[i].value);
                                 }
                                 numberForAdvanced=((value*100)/(4*data.length)).toFixed(2);
                             })
@@ -348,12 +353,16 @@ fetch("username-database-response", {
                                                 document.getElementById("rowForPlants").insertAdjacentHTML("beforeend", title);
                                                 document.getElementById("rowForPlantsLocked").insertAdjacentHTML("beforeend", "You have all plants!");  
                                                 var arrayOfPlants = person.plants;
-                                                if(arrayOfPlants.length>0){
+                                                if(arrayOfPlants!=undefined&&arrayOfPlants!=null){
                                                     for (let i=0;i<arrayOfPlants.length;i++){
-                                                        document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
-                                                        document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
-                                                        document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                                        if(document.getElementById(arrayOfPlants[i].image+"_checkbox1")!=null&&document.getElementById(arrayOfPlants[i].image+"_checkbox1")!=undefined)
+                                                        {
+                                                            document.getElementById(arrayOfPlants[i].image+"_checkbox1").checked=arrayOfPlants[i].task1;
+                                                            document.getElementById(arrayOfPlants[i].image+"_checkbox2").checked=arrayOfPlants[i].task2;
+                                                            document.getElementById(arrayOfPlants[i].image+"_checkbox3").checked=arrayOfPlants[i].task3;
+                                                        }
                                                     }
+
                                                 }
                                             }
                                         })
@@ -406,18 +415,18 @@ function getHtmlTextLocked(image, name, task1, task2, task3){
                 <form action="/plant_`+ image+`" method="post"> 
                     <p> 
                         <label class="container-checkbox"> 
-                            <input name="task" type="checkbox" value="1" id="`+image+`_checkbox1">
+                            <input name="task" type="checkbox" disabled value="1" id="`+image+`_checkbox1">
                             <span class="checkmark"></span>`+ task1 +`
                         </label>
                         <label class="container-checkbox"> 
-                            <input name="task" type="checkbox" value="2" id="`+image+`_checkbox2">
+                            <input name="task" type="checkbox" disabled value="2" id="`+image+`_checkbox2">
                             <span class="checkmark"></span>`+ task2 +`
                         </label>
                         <label class="container-checkbox"> 
-                            <input name="task" type="checkbox" value="3" id="`+image+`_checkbox3">
+                            <input name="task" type="checkbox" disabled value="3" id="`+image+`_checkbox3">
                             <span class="checkmark"></span>`+ task3 +`
                         </label>  
-                        <input type="submit" class="submitClass">
+                        <input type="submit" class="submitClass" disabled>
                     </p>
                 </form> 
             </div>

@@ -48,6 +48,18 @@ const server = http.createServer((req, res) => {
 
   let file = __dirname + "/" + path;
 
+  if(path=="ranking"&&req.method=="GET"){
+    client.db("eGardening").collection('users').find().toArray(function(err, result) {
+      if (err) {throw err}
+      if(result!=null){
+        res.end(JSON.stringify(result));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+    })
+  }
+  else
   if(path.substring(0, 6)=="plant_"&&req.method=="POST"){
     
     var body = '';
@@ -295,13 +307,15 @@ const server = http.createServer((req, res) => {
           "password": hashedPwd,
           "email": email,
           "phone": phone,
-          "plants":[]
+          "plants":[], 
+          "tasks":[]
       }
 
       
       client.db("eGardening").collection('users').findOne({"name":data.name},function(err, result) {
           if (err) {throw err;}
           if(result==null){
+
             client.db("eGardening").collection('users').insertOne(data, (err, collection) => {
                   if(err){
                       throw err;
@@ -363,26 +377,43 @@ const server = http.createServer((req, res) => {
         var post = qs.parse(body);
         var task = post.task;
         let value=0;
+        var task1=false;
+        var task2=false;
+        var task3=false;
+        var task4=false;
         if(task!=null&&task!=undefined)
         {
           for(let i=0;i<task.length;i++){
-            value = value + Number(task[i]);
+            if(Number(task[i])==1)
+              task1=true;
+            else
+            if(Number(task[i])==2)
+              task2=true;
+            else
+            if(Number(task[i])==3)
+              task3=true;
+            else
+            if(Number(task[i])==4)
+              task4=true;
+            value = value + 1;
           }
         }
-        client.db("eGardening").collection('users').findOne({"name":username},function(err, result) {
+
+        client.db("eGardening").collection('users').findOne({"name":username, "tasks.task":taskText},function(err, result) {
             if (err) {throw err;}
             if(result!=null){
-              client.db("eGardening").collection('users').updateOne({"name" : username}, 
-                {'$set' : {[taskText] : value }})  
-                  res.writeHead(302, { "Location": "http://localhost:1234/"+path });
-                  res.end(response);
+              client.db("eGardening").collection('users').updateOne({"name" : username, "tasks.task":taskText}, 
+                {'$set' : {"tasks.$.task" : taskText, "tasks.$.value": value, "tasks.$.task1":task1,"tasks.$.task2": task2, "tasks.$.task3":task3, "tasks.$.task4":task4 }})  
+                
             }
             else{
-                res.writeHead(302, { "Location": "http://localhost:1234/"+path });
-                res.end(response);
+              client.db("eGardening").collection('users').updateOne({"name" : username}, 
+              {'$push' : {"tasks":{ "task": taskText, "value" : value, "task1":task1, "task2": task2, "task3":task3, "task4":task4 }}})  
             }
         });
     });
+    res.writeHead(302, { "Location": "http://localhost:1234/"+path });
+    res.end(response);
   }
   else
   if(path == "form_questions" && req.method=="POST" ) {
