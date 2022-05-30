@@ -11,7 +11,7 @@
     transition: 1s;
 }
 .lesson-col-begintadv p {
-    color: #e3c4a5;
+    color: rgb(227, 196, 165);
     font-size: 25px;
 
 }
@@ -28,6 +28,43 @@ h1 {
 }
 h2 {
     margin-top: 30px;
+}
+.rank1{
+    margin-left: 34%;
+
+}
+.rank2{
+
+    margin-top: -8%;
+}
+.rank3{
+    margin-top: -15%;
+    margin-left: 67%;
+
+}
+.number {
+    background-color: #ffce7faa;
+    flex-basis: 31%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 50px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    font-size: 20px;
+    width: 30%;
+}
+
+.rank1:hover {
+    box-shadow: 0 0 20px 0px rgba(253, 154, 5, 0.708);
+    transition: 1s;
+}
+.rank2:hover {
+    box-shadow: 0 0 20px 0px rgba(218, 211, 199, 0.538);
+    transition: 1s;
+}
+.rank3:hover {
+    box-shadow: 0 0 20px 0px rgba(206, 102, 12, 0.752);
+    transition: 1s;
 }
 
 

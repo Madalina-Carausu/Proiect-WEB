@@ -61,6 +61,55 @@ fetch("username-database-response", {
                         document.getElementById("m3-"+data[i].number).insertAdjacentHTML("beforeend", "0%");
                     }
                 }
+                const length=data.length;
+                setInterval(function(){
+                    $.ajax({
+                        type: 'GET',
+                        dataType: "json",
+                        url: '/ranking',
+                        success: function (data) {
+                            if(data!=null&&data!=undefined){
+                                var name1="", name2="", name3="";
+                                var points1=0, points2=0, points3=0;
+                                for(let i=0;i<data.length;i++){
+                                    var value=0;
+                                    for(let j=0;j<data[i].tasks.length;j++){
+                                        if(data[i].tasks[j].task.substring(0, 5)=="task3")
+                                            value=value+Number(data[i].tasks[j].value);
+                                    }
+                                    if(value!=0){
+                                        value=((value*100)/(4*length)).toFixed(2);
+                                        if(value>=points1){
+                                            points3=points2;
+                                            name3=name2;
+                                            points2=points1;
+                                            name2=name1;
+                                            points1=value;
+                                            name1=data[i].name;
+                                        }
+                                        else
+                                        if(value>=points2){
+                                            points3=points2;
+                                            name3=name2;
+                                            points2=value;
+                                            name2=data[i].name;
+                                        }
+                                        else
+                                        if(value>=points3){
+                                            points3=value;
+                                            name3=data[i].name;
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            console.log(name1, points1)
+                            document.getElementById("3rank1").innerHTML=name1+`<br>`+points1;
+                            document.getElementById("3rank2").innerHTML=name2+`<br>`+points2;
+                            document.getElementById("3rank3").innerHTML=name3+`<br>`+points3;
+                        }
+                    });
+                 }, 2000)
             })
             .catch(err => console.log(err));
     })
