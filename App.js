@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 var formidable = require('formidable');
 var ejs = require('ejs');
-var htmlContent = fs.readFileSync(__dirname + '/modules/GeneralModule.ejs', 'utf8');
+var htmlContent = fs.readFileSync(__dirname + '/views/modules/GeneralModule.ejs', 'utf8');
 
 
 
@@ -34,6 +34,7 @@ const server = http.createServer((req, res) => {
   let parsedURL = url.parse(req.url, true);
   //remove the leading and trailing slashes
   let path = parsedURL.path.replace(/^\/+|\/+$/g, "");
+ 
   if(login==0){
     if (path == "") {
       path = "Proiect.html";
@@ -49,7 +50,7 @@ const server = http.createServer((req, res) => {
       }
   }
 
-  let file = __dirname + "/" + path;
+  let file = __dirname + "/views/" + path;
 
   if(path=="ranking"&&req.method=="GET"){
     client.db("eGardening").collection('users').find().toArray(function(err, result) {
@@ -216,7 +217,8 @@ const server = http.createServer((req, res) => {
       if (err) {throw err}
       //const output = modulePage();
       if(result!=null) {
-        const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+        const template = fs.readFileSync('./views/modules/GeneralModule.ejs', 'utf8');
+        
         var filename1 = "../images/" + result.filename1 +".png";
         var filename2 = "../images/" + result.filename2 +".png";
         var filename3 = "../images/" + result.filename3 +".png";
@@ -240,7 +242,7 @@ const server = http.createServer((req, res) => {
       if (err) {throw err}
       //const output = modulePage();
       if(result!=null) {
-        const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+        const template = fs.readFileSync('./views/modules/GeneralModule.ejs', 'utf8');
         var filename1 = "../images/" + result.filename1 +".png";
         var filename2 = "../images/" + result.filename2 +".png";
         var filename3 = "../images/" + result.filename3 +".png";
@@ -264,7 +266,7 @@ const server = http.createServer((req, res) => {
       if (err) {throw err}
       //const output = modulePage();
       if(result!=null) {
-        const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+        const template = fs.readFileSync('./views/modules/GeneralModule.ejs', 'utf8');
         var filename1 = "../images/" + result.filename1 +".png";
         var filename2 = "../images/" + result.filename2 +".png";
         var filename3 = "../images/" + result.filename3 +".png";
@@ -311,7 +313,7 @@ const server = http.createServer((req, res) => {
   else
   if(path=="login_popup" && req.method=="POST"){
     path="Proiect.html";
-    file = __dirname + "/" + path;              //abstactizare, sa am undeva o clasa cu ceva si sa caut acolo, sa nu mai fac +
+    file = __dirname + "/views/" + path;              //abstactizare, sa am undeva o clasa cu ceva si sa caut acolo, sa nu mai fac +
     var body = '';                              //functie in care dam tot request body ul
                                                 //mai putine if uri
     req.on('data', function (data) {
@@ -361,7 +363,7 @@ const server = http.createServer((req, res) => {
   else
   if(path=="signup_popup" && req.method=="POST"){
     path="Proiect.html";
-    file = __dirname + "/" + path;
+    file = __dirname + "/views/" + path;
     var body = '';
     req.on('data', function (data) {
         body += data;
@@ -441,7 +443,7 @@ const server = http.createServer((req, res) => {
         path="Intermediate.html";
       else
         path="Advanced.html";
-    file = __dirname + "/" + path;
+    file = __dirname + "/views/" + path;
     var body = '';
     req.on('data', function (data) {
         body += data;
@@ -602,7 +604,7 @@ const server = http.createServer((req, res) => {
 
       var oldpath = files.filename1.filepath;
       var newName1 = Date.now().toString() + files.filename1.originalFilename;
-      var newpath1 =  __dirname + '/images/' + newName1;
+      var newpath1 =  __dirname + '/views/images/' + newName1;
       
       fs.copyFile(oldpath, newpath1, function (err) {
         if (err) throw err;
@@ -614,7 +616,7 @@ const server = http.createServer((req, res) => {
       });
       oldpath = files.filename2.filepath;
       var newName2 = Date.now().toString() + files.filename2.originalFilename;
-      var newpath2 =  __dirname + '/images/' + newName2;
+      var newpath2 =  __dirname + '/views/images/' + newName2;
       
       fs.copyFile(oldpath, newpath2, function (err) {
         if (err) throw err;
@@ -627,7 +629,7 @@ const server = http.createServer((req, res) => {
 
       oldpath = files.filename3.filepath;
       var newName3 = Date.now().toString() + files.filename3.originalFilename;
-      var newpath3 =  __dirname + '/images/' + newName3;
+      var newpath3 =  __dirname + '/views/images/' + newName3;
       
       fs.copyFile(oldpath, newpath3, function (err) {
         if (err) throw err;
@@ -640,7 +642,7 @@ const server = http.createServer((req, res) => {
 
       oldpath = files.filename4.filepath;
       var newName4 = Date.now().toString() + files.filename4.originalFilename;
-      var newpath4 =  __dirname + '/images/' + newName4;
+      var newpath4 =  __dirname + '/views/images/' + newName4;
       
       fs.copyFile(oldpath, newpath4, function (err) {
         if (err) throw err;
@@ -755,7 +757,7 @@ const server = http.createServer((req, res) => {
 
       var oldpath = files.filename_plant.filepath;
       var newName = Date.now().toString() + files.filename_plant.originalFilename;
-      var newpath =  __dirname + '/images/' + newName;
+      var newpath =  __dirname + '/views/images/' + newName;
       
       /*fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
@@ -835,7 +837,6 @@ const server = http.createServer((req, res) => {
       
     });
   }
-
   else{
   //async read file function uses callback
   fs.readFile(file, function(err, content) {
@@ -862,7 +863,7 @@ const server = http.createServer((req, res) => {
 });
 
 function modulePage() {
-  const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+  const template = fs.readFileSync('./views/modules/GeneralModule.ejs', 'utf8');
   return ejs.render(template, {display:"titluuuuuuu", title1:"aaa", title2:"bbb", title3: "ccc", title4:"dddd", content1:"abcd", content2:"abcd", content3:"abcd", content4:"abcd", task1:"task1", task2:"task2", task3:"task3", task4:"task4"});
 }
 

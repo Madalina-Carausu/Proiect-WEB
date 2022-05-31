@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html itemscope itemtype="https://schema.org/WebPage" lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="description" content="Free gardening courses">
+        <meta name="keywords" content="Course, Garden, Gardening, Plant, Vegetables, ">
+        <meta name="author" content="Madalina Carausu and Isabela Haiura">
+
+        <title>e-Gardening</title>
+
+        <link rel="stylesheet" href="Proiect.css">
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5e6801e0f3.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="header" id="head">
+            <nav>
+                <a href="Proiect.html" itemprop="url"><img src = "images/logo.png" alt="logo image"></a>
+                <p> e-Gardening </p>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="#head" itemprop="url">HOME</a></li>
+                        <li><a href="#lesson" itemprop="url">LEARN</a></li>
+                        <li><a href="#tipsAndTricks" itemprop="url">TIPS & TRICKS</a></li>
+                        <li><a href="#q_a" itemprop="url">Q&A</a></li>
+                        <li><a href="#contact" itemprop="url">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i> 
+            </nav>
+    
+            <div class="text-box">
+                <h1 itemprop="headline">World's Best Gardening Tool</h1>
+                <p itemprop="about">Get all the information you need about gardening, whether it's about <br>your veggie patch, fruit trees, or ornamental flowers.</p>
+                <div class="login-btn" id="loginButton" onclick="document.getElementById('login').style.display='flex'">Login To Learn More</div>
+            </div>
+            <div id="login" class="modal">
+                <form class="modal-content animate" action="/login_popup" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container">
+                    <label for="name"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="name" id="name" required>
+    
+                    <label for="pswd"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="pswd" id="pswd" required>
+                            
+                    <button type="submit" class="login-in-login">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember" style="color:black"> Remember me
+                    </label>
+                    </div>
+    
+                    <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('signup').style.display='flex'; document.getElementById('login').style.display='none'" class="signup">Sign up</button>
+                    <div id="rasp"></div>
+                    <span class="psw" style="color: black;">Forgot <a href="#">password?</a></span>
+                    </div>
+                </form>
+            </div>
+
+            <div id="signup" class="modal signup_margin">
+                <form class="modal-content animate" action="/signup_popup" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+    
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+                    <label for="email"><b>E-mail</b></label>
+                    <input type="email" placeholder="Enter e-mail" name="email" id="email" required>
+
+                    <label for="phone"><b>Phone Number</b></label>
+                    <input type="tel" placeholder="Enter Phone Number" name="phone" id="phone" required>
+                            
+                    <button type="submit" class="login-in-login">Sign up</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember" style="color:black"> Remember me
+                    </label>
+                    </div>
+    
+                    <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('login').style.display='flex'; document.getElementById('signup').style.display='none'" class="signup">Login</button>
+                    <div id="rasp2"></div>
+                    <span class="psw" style="color: black;">Forgot <a href="#">password?</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+
+
+<!-- Lessons -->
+    <section class="lesson" id="lesson">
+        <h2>Our Lessons</h2>
+        <p>Looking for general information about gardening, watering schedules, or just want to enrich your general knowledge ? Find exactly what you need right here.</p>
+    
+        <div class="row">
+            <a href="Beginner.html" class="lesson-col" itemprop="url">
+                <div itemprop="hasPart" itemscope itemtype="https://schema.org/Course">
+                    <h3 itemprop="educationalLevel">Beginner</h3>
+                    <p itemprop="description">Let's intoduce yourself to gardening!</p>
+                </div>
+            </a>
+            <a href="Intermediate.html" class="lesson-col" itemprop="url">
+                <div itemprop="hasPart" itemscope itemtype="https://schema.org/Course">
+                    <h3 itemprop="educationalLevel">Intermediate</h3>
+                    <p itemprop="description">You already know the basics and want to progress with your garden.</p>
+                </div>
+            </a>
+            <a href="Advanced.html" class="lesson-col" itemprop="url">
+                <div itemprop="hasPart" itemscope itemtype="https://schema.org/Course">
+                    <h3 itemprop="educationalLevel">Advanced</h3>
+                    <p itemprop="description">Expert courses to optimize your yield, grow healthy plants and take your raised bed garden to the next level</p>
+                </div>  
+            </a>
+        </div>
+    
+    </section>
+
+    <!--tips and tricks-->
+    <section class="tipsAndTricks" id="tipsAndTricks" itemprop="hasPart" itemscope itemtype="https://schema.org/Article">
+        <h2 itemprop="headline">Tips & Tricks</h2>
+        <p itemprop="about">Whether you’re new to growing or a seasoned expert, our collection of gardening tips will help. Enjoy! </p>
+        <div class="row">
+            <div class="tips-col" itemprop="hasPart">
+                <a href="tipsAndTricks/Flowers.html">
+                    <img src="images/flowers.jpg" alt="flowers image">
+                    <div class="layer">
+                        <h3>Flowers</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="tips-col" itemprop="hasPart">
+                <a href="tipsAndTricks/Vegetables.html">
+                    <img src="images/vegetables.jpg" alt="vegetables image">
+                    <div class="layer">
+                        <h3>Vegetables</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="tips-col" itemprop="hasPart">
+                <a href="tipsAndTricks/Soil.html">
+                    <img src="images/soil.jpg" alt="soil image">
+                    <div class="layer">
+                        <h3>Soil</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--Q&A-->
+
+    <section class="q_a" id="q_a" itemprop="hasPart" itemscope itemtype="https://schema.org/QAPage">
+        <h2 itemprop="headline">Frequent Questions and Answers</h2>
+        <p> <a class = "link_to_qa" href="QA.html" itemprop="relatedLink">Here</a> you can find the answers to all your curiosities.</p>
+        
+        <div class="row">
+            <div class="q_a-col">
+                <span itemscope itemtype="https://schema.org/Person">
+                    <img itemprop="image" src="images/womanUser.png" alt="user image">
+                </span>
+                <div>
+                    <h3 itemprop="comment" itemscope itemtype="https://schema.org/Question">Q: What does "Organic Gardening" mean?</h3>
+                    <p itemprop="comment" itemscope itemtype="https://schema.org/Answer">A: Organic gardening is all about growing plants in tune with Nature.<a href="QA.html#first_question" itemprop="relatedLink">[more]</a></p>
+                    <h3 itemscope itemtype="https://schema.org/Person" itemprop="name">Samantha Williams</h3>
+                </div>
+            </div>
+            <div class="q_a-col">
+                <span itemscope itemtype="https://schema.org/Person">
+                    <img itemprop="image" src="images/manUser2.png" alt="user image">
+                </span>
+                <div>
+                    <h3 itemprop="comment" itemscope itemtype="https://schema.org/Question">Q: What Planting Zone Do I Live In?</h3>
+                    <p itemprop="comment" itemscope itemtype="https://schema.org/Answer">A: Use the USDA Hardiness Zone map, simply enter your zip code and use the colored key to determine your zone.<a href="QA.html#second_question" itemprop="relatedLink">[more]</a></p>
+                    <h3 itemscope itemtype="https://schema.org/Person" itemprop="name">Avery Glass</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!--Contact-->
+<section class="contact" id="contact" itemprop="hasPart" itemscope itemtype="https://schema.org/ContactPage">
+    <h2 itemprop="description" >If You Want More Information</h2>
+    <a href="" class="login-btn" itemprop="relatedLink">CONTACT US</a>
+</section>
+
+
+
+<!--Footer-->
+<hr>
+<section class="footer">
+    <div itemprop="hasPart" itemscope itemtype="https://schema.org/AboutPage">
+        <h4 itemprop="headline">About us</h4>
+        <p itemprop="description">We are two eager students who are trully passionate about everything related to gardening.</p>
+        <div class="icons">
+            <i class="fa-brands fa-facebook-f"><a href="" itemprop="relatedLink"></a></i>
+            <i class="fa-brands fa-twitter"><a href="" itemprop="relatedLink"></a></i>
+            <i class="fa-brands fa-instagram"><a href="" itemprop="relatedLink"></a></i>
+        </div>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by 
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="givenName">Madalina</span>
+        </span>
+         & 
+         <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="givenName">Isabela</span>
+        </span>.</p>
+</section>
+
+<!--JavaScript for Toggle Menu-->
+    <script type="module" src="Proiect.js">
+    </script>
+</body>
+</html>

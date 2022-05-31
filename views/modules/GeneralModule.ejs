@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html itemscope itemtype="https://schema.org/WebPage" lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="description" content="Free gardening courses">
+        <meta name="keywords" content="Course, Garden, Gardening, Plant, Vegetables, ">
+        <meta name="author" content="Madalina Carausu and Isabela Haiura">
+
+        <title>e-Gardening</title>
+
+        <link rel="stylesheet" href="../Proiect.css">
+        <link rel="stylesheet" href="../Advanced.css">
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="icon" type="image/png" href="../images/logo.png">
+        <link rel="stylesheet" href="./modules/Modules.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5e6801e0f3.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="sub-header1">
+            <nav>
+                <a href="../Proiect.html"><img src = "../images/logo.png" alt="logo image"></a>
+                <p> e-Gardening </p>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="../Admin.html" itemprop="url" id="admin">ADMIN</a></li>
+                        <li><a href="../MyProfile.html" itemprop="url" id="my_profile">MY PROFILE</a></li>
+                        <li><a href="../Proiect.html" itemprop="relatedLink">HOME</a></li>
+                        <li><a href="../Proiect.html#lesson" itemprop="relatedLink">LEARN</a></li>
+                        <li><a href="../Proiect.html#tipsAndTricks" itemprop="relatedLink">TIPS & TRICKS</a></li>
+                        <li><a href="../QA.html" itemprop="relatedLink">Q&A</a></li>
+                        <li><a href="../Proiect.html#contact" itemprop="relatedLink">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i> 
+            </nav>
+        <h1 itemprop="headline"><%= display %></h1>
+        </div>
+        
+
+
+    <section class="bodyAdvanced" itemprop="hasPart" itemscope itemtype="https://schema.org/Course"> 
+        
+        <div class="oneLine">
+            <div class="oneLineText">
+                <h2><%=title1%></h2>
+                <p><%=content1%></p>
+            </div>
+            <img class="imgAdvanced" src="<%= filename1 %>" alt="">  <!--sa pun toata calea ca parametru-->
+        </div>
+
+        <div class="oneLine">
+            <img class="imgAdvanced" src="<%= filename2 %>" alt="">
+            <div class="oneLineText">
+                <h2><%=title2%></h2>
+                <p><%=content2%></p>
+            </div>
+        </div>
+
+        <div class="oneLine">
+            <div class="oneLineText">
+                <h2><%=title3%></h2>
+                <p><%=content3%></p>
+            </div>
+            <img class="imgAdvanced" src="<%= filename3 %>" alt="">
+        </div>
+
+        <div class="oneLine">
+            <img class="imgAdvanced" src="<%= filename4 %>" alt="">
+            <div class="oneLineText">
+                <h2><%=title4%></h2>
+                <p><%=content4%></p>
+            </div>
+        </div>
+
+
+        <div class="middle">
+            <h2 class="tasks">
+                Tasks:
+            </h2>
+            <br>
+            <p>
+                <form action="<%= action %>" method="post">
+                    <label class="container-checkbox">
+                        <input name="task" type="checkbox" value="1" id="checkbox1">
+                        <span class="checkmark"></span>
+                        <%=task1%>
+                    </label>
+                    <br> 
+                    <label class="container-checkbox">   
+                        <input name="task" type="checkbox" value="2" id="checkbox2">
+                        <span class="checkmark"></span>
+                        <%=task2%>
+                    </label>
+                    <br> 
+                    <label class="container-checkbox">   
+                        <input name="task" type="checkbox" value="3" id="checkbox3">
+                        <span class="checkmark"></span>
+                        <%=task3%>
+                    </label>
+                    <br> 
+                    <label class="container-checkbox">   
+                        <input name="task" type="checkbox" value="4" id="checkbox4">
+                        <span class="checkmark"></span>
+                        <%=task4%>
+                    </label>
+                    <br> 
+                    <input type="submit" class="submitClass">
+                </form>
+            </p>
+        <p id="bottomText"> If you checked all the above requirements then you are ready for the <a href="Advanced2.html">next module</a>!</p>
+        </div>
+    </section>
+
+
+<!--Footer-->
+<hr>
+<section class="footer">
+    <div itemprop="hasPart" itemscope itemtype="https://schema.org/AboutPage">
+        <h4 itemprop="headline">About us</h4>
+        <p itemprop="description">We are two eager students who are trully passionate about everything related to gardening.</p>
+        <div class="icons">
+            <i class="fa-brands fa-facebook-f"><a href="" itemprop="relatedLink"></a></i>
+            <i class="fa-brands fa-twitter"><a href="" itemprop="relatedLink"></a></i>
+            <i class="fa-brands fa-instagram"><a href="" itemprop="relatedLink"></a></i>
+        </div>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by 
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="givenName">Madalina</span>
+        </span>
+         & 
+         <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="givenName">Isabela</span>
+        </span>.</p>
+</section>
+
+<!--JavaScript for Toggle Menu-->
+    <script src="./modules/Modules.js"></script>
+    <script>
+        var action = `<%= action %>`;
+        const task = action.substring(1, action.length); 
+        fetch("username-database-response", { 
+            mode: 'no-cors'
+        })  .then(response => {return response.json()})
+            .then(data => {
+                if(data!=undefined&&data!=null&&data!="Eroare"){
+                    data.tasks.filter(element =>  element.task==task).map(element => {
+                        if(element!=null&&element!=undefined){
+                            document.getElementById("checkbox1").checked=element.task1;
+                            document.getElementById("checkbox2").checked=element.task2;
+                            document.getElementById("checkbox3").checked=element.task3;
+                            document.getElementById("checkbox4").checked=element.task4;
+                        }
+                    })
+                }   
+            })
+            .catch(err => console.log(err));
+    </script>
+</body>
+</html>
