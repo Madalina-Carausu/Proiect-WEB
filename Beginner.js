@@ -21,12 +21,12 @@ fetch("username-database-response", {
             .then(data => {
                 var title1="", title2="", title3="";
                 var i=0;
-                while(i<data.length){
+                while(i<data.length && i<9){
                     let count=0;
                     title1="";
                     title2="";
                     title3="";
-                    while(count<3&&i<data.length){
+                    while(count<3&&i<data.length && i<9){
                         const number=data[i].number;
                         const maxPoints=data[i].maxPoints;
                         if(count==0){
@@ -43,10 +43,53 @@ fetch("username-database-response", {
                             `<h3>`+data[i].display+ `</h3>` + `<p id="m1-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
                         }
                         count++;
+                        i++;
+                    }
+                    const title=`<div class="row">`+title1+title2+title3+`</div>`
+                    divBeginner.insertAdjacentHTML("beforeend", title)
+                }
+                while(i<data.length && i>=9){
+                    let count=0;
+                    title1="";
+                    title2="";
+                    title3="";
+                    while(count<3&&i<data.length && i>=9){
+                        const number=data[i].number;
+                        const maxPoints=data[i].maxPoints;
+                        var beginnerX = "Beginner" + number;
+                        if(count==0){
+                            title1 = `<form action = "/`+beginnerX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Beginner`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m1-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Beginner`+number+`" style="display:none;"></input>
+                            </form>`;
+                        }
+                        else
+                        if(count==1){
+                            title2 = `<form action = "/`+beginnerX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Beginner`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m1-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Beginner`+number+`" style="display:none;"></input>
+                            </form>`;  
+                        }
+                        else{
+                            title3 = `<form action = "/`+beginnerX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Beginner`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m1-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Beginner`+number+`" style="display:none;"></input>
+                            </form>`;
+                        }
+                        count++;
                         i++; 
                     }
-                    const title=`<div class="row">`+title1+title2+title3+`</div>`;
-                    divBeginner.insertAdjacentHTML("beforeend", title);
+                    const titlee=`<div class="row">`+title1+title2+title3+`</div>`
+                    divBeginner.insertAdjacentHTML("beforeend", titlee)
                 }
                 for(let i=0;i<data.length;i++){
                     const task="task1_"+data[i].number;
@@ -80,7 +123,7 @@ fetch("username-database-response", {
                                     }
                                     if(value!=0){
                                         value=((value*100)/(4*length)).toFixed(2);
-                                        if(Number(value)>=Number(points1)){
+                                        if(value>=points1){
                                             points3=points2;
                                             name3=name2;
                                             points2=points1;
@@ -89,14 +132,14 @@ fetch("username-database-response", {
                                             name1=data[i].name;
                                         }
                                         else
-                                        if(Number(value)>=Number(points2)){
+                                        if(value>=points2){
                                             points3=points2;
                                             name3=name2;
                                             points2=value;
                                             name2=data[i].name;
                                         }
                                         else
-                                        if(Number(value)>=Number(points3)){
+                                        if(value>=points3){
                                             points3=value;
                                             name3=data[i].name;
                                         }
@@ -104,17 +147,17 @@ fetch("username-database-response", {
                                     
                                 }
                             }
+                            console.log(name1, points1)
                             document.getElementById("1rank1").innerHTML=name1+`<br>`+points1;
                             document.getElementById("1rank2").innerHTML=name2+`<br>`+points2;
                             document.getElementById("1rank3").innerHTML=name3+`<br>`+points3;
                         }
                     });
                  }, 2000)
-
             })
             .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
 
 fetch("get_login", { 
     mode: 'no-cors'

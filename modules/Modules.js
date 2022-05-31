@@ -18,7 +18,7 @@ fetch("get_login", {
             document.getElementById("my_profile").style.display="none";
     })
     .catch(err => console.log(err));
-    
+
 fetch("get_admin", { 
     mode: 'no-cors'
 })  .then(response => {return response.json()})
@@ -29,3 +29,4 @@ fetch("get_admin", {
             document.getElementById("admin").style.display="none";
     })
     .catch(err => console.log(err));
+

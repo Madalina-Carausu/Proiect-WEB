@@ -126,6 +126,7 @@ select{
 .chooseFile:hover {
     background: rgba(55, 99, 89, 0.777);
 }
+
 /*
 #myFile_plant, #myFile1, #myFile2, #myFile3, #myFile4  {
     width: 0.1px;
@@ -135,4 +136,5 @@ select{
     position: absolute;
     z-index: -1;
 }*/
+
 

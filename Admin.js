@@ -49,9 +49,9 @@ fetch("get_questions", {
     })
     .catch(err => console.log(err));    
 
-
+/*
 $("#myFile_plant").change(function() {
     filename = this.name;
     console.log(filename);
-    });
+    });*/
     

@@ -8,6 +8,9 @@ const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
 var formidable = require('formidable');
+var ejs = require('ejs');
+var htmlContent = fs.readFileSync(__dirname + '/modules/GeneralModule.ejs', 'utf8');
+
 
 
 const { MongoClient } = require('mongodb');
@@ -196,6 +199,7 @@ const server = http.createServer((req, res) => {
   else
   if(path=="Beginner-response")
   {
+    console.log("intra aici");
     client.db("eGardening").collection('courses').find({"level":"Beginner"}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
@@ -203,6 +207,80 @@ const server = http.createServer((req, res) => {
       }
       else{
         res.end(JSON.stringify("Eroare"));  
+      }
+    })
+  }
+  else
+  if(path.substring(0,8) == "Beginner" && req.method=="POST") {
+    var number = Number(path.substring(8, path.length));
+    client.db("eGardening").collection('courses').findOne({"level":"Beginner", "number" : number}, function(err, result){ 
+      if (err) {throw err}
+      //const output = modulePage();
+      if(result!=null) {
+        const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+        var filename1 = "../images/" + result.filename1 +".png";
+        var filename2 = "../images/" + result.filename2 +".png";
+        var filename3 = "../images/" + result.filename3 +".png";
+        var filename4 = "../images/" + result.filename4 +".png";
+        if(result.level == "Beginner") nr=1;
+        else if(result.level == "Intermediate") nr=2;
+        else if(result.level == "Advanced") nr=3;
+        var action = "/task" + nr+"_"+result.number;
+        const output = ejs.render(template, {action:action,display: result.display, title1: result.title1, title2:result.title2, title3: result.title3, title4:result.title4, content1:result.content1, content2:result.content2, content3:result.content3, content4:result.content4, task1:result.task1, task2:result.task2, task3:result.task3, task4:result.task4, filename1: filename1, filename2: filename2, filename3: filename3, filename4: filename4});
+
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(output);
+        res.end();
+      }
+    })
+  }
+  else
+  if(path.substring(0,12) == "Intermediate" && req.method=="POST") {
+    console.log("intra in intermediate")
+    var number = Number(path.substring(12, path.length));
+    client.db("eGardening").collection('courses').findOne({"level":"Intermediate", "number" : number}, function(err, result){ 
+      if (err) {throw err}
+      //const output = modulePage();
+      if(result!=null) {
+        const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+        var filename1 = "../images/" + result.filename1 +".png";
+        var filename2 = "../images/" + result.filename2 +".png";
+        var filename3 = "../images/" + result.filename3 +".png";
+        var filename4 = "../images/" + result.filename4 +".png";
+        if(result.level == "Beginner") nr=1;
+        else if(result.level == "Intermediate") nr=2;
+        else if(result.level == "Advanced") nr=3;
+        var action = "/task" + nr+"_"+result.number;
+        const output = ejs.render(template, {action:action,display: result.display, title1: result.title1, title2:result.title2, title3: result.title3, title4:result.title4, content1:result.content1, content2:result.content2, content3:result.content3, content4:result.content4, task1:result.task1, task2:result.task2, task3:result.task3, task4:result.task4, filename1: filename1, filename2: filename2, filename3: filename3, filename4: filename4});
+
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(output);
+        res.end();
+      }
+    })
+  }
+  else
+  if(path.substring(0,8) == "Advanced" && req.method=="POST") {
+    var number = Number(path.substring(8, path.length));
+    client.db("eGardening").collection('courses').findOne({"level":"Advanced", "number" : number}, function(err, result){ 
+      if (err) {throw err}
+      //const output = modulePage();
+      if(result!=null) {
+        const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+        var filename1 = "../images/" + result.filename1 +".png";
+        var filename2 = "../images/" + result.filename2 +".png";
+        var filename3 = "../images/" + result.filename3 +".png";
+        var filename4 = "../images/" + result.filename4 +".png";
+        var nr = 0;
+        if(result.level == "Beginner") nr=1;
+        else if(result.level == "Intermediate") nr=2;
+        else if(result.level == "Advanced") nr=3;
+        var action = "/task" + nr+"_"+result.number;
+        const output = ejs.render(template, {action:action,display: result.display, title1: result.title1, title2:result.title2, title3: result.title3, title4:result.title4, content1:result.content1, content2:result.content2, content3:result.content3, content4:result.content4, task1:result.task1, task2:result.task2, task3:result.task3, task4:result.task4, filename1: filename1, filename2: filename2, filename3: filename3, filename4: filename4});
+
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(output);
+        res.end();
       }
     })
   }
@@ -526,51 +604,51 @@ const server = http.createServer((req, res) => {
 
       var oldpath = files.filename1.filepath;
       var newName1 = Date.now().toString() + files.filename1.originalFilename;
-      var newpath =  __dirname + '/images/' + newName1;
+      var newpath1 =  __dirname + '/images/' + newName1;
       
-      fs.copyFile(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath1, function (err) {
         if (err) throw err;
         else 
         {
-          response2="File uploaded and moved!" + newpath;
+          response2="File uploaded and moved!" + newpath1;
           console.log(response2);
         }
       });
       oldpath = files.filename2.filepath;
       var newName2 = Date.now().toString() + files.filename2.originalFilename;
-      newpath =  __dirname + '/images/' + newName2;
+      var newpath2 =  __dirname + '/images/' + newName2;
       
-      fs.copyFile(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath2, function (err) {
         if (err) throw err;
         else 
         {
-          response2="File uploaded and moved!" + newpath;
+          response2="File uploaded and moved!" + newpath2;
           console.log(response2);
         }
       });
 
       oldpath = files.filename3.filepath;
       var newName3 = Date.now().toString() + files.filename3.originalFilename;
-      newpath =  __dirname + '/images/' + newName3;
+      var newpath3 =  __dirname + '/images/' + newName3;
       
-      fs.copyFile(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath3, function (err) {
         if (err) throw err;
         else 
         {
-          response2="File uploaded and moved!" + newpath;
+          response2="File uploaded and moved!" + newpath3;
           console.log(response2);
         }
       });
 
       oldpath = files.filename4.filepath;
       var newName4 = Date.now().toString() + files.filename4.originalFilename;
-      newpath =  __dirname + '/images/' + newName4;
+      var newpath4 =  __dirname + '/images/' + newName4;
       
-      fs.copyFile(oldpath, newpath, function (err) {
+      fs.copyFile(oldpath, newpath4, function (err) {
         if (err) throw err;
         else 
         {
-          response2="File uploaded and moved!" + newpath;
+          response2="File uploaded and moved!" + newpath4;
           console.log(response2);
         }
       });
@@ -594,40 +672,45 @@ const server = http.createServer((req, res) => {
       var task3 = fields.task3;
       var task4 = fields.task4;
 
-      var data = {
-        "level" : level,
-        "display" : display,
-        "maxPoints" : 4,
-        "title1" : title1,
-        "content1" : content1,
-        "filename1" : filename1,
-        "title2" : title2,
-        "content2" : content2,
-        "filename2" : filename2,
-        "title3" : title3,
-        "content3" : content3,
-        "filename3" : filename3,
-        "title4" : title4,
-        "content4" : content4,
-        "filename4" : filename4,
-        "task1" : task1,
-        "task2" : task2,
-        "task3" : task3,
-        "task4" : task4
-      }
-    
-      client.db("eGardening").collection('courses').insertOne(data, (err, collection) => {
-        if(err){
-            throw err;
+      client.db("eGardening").collection('courses').find({"level":level}).toArray(function(err, result) {
+        if (err) {throw err}
+        if(result!=null){
+          var data = {
+            "level" : level,
+            "number" : result.length+1,
+            "display" : display,
+            "maxPoints" : 4,
+            "title1" : title1,
+            "content1" : content1,
+            "filename1" : filename1,
+            "title2" : title2,
+            "content2" : content2,
+            "filename2" : filename2,
+            "title3" : title3,
+            "content3" : content3,
+            "filename3" : filename3,
+            "title4" : title4,
+            "content4" : content4,
+            "filename4" : filename4,
+            "task1" : task1,
+            "task2" : task2,
+            "task3" : task3,
+            "task4" : task4
+          }
+        
+          client.db("eGardening").collection('courses').insertOne(data, (err, collection) => {
+            if(err){
+                throw err;
+            }
+            response2="Recod Inserted Successfully";
+            console.log(response2);
+            res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-course' });
+            res.end(response2);
+          });
         }
-        response2="Recod Inserted Successfully";
-        console.log(response2);
-        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-course' });
-        res.end(response2);
+        });
+      
       });
-
-    });
-
   }
   else
   if(path == "form_add_plant" && req.method=="POST" ) {
@@ -779,6 +862,12 @@ const server = http.createServer((req, res) => {
     });
   } 
 });
+
+function modulePage() {
+  console.log("intra in module page");
+  const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
+  return ejs.render(template, {display:"titluuuuuuu", title1:"aaa", title2:"bbb", title3: "ccc", title4:"dddd", content1:"abcd", content2:"abcd", content3:"abcd", content4:"abcd", task1:"task1", task2:"task2", task3:"task3", task4:"task4"});
+}
 
 server.listen(1234, "localhost", () => {
   console.log("Listening on port 1234");

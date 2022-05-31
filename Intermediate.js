@@ -21,12 +21,12 @@ fetch("username-database-response", {
             .then(data => {
                 var title1="", title2="", title3="";
                 var i=0;
-                while(i<data.length){
+                while(i<data.length && i<6){
                     let count=0;
                     title1="";
                     title2="";
                     title3="";
-                    while(count<3&&i<data.length){
+                    while(count<3&&i<data.length && i<6){
                         const number=data[i].number;
                         const maxPoints=data[i].maxPoints;
                         if(count==0){
@@ -47,6 +47,49 @@ fetch("username-database-response", {
                     }
                     const title=`<div class="row">`+title1+title2+title3+`</div>`
                     divIntermediate.insertAdjacentHTML("beforeend", title)
+                }
+                while(i<data.length && i>=6){
+                    let count=0;
+                    title1="";
+                    title2="";
+                    title3="";
+                    while(count<3&&i<data.length && i>=6){
+                        const number=data[i].number;
+                        const maxPoints=data[i].maxPoints;
+                        var intermediateX = "Intermediate" + number;
+                        if(count==0){
+                            title1 = `<form action = "/`+intermediateX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Intermediate`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m2-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Intermediate`+number+`" style="display:none;"></input>
+                            </form>`;
+                        }
+                        else
+                        if(count==1){
+                            title2 = `<form action = "/`+intermediateX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Intermediate`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m2-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Intermediate`+number+`" style="display:none;"></input>
+                            </form>`;  
+                        }
+                        else{
+                            title3 = `<form action = "/`+intermediateX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Intermediate`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m2-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Intermediate`+number+`" style="display:none;"></input>
+                            </form>`;
+                        }
+                        count++;
+                        i++; 
+                    }
+                    const titlee=`<div class="row">`+title1+title2+title3+`</div>`
+                    divIntermediate.insertAdjacentHTML("beforeend", titlee)
                 }
                 for(let i=0;i<data.length;i++){
                     const task="task2_"+data[i].number;

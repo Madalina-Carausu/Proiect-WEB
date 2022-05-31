@@ -5,27 +5,28 @@ function showMenu() {
 function hideMenu() {
     navLinks.style.right="-200px";
 }
-const divAdvanced = document.getElementById("divForAdvanced");
 
-var person
+const divForAdvanced = document.getElementById("divForAdvanced");
 
-fetch("username-database-response", {
-    mode: 'no-cors'
+var person;
+
+fetch("username-database-response", { 
+    mode: 'no-cors' 
 })  .then(response => {return response.json()})
     .then(data => {
         person=data;
         fetch("Advanced-response", { 
-            mode: 'no-cors'
+            mode: 'no-cors' 
         })  .then(response => {return response.json()})
             .then(data => {
                 var title1="", title2="", title3="";
                 var i=0;
-                while(i<data.length){
+                while(i<data.length && i<6){
                     let count=0;
                     title1="";
                     title2="";
                     title3="";
-                    while(count<3&&i<data.length){
+                    while(count<3&&i<data.length && i<6){
                         const number=data[i].number;
                         const maxPoints=data[i].maxPoints;
                         if(count==0){
@@ -42,10 +43,53 @@ fetch("username-database-response", {
                             `<h3>`+data[i].display+ `</h3>` + `<p id="m3-`+number+`" value=`+maxPoints+ `></p>`+ `</a>`;
                         }
                         count++;
-                        i++; 
+                        i++;
                     }
                     const title=`<div class="row">`+title1+title2+title3+`</div>`
-                    divAdvanced.insertAdjacentHTML("beforeend", title)
+                    divForAdvanced.insertAdjacentHTML("beforeend", title)
+                }
+                while(i<data.length && i>=9){
+                    let count=0;
+                    title1="";
+                    title2="";
+                    title3="";
+                    while(count<3&&i<data.length && i>=9){
+                        const number=data[i].number;
+                        const maxPoints=data[i].maxPoints;
+                        var advancedX = "Advanced" + number;
+                        if(count==0){
+                            title1 = `<form action = "/`+advancedX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Advanced`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m3-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Advanced`+number+`" style="display:none;"></input>
+                            </form>`;
+                        }
+                        else
+                        if(count==1){
+                            title2 = `<form action = "/`+advancedX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Advanced`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m3-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Advanced`+number+`" style="display:none;"></input>
+                            </form>`;  
+                        }
+                        else{
+                            title3 = `<form action = "/`+advancedX+`" method="POST" class = "lesson-col-begintadv module1-3">
+                            <label for="Advanced`+number+`">
+                                <h3>`+data[i].display+`</h3>
+                                <p id="m3-`+number+`" value=`+maxPoints+`></p>
+                            </label>
+                            <input type="submit" id="Advanced`+number+`" style="display:none;"></input>
+                            </form>`;
+                        }
+                        count++;
+                        i++; 
+                    }
+                    const titlee=`<div class="row">`+title1+title2+title3+`</div>`
+                    divForAdvanced.insertAdjacentHTML("beforeend", titlee)
                 }
                 for(let i=0;i<data.length;i++){
                     const task="task3_"+data[i].number;
@@ -112,8 +156,8 @@ fetch("username-database-response", {
                  }, 2000)
             })
             .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
 
 fetch("get_login", { 
     mode: 'no-cors'
@@ -136,3 +180,4 @@ fetch("get_admin", {
         document.getElementById("admin").style.display="none";
 })
 .catch(err => console.log(err));
+
