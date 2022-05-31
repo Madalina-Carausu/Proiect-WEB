@@ -43,6 +43,7 @@
 
 .col-myProfile-unlocked {
     flex-basis: 31%;
+    width: 20%;
     background: #ffc466b0;
     border-radius: 10px;
     margin-bottom: 5%;
@@ -54,6 +55,7 @@
 
 .col-myProfile-locked{
     flex-basis: 31%;
+    width: 20%;
     background: rgba(0, 0, 0, 0.495);
     border-radius: 10px;
     margin-bottom: 5%;
@@ -64,18 +66,13 @@
     opacity: 50%;
 }
 
-.col-myProfile-locked {
-    cursor: pointer;
-}
-
-
 .titleAndImage{
     display: flex;
 }
 
 .titleAndImage img{
     height: 70px;
-    width: auto;
+    width: 80px;
     margin-left: 5px;
     margin-right: 5px; /*30px daca vreau numele mai departe de img*/
     border-radius: 50%;
@@ -224,5 +221,10 @@ input{
         flex-direction: column;
     }
 
-
+    .col-myProfile-unlocked{
+        width:100%;
+    }
+    .col-myProfile-locked{
+        width:100%;
+    }
 }

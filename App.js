@@ -199,7 +199,6 @@ const server = http.createServer((req, res) => {
   else
   if(path=="Beginner-response")
   {
-    console.log("intra aici");
     client.db("eGardening").collection('courses').find({"level":"Beginner"}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
@@ -236,7 +235,6 @@ const server = http.createServer((req, res) => {
   }
   else
   if(path.substring(0,12) == "Intermediate" && req.method=="POST") {
-    console.log("intra in intermediate")
     var number = Number(path.substring(12, path.length));
     client.db("eGardening").collection('courses').findOne({"level":"Intermediate", "number" : number}, function(err, result){ 
       if (err) {throw err}
@@ -864,7 +862,6 @@ const server = http.createServer((req, res) => {
 });
 
 function modulePage() {
-  console.log("intra in module page");
   const template = fs.readFileSync('./modules/GeneralModule.ejs', 'utf8');
   return ejs.render(template, {display:"titluuuuuuu", title1:"aaa", title2:"bbb", title3: "ccc", title4:"dddd", content1:"abcd", content2:"abcd", content3:"abcd", content4:"abcd", task1:"task1", task2:"task2", task3:"task3", task4:"task4"});
 }
