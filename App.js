@@ -5,6 +5,15 @@ const url = require("url");
 const fs = require("fs");
 const qs = require('querystring');
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
+const {SignUpUser} = require("./controllers/SignUpController");
+const {LoginUser} = require("./controllers/LoginController");
+const {TaskUser} = require("./controllers/TaskController");
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
 
 const saltRounds = 10;
 var formidable = require('formidable');
@@ -12,21 +21,30 @@ var ejs = require('ejs');
 var htmlContent = fs.readFileSync(__dirname + '/views/modules/GeneralModule.ejs', 'utf8');
 
 
+mongoose.connect('mongodb://localhost:27017/eGardening');
 
-const { MongoClient } = require('mongodb');
-const uri = "mongodb://0.0.0.0:27017";
-const client = new MongoClient(uri);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
 
-try {
-  client.connect();
-} catch(e) {
-  console.log(e);
-}
+
+//const { MongoClient } = require('mongodb');
+//const uri = "mongodb://0.0.0.0:27017";
+//const client = new MongoClient(uri);
+
+//try {
+//  client.connect();
+//} catch(e) {
+//  console.log(e);
+//}
+
 var response="";
 var response2="";
 var username="";
 var login=0;
-var admin=0; //wether or not the administrator is connected
+var admin=0;
 
 const server = http.createServer((req, res) => {
   //handle the request and send back a static file
@@ -53,7 +71,7 @@ const server = http.createServer((req, res) => {
   let file = __dirname + "/views/" + path;
 
   if(path=="ranking"&&req.method=="GET"){
-    client.db("eGardening").collection('users').find().toArray(function(err, result) {
+    db.collection('users').find().toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
         res.end(JSON.stringify(result));  
@@ -92,14 +110,14 @@ const server = http.createServer((req, res) => {
                   task3=true;
             
           }
-          client.db("eGardening").collection('users').findOne({"name":username, "plants.image": image},  function(err, result) {
+          db.collection('users').findOne({"name":username, "plants.image": image},  function(err, result) {
             if (err) {throw err;}
             if(result!=null){
-              client.db("eGardening").collection('users').updateMany({"name":username, "plants.image": image},  
+              db.collection('users').updateMany({"name":username, "plants.image": image},  
               {'$set' : { "plants.$.task1" : task1 , "plants.$.task2" : task2 , "plants.$.task3" : task3 }})  
             }
             else
-              client.db("eGardening").collection('users').updateOne({"name" : username}, 
+            db.collection('users').updateOne({"name" : username}, 
               {'$push' : {"plants":{ "image": image, "task1" : task1 , "task2" : task2 , "task3" : task3 }}})  
           });
         }
@@ -112,7 +130,7 @@ const server = http.createServer((req, res) => {
   if(path.substring(0, 6)=="Plants"){
     //Plants-Beginner-response
     if(path.slice(-8)=="Beginner"){
-      client.db("eGardening").collection('plants').find({"level":"Beginner"}).toArray(function(err, result) {
+      db.collection('plants').find({"level":"Beginner"}).toArray(function(err, result) {
         if (err) {throw err}
         if(result!=null){
           res.end(JSON.stringify(result));  
@@ -124,7 +142,7 @@ const server = http.createServer((req, res) => {
     }
     else
     if(path.slice(-12)=="Intermediate"){
-      client.db("eGardening").collection('plants').find({"level":"Intermediate"}).toArray(function(err, result) {
+      db.collection('plants').find({"level":"Intermediate"}).toArray(function(err, result) {
         if (err) {throw err}
         if(result!=null){
           res.end(JSON.stringify(result));  
@@ -135,7 +153,7 @@ const server = http.createServer((req, res) => {
       })
     }
     else{
-      client.db("eGardening").collection('plants').find({"level":"Advanced"}).toArray(function(err, result) {
+      db.collection('plants').find({"level":"Advanced"}).toArray(function(err, result) {
         if (err) {throw err}
         if(result!=null){
           res.end(JSON.stringify(result));  
@@ -163,7 +181,7 @@ const server = http.createServer((req, res) => {
   }
   else
   if(path.slice(-26)=="username-database-response"){
-    client.db("eGardening").collection('users').findOne({"name":username}, function(err, result) {
+    db.collection('users').findOne({"name":username}, function(err, result) {
       if (err) {throw err}
       if(result!=null){
         res.end(JSON.stringify(result));  
@@ -175,7 +193,7 @@ const server = http.createServer((req, res) => {
   }
   else
   if(path=="Advanced-response"){
-    client.db("eGardening").collection('courses').find({"level":"Advanced"}).toArray(function(err, result) {
+    db.collection('courses').find({"level":"Advanced"}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
         res.end(JSON.stringify(result));  
@@ -187,7 +205,7 @@ const server = http.createServer((req, res) => {
   }
   else
   if(path=="Intermediate-response"){
-    client.db("eGardening").collection('courses').find({"level":"Intermediate"}).toArray(function(err, result) {
+    db.collection('courses').find({"level":"Intermediate"}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
         res.end(JSON.stringify(result));  
@@ -200,7 +218,7 @@ const server = http.createServer((req, res) => {
   else
   if(path=="Beginner-response")
   {
-    client.db("eGardening").collection('courses').find({"level":"Beginner"}).toArray(function(err, result) {
+    db.collection('courses').find({"level":"Beginner"}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
         res.end(JSON.stringify(result));  
@@ -213,7 +231,7 @@ const server = http.createServer((req, res) => {
   else
   if(path.substring(0,8) == "Beginner" && req.method=="POST") {
     var number = Number(path.substring(8, path.length));
-    client.db("eGardening").collection('courses').findOne({"level":"Beginner", "number" : number}, function(err, result){ 
+    db.collection('courses').findOne({"level":"Beginner", "number" : number}, function(err, result){ 
       if (err) {throw err}
       //const output = modulePage();
       if(result!=null) {
@@ -238,7 +256,7 @@ const server = http.createServer((req, res) => {
   else
   if(path.substring(0,12) == "Intermediate" && req.method=="POST") {
     var number = Number(path.substring(12, path.length));
-    client.db("eGardening").collection('courses').findOne({"level":"Intermediate", "number" : number}, function(err, result){ 
+    db.collection('courses').findOne({"level":"Intermediate", "number" : number}, function(err, result){ 
       if (err) {throw err}
       //const output = modulePage();
       if(result!=null) {
@@ -262,7 +280,7 @@ const server = http.createServer((req, res) => {
   else
   if(path.substring(0,8) == "Advanced" && req.method=="POST") {
     var number = Number(path.substring(8, path.length));
-    client.db("eGardening").collection('courses').findOne({"level":"Advanced", "number" : number}, function(err, result){ 
+    db.collection('courses').findOne({"level":"Advanced", "number" : number}, function(err, result){ 
       if (err) {throw err}
       //const output = modulePage();
       if(result!=null) {
@@ -287,7 +305,7 @@ const server = http.createServer((req, res) => {
   else
   if(path=="get_questions" && req.method=="GET"){
 
-    client.db("eGardening").collection('questions').find({"answer" : ""}).toArray(function(err, result) {
+    db.collection('questions').find({"answer" : ""}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
         res.end(JSON.stringify(result));  
@@ -300,7 +318,7 @@ const server = http.createServer((req, res) => {
   else
   if(path=="get_questions_and_answers" && req.method=="GET"){
 
-    client.db("eGardening").collection('questions').find({"answer" : {$ne: ""}}).toArray(function(err, result) {
+    db.collection('questions').find({"answer" : {$ne: ""}}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
         res.end(JSON.stringify(result));  
@@ -313,46 +331,16 @@ const server = http.createServer((req, res) => {
   else
   if(path=="login_popup" && req.method=="POST"){
     path="Proiect.html";
-    file = __dirname + "/views/" + path;              //abstactizare, sa am undeva o clasa cu ceva si sa caut acolo, sa nu mai fac +
-    var body = '';                              //functie in care dam tot request body ul
-                                                //mai putine if uri
-    req.on('data', function (data) {
-        body += data;
-        if (body.length > 1e6)
-           request.close();
-    });
-
-    req.on('end', function () {
-        var post = qs.parse(body);
-        var name = post.name;
-        var password = post.pswd;
-
-        client.db("eGardening").collection('users').findOne({"name":name}, async function(err, result) {
-            if (err) {throw err;}
-            if(result!=null){
-              const cmp = await bcrypt.compare(password, result.password);
-              if(cmp){
-                response="Login succesfully!";
-                username=name;
-                login=1;
-                if(username == "admin") admin = 1;
-                console.log(response)
-                res.writeHead(302, { "Location": "http://" + 'localhost:1234/Proiect_MyProfile.html' });
-                res.end(response);
-              }
-              else
-              {
-                response="Login failed!";
-                console.log(response)
-                res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
-                res.end(response);
-              }
-            }
-      });
-    })
+    file = __dirname + "/views/" + path;             
+    LoginUser(req, res)
+    login=localStorage.getItem("login");
+    admin=localStorage.getItem("admin");
+    username=localStorage.getItem("username");
+    response=localStorage.getItem("responseFromLogin")
   }
   else
   if(path=="login_popup" && req.method=="GET"){
+    
       if(response!=""){
         const objectToSend = {"response": response, "username":username};
         response="";
@@ -363,7 +351,7 @@ const server = http.createServer((req, res) => {
   else
   if(path=="signup_popup" && req.method=="POST"){
     path="Proiect.html";
-    file = __dirname + "/views/" + path;
+    file = __dirname + "/" + path;
     var body = '';
     req.on('data', function (data) {
         body += data;
@@ -390,11 +378,11 @@ const server = http.createServer((req, res) => {
       }
 
       
-      client.db("eGardening").collection('users').findOne({"name":data.name},function(err, result) {
+      db.collection('users').findOne({"name":data.name},function(err, result) {
           if (err) {throw err;}
           if(result==null){
 
-            client.db("eGardening").collection('users').insertOne(data, (err, collection) => {
+            db.collection('users').insertOne(data, (err, collection) => {
                   if(err){
                       throw err;
                   }
@@ -434,7 +422,7 @@ const server = http.createServer((req, res) => {
       login=0;
   }
   else
-  if(path.substring(0,4)=="task" && req.method=="POST"){//expresii regulate
+  if(path.substring(0,4)=="task" && req.method=="POST"){
     const taskText=path;
     if(path.substring(0,5)=="task1")
       path="Beginner.html";
@@ -477,19 +465,20 @@ const server = http.createServer((req, res) => {
           }
         }
 
-        client.db("eGardening").collection('users').findOne({"name":username, "tasks.task":taskText},function(err, result) {
+        db.collection('users').findOne({"name":username, "tasks.task":taskText},function(err, result) {
             if (err) {throw err;}
             if(result!=null){
-              client.db("eGardening").collection('users').updateOne({"name" : username, "tasks.task":taskText}, 
+              db.collection('users').updateOne({"name" : username, "tasks.task":taskText}, 
                 {'$set' : {"tasks.$.task" : taskText, "tasks.$.value": value, "tasks.$.task1":task1,"tasks.$.task2": task2, "tasks.$.task3":task3, "tasks.$.task4":task4 }})  
                 
             }
             else{
-              client.db("eGardening").collection('users').updateOne({"name" : username}, 
+              db.collection('users').updateOne({"name" : username}, 
               {'$push' : {"tasks":{ "task": taskText, "value" : value, "task1":task1, "task2": task2, "task3":task3, "task4":task4 }}})  
             }
         });
     });
+    //console.log(TaskUser(req, res, username, taskText));
     res.writeHead(302, { "Location": "http://localhost:1234/"+path });
     res.end(response);
   }
@@ -515,7 +504,7 @@ const server = http.createServer((req, res) => {
           "answer" : ""
         }
       
-        client.db("eGardening").collection('questions').insertOne(data, (err, collection) => {
+        db.collection('questions').insertOne(data, (err, collection) => {
           if(err){
               throw err;
           }
@@ -672,7 +661,7 @@ const server = http.createServer((req, res) => {
       var task3 = fields.task3;
       var task4 = fields.task4;
 
-      client.db("eGardening").collection('courses').find({"level":level}).toArray(function(err, result) {
+      db.collection('courses').find({"level":level}).toArray(function(err, result) {
         if (err) {throw err}
         if(result!=null){
           var data = {
@@ -698,7 +687,7 @@ const server = http.createServer((req, res) => {
             "task4" : task4
           }
         
-          client.db("eGardening").collection('courses').insertOne(data, (err, collection) => {
+          db.collection('courses').insertOne(data, (err, collection) => {
             if(err){
                 throw err;
             }
@@ -793,7 +782,7 @@ const server = http.createServer((req, res) => {
         "image" : filename_plant
       }
 
-      client.db("eGardening").collection('plants').insertOne(data, (err, collection) => {
+      db.collection('plants').insertOne(data, (err, collection) => {
         if(err){
             throw err;
         }
@@ -823,10 +812,10 @@ const server = http.createServer((req, res) => {
       var question = questionAndFrom.slice(0, questionAndFrom.search(" ---"));
       var user = questionAndFrom.slice(questionAndFrom.search("FROM")+5, questionAndFrom.length);
     
-      client.db("eGardening").collection('questions').findOne({"question":question, "username" : user},function(err, result) {
+      db.collection('questions').findOne({"question":question, "username" : user},function(err, result) {
         if (err) {throw err;}
         if(result!=null){
-          client.db("eGardening").collection('questions').updateOne({"question":question, "username" : user}, 
+          db.collection('questions').updateOne({"question":question, "username" : user}, 
             {'$set' : {"answer" : answer }});  
           response2="Record Inserted Successfully";
           console.log(response2);
