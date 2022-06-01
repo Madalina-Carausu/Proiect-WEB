@@ -4,22 +4,22 @@ const http = require("http");
 const url = require("url");
 const fs = require("fs");
 const qs = require('querystring');
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
-const {SignUpUser} = require("./controllers/SignUpController");
-const {LoginUser} = require("./controllers/LoginController");
-const {TaskUser} = require("./controllers/TaskController");
+
+var SignUpUser = require("./controllers/SignUpController");
+var LoginUser = require("./controllers/LoginController");
+var TaskUser = require("./controllers/TaskController");
+var Users = require("./controllers/UsersController");
+var Plants = require("./controllers/PlantsController");
+var Questions = require("./controllers/QuestionsController")
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
 }
 
-const saltRounds = 10;
 var formidable = require('formidable');
 var ejs = require('ejs');
-var htmlContent = fs.readFileSync(__dirname + '/views/modules/GeneralModule.ejs', 'utf8');
-
 
 mongoose.connect('mongodb://localhost:27017/eGardening');
 
@@ -28,17 +28,6 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
   console.log("Connected successfully");
 });
-
-
-//const { MongoClient } = require('mongodb');
-//const uri = "mongodb://0.0.0.0:27017";
-//const client = new MongoClient(uri);
-
-//try {
-//  client.connect();
-//} catch(e) {
-//  console.log(e);
-//}
 
 var response="";
 var response2="";
@@ -68,21 +57,12 @@ const server = http.createServer((req, res) => {
       }
   }
 
-  let file = __dirname + "/views/" + path;
-
-  if(path=="ranking"&&req.method=="GET"){
-    db.collection('users').find().toArray(function(err, result) {
-      if (err) {throw err}
-      if(result!=null){
-        res.end(JSON.stringify(result));  
-      }
-      else{
-        res.end(JSON.stringify("Eroare"));  
-      }
-    })
+    let file = __dirname + "/views/" + path;
+  if(path=="ranking"&&req.method=="GET"){//FACUTA
+    Users.getAllUsers(req, res);
   }
   else
-  if(path.substring(0, 6)=="plant_"&&req.method=="POST"){
+  if(path.substring(0, 6)=="plant_"&&req.method=="POST"){//FACUTA
     
     var body = '';
     var image=path.substring(6, path.length);
@@ -92,80 +72,16 @@ const server = http.createServer((req, res) => {
             request.close();
     });
     
-    req.on('end', function () {
-        var post = qs.parse(body);
-        var task = post.task;
-        var task1=false;
-        var task2=false;
-        var task3=false;
-        if(task!=null&&task!=undefined)
-        {
-          for(let i=0;i<task.length;i++){
-            if(task[i]==1)
-              task1=true;
-            else
-              if(task[i]==2)
-                task2=true;
-              else
-                  task3=true;
-            
-          }
-          db.collection('users').findOne({"name":username, "plants.image": image},  function(err, result) {
-            if (err) {throw err;}
-            if(result!=null){
-              db.collection('users').updateMany({"name":username, "plants.image": image},  
-              {'$set' : { "plants.$.task1" : task1 , "plants.$.task2" : task2 , "plants.$.task3" : task3 }})  
-            }
-            else
-            db.collection('users').updateOne({"name" : username}, 
-              {'$push' : {"plants":{ "image": image, "task1" : task1 , "task2" : task2 , "task3" : task3 }}})  
-          });
-        }
-        res.writeHead(302, { "Location": "http://localhost:1234/MyProfile.html"});
-        res.end();
-
+    req.on('end', async function () {
+      await Users.addTasksForPlants(body, res, image, username)
     })
   }
   else
-  if(path.substring(0, 6)=="Plants"){
-    //Plants-Beginner-response
-    if(path.slice(-8)=="Beginner"){
-      db.collection('plants').find({"level":"Beginner"}).toArray(function(err, result) {
-        if (err) {throw err}
-        if(result!=null){
-          res.end(JSON.stringify(result));  
-        }
-        else{
-          res.end(JSON.stringify("Eroare"));  
-        }
-      })
-    }
-    else
-    if(path.slice(-12)=="Intermediate"){
-      db.collection('plants').find({"level":"Intermediate"}).toArray(function(err, result) {
-        if (err) {throw err}
-        if(result!=null){
-          res.end(JSON.stringify(result));  
-        }
-        else{
-          res.end(JSON.stringify("Eroare"));  
-        }
-      })
-    }
-    else{
-      db.collection('plants').find({"level":"Advanced"}).toArray(function(err, result) {
-        if (err) {throw err}
-        if(result!=null){
-          res.end(JSON.stringify(result));  
-        }
-        else{
-          res.end(JSON.stringify("Eroare"));  
-        }
-      })
-    }
+  if(path.substring(0, 6)=="Plants"){//FACUTA
+    Plants.plantsForSpecificLevel(path, res)
   }
   else
-  if(path.slice(-9)=="get_login")//modules/get_login  //tipsAndTricks/get_login   //get_login
+  if(path.slice(-9)=="get_login")//NIMIC
   {
     const objectToSend = {"response": login, "username":username};
     const jsonContent = JSON.stringify(objectToSend);
@@ -173,26 +89,18 @@ const server = http.createServer((req, res) => {
 
   }
   else
-  if(path.slice(-9)=="get_admin")//modules/get_login  //tipsAndTricks/get_login   //get_login
+  if(path.slice(-9)=="get_admin")//NIMIC
   {
     const objectToSend = {"response": admin};
     const jsonContent = JSON.stringify(objectToSend);
     res.end(jsonContent);
   }
   else
-  if(path.slice(-26)=="username-database-response"){
-    db.collection('users').findOne({"name":username}, function(err, result) {
-      if (err) {throw err}
-      if(result!=null){
-        res.end(JSON.stringify(result));  
-      }
-      else{
-        res.end(JSON.stringify("Eroare"));  
-      }
-    })
+  if(path.slice(-26)=="username-database-response"){//FACUT
+    Users.findUserByName(username, res)
   }
   else
-  if(path=="Advanced-response"){
+  if(path=="Advanced-response"){//COURSES
     db.collection('courses').find({"level":"Advanced"}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
@@ -204,7 +112,7 @@ const server = http.createServer((req, res) => {
     })
   }
   else
-  if(path=="Intermediate-response"){
+  if(path=="Intermediate-response"){//COURSES
     db.collection('courses').find({"level":"Intermediate"}).toArray(function(err, result) {
       if (err) {throw err}
       if(result!=null){
@@ -216,7 +124,7 @@ const server = http.createServer((req, res) => {
     })
   }
   else
-  if(path=="Beginner-response")
+  if(path=="Beginner-response")//COURSES
   {
     db.collection('courses').find({"level":"Beginner"}).toArray(function(err, result) {
       if (err) {throw err}
@@ -229,7 +137,7 @@ const server = http.createServer((req, res) => {
     })
   }
   else
-  if(path.substring(0,8) == "Beginner" && req.method=="POST") {
+  if(path.substring(0,8) == "Beginner" && req.method=="POST") {//COURSES
     var number = Number(path.substring(8, path.length));
     db.collection('courses').findOne({"level":"Beginner", "number" : number}, function(err, result){ 
       if (err) {throw err}
@@ -254,7 +162,7 @@ const server = http.createServer((req, res) => {
     })
   }
   else
-  if(path.substring(0,12) == "Intermediate" && req.method=="POST") {
+  if(path.substring(0,12) == "Intermediate" && req.method=="POST") {//COURSES
     var number = Number(path.substring(12, path.length));
     db.collection('courses').findOne({"level":"Intermediate", "number" : number}, function(err, result){ 
       if (err) {throw err}
@@ -278,7 +186,7 @@ const server = http.createServer((req, res) => {
     })
   }
   else
-  if(path.substring(0,8) == "Advanced" && req.method=="POST") {
+  if(path.substring(0,8) == "Advanced" && req.method=="POST") {//COURSES
     var number = Number(path.substring(8, path.length));
     db.collection('courses').findOne({"level":"Advanced", "number" : number}, function(err, result){ 
       if (err) {throw err}
@@ -303,44 +211,34 @@ const server = http.createServer((req, res) => {
     })
   }
   else
-  if(path=="get_questions" && req.method=="GET"){
-
-    db.collection('questions').find({"answer" : ""}).toArray(function(err, result) {
-      if (err) {throw err}
-      if(result!=null){
-        res.end(JSON.stringify(result));  
-      }
-      else{
-        res.end(JSON.stringify("Eroare"));  
-      }
-    })
+  if(path=="get_questions" && req.method=="GET"){//FACUT
+    Questions.getNotAnsweredQuestions(res);
   }
   else
-  if(path=="get_questions_and_answers" && req.method=="GET"){
-
-    db.collection('questions').find({"answer" : {$ne: ""}}).toArray(function(err, result) {
-      if (err) {throw err}
-      if(result!=null){
-        res.end(JSON.stringify(result));  
-      }
-      else{
-        res.end(JSON.stringify("Eroare"));  
-      }
-    })
+  if(path=="get_questions_and_answers" && req.method=="GET"){//FACUT
+    Questions.getQuestions(res);
   }
   else
-  if(path=="login_popup" && req.method=="POST"){
+  if(path=="login_popup" && req.method=="POST"){//FACUT
     path="Proiect.html";
-    file = __dirname + "/views/" + path;             
-    LoginUser(req, res)
-    login=localStorage.getItem("login");
-    admin=localStorage.getItem("admin");
-    username=localStorage.getItem("username");
-    response=localStorage.getItem("responseFromLogin")
+    file = __dirname + "/views/" + path;  
+    var body = '';                       
+    req.on('data', function (data) {
+    body += data;
+    if (body.length > 1e6)
+      req.close();
+    });
+
+    req.on('end', async function (){
+      await LoginUser(body, res)
+      login=Number(localStorage.getItem("login"));
+      admin=Number(localStorage.getItem("admin"));
+      username=localStorage.getItem("username");
+      response=localStorage.getItem("responseFromLogin")
+    })
   }
   else
-  if(path=="login_popup" && req.method=="GET"){
-    
+  if(path=="login_popup" && req.method=="GET"){//NIMIC
       if(response!=""){
         const objectToSend = {"response": response, "username":username};
         response="";
@@ -349,7 +247,7 @@ const server = http.createServer((req, res) => {
       }
   }
   else
-  if(path=="signup_popup" && req.method=="POST"){
+  if(path=="signup_popup" && req.method=="POST"){//FACUT
     path="Proiect.html";
     file = __dirname + "/" + path;
     var body = '';
@@ -360,50 +258,13 @@ const server = http.createServer((req, res) => {
     });
 
     req.on('end', async function () {
-        var post = qs.parse(body);
-        var name = post.uname;
-        var password = post.psw;
-        var email=post.email;
-        var phone=post.phone;
-
-        const hashedPwd = await bcrypt.hash(password, saltRounds);
-
-        var data = {
-          "name": name,
-          "password": hashedPwd,
-          "email": email,
-          "phone": phone,
-          "plants":[], 
-          "tasks":[]
-      }
-
-      
-      db.collection('users').findOne({"name":data.name},function(err, result) {
-          if (err) {throw err;}
-          if(result==null){
-
-            db.collection('users').insertOne(data, (err, collection) => {
-                  if(err){
-                      throw err;
-                  }
-                  response2="Recod Inserted Successfully";
-                  console.log(response2);
-                  res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
-                  res.end(response2);
-              });
-          }
-          else
-          {
-              response2="Sign up failed!";
-              console.log(response2);
-              res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
-              res.end(response2);
-          }
-      });
+      await SignUpUser(body, res)
+      response2=localStorage.getItem("responseFromSignUp");
+      console.log(response2)
     });
   }
   else
-  if(path=="signup_popup" && req.method=="GET"){
+  if(path=="signup_popup" && req.method=="GET"){//NIMIC
       if(response2!=""){
         const objectToSend = {"response": response2}
         response2="";
@@ -412,17 +273,17 @@ const server = http.createServer((req, res) => {
       }
   }
   else
-  if(path=="logout" && req.method=="POST"){
-      res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
-      res.end("success");
+  if(path=="logout" && req.method=="POST"){//NIMIC
       response="";
       response2="";
-      if(username == "admin") admin = 0;
+      admin = 0;
       username="";
       login=0;
+      res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
+      res.end("success");
   }
   else
-  if(path.substring(0,4)=="task" && req.method=="POST"){
+  if(path.substring(0,4)=="task" && req.method=="POST"){//FACUT
     const taskText=path;
     if(path.substring(0,5)=="task1")
       path="Beginner.html";
@@ -438,52 +299,16 @@ const server = http.createServer((req, res) => {
         if (body.length > 1e6)
             request.close();
     });
-    
-    req.on('end', function () {
-        var post = qs.parse(body);
-        var task = post.task;
-        let value=0;
-        var task1=false;
-        var task2=false;
-        var task3=false;
-        var task4=false;
-        if(task!=null&&task!=undefined)
-        {
-          for(let i=0;i<task.length;i++){
-            if(Number(task[i])==1)
-              task1=true;
-            else
-            if(Number(task[i])==2)
-              task2=true;
-            else
-            if(Number(task[i])==3)
-              task3=true;
-            else
-            if(Number(task[i])==4)
-              task4=true;
-            value = value + 1;
-          }
-        }
-
-        db.collection('users').findOne({"name":username, "tasks.task":taskText},function(err, result) {
-            if (err) {throw err;}
-            if(result!=null){
-              db.collection('users').updateOne({"name" : username, "tasks.task":taskText}, 
-                {'$set' : {"tasks.$.task" : taskText, "tasks.$.value": value, "tasks.$.task1":task1,"tasks.$.task2": task2, "tasks.$.task3":task3, "tasks.$.task4":task4 }})  
-                
-            }
-            else{
-              db.collection('users').updateOne({"name" : username}, 
-              {'$push' : {"tasks":{ "task": taskText, "value" : value, "task1":task1, "task2": task2, "task3":task3, "task4":task4 }}})  
-            }
-        });
+   
+    req.on('end', async function () {
+      await TaskUser(body, taskText, username, res)
     });
-    //console.log(TaskUser(req, res, username, taskText));
+
     res.writeHead(302, { "Location": "http://localhost:1234/"+path });
     res.end(response);
   }
   else
-  if(path == "form_questions" && req.method=="POST" ) {
+  if(path == "form_questions" && req.method=="POST" ) {//FACUT
     var body = '';
 
     if(username != "") {
@@ -494,27 +319,10 @@ const server = http.createServer((req, res) => {
               request.close();
       });
 
-
-      req.on('end', function () {
-        var post = qs.parse(body);
-        var question = post.question;
-        var data = {
-          "question": question,
-          "username": username,
-          "answer" : ""
-        }
+      req.on('end', async function () {
+        await Questions.addQuestion(body, res, username)
+      })
       
-        db.collection('questions').insertOne(data, (err, collection) => {
-          if(err){
-              throw err;
-          }
-          response2="Recod Inserted Successfully";
-          console.log(response2);
-          res.writeHead(302, { "Location": "http://" + 'localhost:1234/QA.html' });
-          res.end(response2);
-        });
-        
-      });
     }
     else
     {
@@ -525,7 +333,7 @@ const server = http.createServer((req, res) => {
     }
   }
   else
-  if(path == "form_add_course" && req.method=="POST" ) {
+  if(path == "form_add_course" && req.method=="POST" ) {//COURSES
     /*var body = '';
 
     req.on('data', function (data) {
@@ -702,100 +510,11 @@ const server = http.createServer((req, res) => {
       });
   }
   else
-  if(path == "form_add_plant" && req.method=="POST" ) {
-    /*var body = '';
-
-    req.on('data', function (data) {
-        body += data;
-        if (body.length > 1e6)
-            request.close();
-    });
-
-    req.on('end', function () {
-      var post = qs.parse(body);
-      var level = post.difficulty;
-      var name = post.name;
-      var filename_plant = post.filename_plant;
-      var task1 = post.task1;
-      var task2 = post.task2;
-      var task3 = post.task3;
-
-      var data = {
-        "name" : name,
-        "task1" : task1,
-        "task2" : task2,
-        "task3" : task3,
-        "level" : level,
-        "image" : filename_plant
-      }
-    
-      client.db("eGardening").collection('plants').insertOne(data, (err, collection) => {
-        if(err){
-            throw err;
-        }
-        response2="Recod Inserted Successfully";
-        console.log(response2);
-        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-plant' });
-        res.end(response2);
-      });
-      
-    });*/
-
-    var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-
-      var oldpath = files.filename_plant.filepath;
-      var newName = Date.now().toString() + files.filename_plant.originalFilename;
-      var newpath =  __dirname + '/views/images/' + newName;
-      
-      /*fs.rename(oldpath, newpath, function (err) {
-        if (err) throw err;
-        else 
-        {
-          response2="File uploaded and moved!" + newpath;
-          console.log(response2);
-        }
-      });*/
-
-      fs.copyFile(oldpath, newpath, function (err) {
-        if (err) throw err;
-        else 
-        {
-          response2="File uploaded and moved!" + newpath;
-          console.log(response2);
-        }
-      });
-
-      var level = fields.difficulty;
-      var name = fields.name;
-      var filename_plant = newName.substring(0, newName.length-4);
-      var task1 = fields.task1;
-      var task2 = fields.task2;
-      var task3 = fields.task3;
-
-      var data = {
-        "name" : name,
-        "task1" : task1,
-        "task2" : task2,
-        "task3" : task3,
-        "level" : level,
-        "image" : filename_plant
-      }
-
-      db.collection('plants').insertOne(data, (err, collection) => {
-        if(err){
-            throw err;
-        }
-        response2="Recod Inserted Successfully";
-        console.log(response2);
-        res.writeHead(302, { "Location": "http://" + 'localhost:1234/Admin.html#form-add-plant' });
-        res.end(response2);
-      });
-
-    });
+  if(path == "form_add_plant" && req.method=="POST" ) {//FACUT
+    Plants.addDynamicPlant(req, res, __dirname)
   }
   else
-  if(path == "form_answer_question" && req.method=="POST" ) {
+  if(path == "form_answer_question" && req.method=="POST" ) {//FACUT
     
     var body = '';
 
@@ -805,25 +524,8 @@ const server = http.createServer((req, res) => {
             request.close();
     });
 
-    req.on('end', function () {
-      var post = qs.parse(body);
-      var questionAndFrom = post.chosen_question;
-      var answer = post.answer;
-      var question = questionAndFrom.slice(0, questionAndFrom.search(" ---"));
-      var user = questionAndFrom.slice(questionAndFrom.search("FROM")+5, questionAndFrom.length);
-    
-      db.collection('questions').findOne({"question":question, "username" : user},function(err, result) {
-        if (err) {throw err;}
-        if(result!=null){
-          db.collection('questions').updateOne({"question":question, "username" : user}, 
-            {'$set' : {"answer" : answer }});  
-          response2="Record Inserted Successfully";
-          console.log(response2);
-          res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#form-answer-question" });
-          res.end(response2);
-        }
-    });
-      
+    req.on('end', async function () {
+      await Questions.answerTheQuestion(body, res)
     });
   }
   else{
@@ -849,6 +551,7 @@ const server = http.createServer((req, res) => {
     }
     });
   } 
+  
 });
 
 function modulePage() {
