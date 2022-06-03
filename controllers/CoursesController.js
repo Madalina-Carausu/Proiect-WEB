@@ -113,7 +113,7 @@ async function addDynamicCourse(req, res, dirname){//daca e aceeasi poza sa nu o
     await form.parse(req, async function (err, fields, files) {
         var oldpath = files.filename1.filepath;
         var response2="";
-        var newName1 = Date.now().toString() + files.filename1.originalFilename;
+        var newName1 = Date.now().toString() + files.filename1.originalFilename.substring(0,files.filename1.originalFilename.length-4) + "1" +".png";
         var newpath1 =  dirname + '/views/images/' + newName1;
         await fs.copyFile(oldpath, newpath1, function (err) {
             if (err) throw err;
@@ -124,7 +124,7 @@ async function addDynamicCourse(req, res, dirname){//daca e aceeasi poza sa nu o
             }
         });
         oldpath = files.filename2.filepath;
-        var newName2 = Date.now().toString() + files.filename2.originalFilename;
+        var newName2 = Date.now().toString() + files.filename2.originalFilename.substring(0,files.filename2.originalFilename.length-4) + "2" +".png";
         var newpath2 =  dirname + '/views/images/' + newName2;
         await fs.copyFile(oldpath, newpath2, function (err) {
             if (err) throw err;
@@ -136,7 +136,7 @@ async function addDynamicCourse(req, res, dirname){//daca e aceeasi poza sa nu o
         });
 
         oldpath = files.filename3.filepath;
-        var newName3 = Date.now().toString() + files.filename3.originalFilename;
+        var newName3 = Date.now().toString() + files.filename3.originalFilename.substring(0,files.filename3.originalFilename.length-4) + "3" +".png";
         var newpath3 =  dirname + '/views/images/' + newName3;
         await fs.copyFile(oldpath, newpath3, function (err) {
             if (err) throw err;
@@ -147,7 +147,7 @@ async function addDynamicCourse(req, res, dirname){//daca e aceeasi poza sa nu o
             }
         });
         oldpath = files.filename4.filepath;
-        var newName4 = Date.now().toString() + files.filename4.originalFilename;
+        var newName4 = Date.now().toString() + files.filename4.originalFilename.substring(0,files.filename4.originalFilename.length-4) + "4" +".png";
         var newpath4 =  dirname + '/views/images/' + newName4;
         await fs.copyFile(oldpath, newpath4, function (err) {
             if (err) throw err;
