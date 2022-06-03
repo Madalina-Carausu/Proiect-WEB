@@ -48,12 +48,12 @@ fetch("username-database-response", {
                     const title=`<div class="row">`+title1+title2+title3+`</div>`
                     divForAdvanced.insertAdjacentHTML("beforeend", title)
                 }
-                while(i<data.length && i>=9){
+                while(i<data.length && i>=6){
                     let count=0;
                     title1="";
                     title2="";
                     title3="";
-                    while(count<3&&i<data.length && i>=9){
+                    while(count<3&&i<data.length && i>=6){
                         const number=data[i].number;
                         const maxPoints=data[i].maxPoints;
                         var advancedX = "Advanced" + number;

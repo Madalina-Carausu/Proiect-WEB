@@ -13,7 +13,8 @@ var TaskUser = require("./controllers/TaskController");
 var Users = require("./controllers/UsersController");
 var Plants = require("./controllers/PlantsController");
 var Questions = require("./controllers/QuestionsController")
-var Course = require("./controllers/CoursesController")
+var Course = require("./controllers/CoursesController");
+const User = require("./models/User");
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
@@ -122,8 +123,14 @@ const server = http.createServer((req, res) => {
         path = "Proiect_MyProfile.html";
       }
   }
+  
 
-    let file = __dirname + "/views/" + path;
+  let file = __dirname + "/views/" + path;
+
+  if(path=="extractCSV"&& req.method=="POST"){
+    Users.extractAllUsers(req, res)
+  }
+  else
   if(path=="ranking"&&req.method=="GET"){
     Users.getAllUsers(req, res);
   }

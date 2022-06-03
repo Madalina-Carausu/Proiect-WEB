@@ -24,7 +24,6 @@ async function loginUser(body, res){
   var name = post.name;
   var password = post.pswd;
   const cmp = await findUserAndComparePassword(name, password)
-  console.log(cmp)
     if(cmp){
       const username=name;
       localStorage.setItem("login", "1");

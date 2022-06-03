@@ -1,16 +1,18 @@
 const Question = require("../models/Question");
 const qs = require('querystring');
 
+function returnNotAnsweredQuestions(){
+    return Question.find({"answer" : ""}).then((questions)=> {return questions;})
+}
 
 async function getNotAnsweredQuestions(res){
-    await Question.find({"answer" : ""}).then((questions)=>{
+    var questions=await returnNotAnsweredQuestions();
         if(questions!=null){
           res.end(JSON.stringify(questions));  
         }
         else{
           res.end(JSON.stringify("Eroare"));  
         }
-      })
 }
 
 async function getQuestions(res){
