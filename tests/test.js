@@ -1,8 +1,19 @@
-const obj = {};
+//TESTARE: node ./tests/test.js
+const mongoose = require("mongoose");
 
-obj.sum = (a, b) => {
-  return a+b;
-};
+const Plant = require("../models/Plant");
+
+
+var Plants = require("../controllers/PlantsController");
+var LoginUser = require("../controllers/LoginController");
+
+mongoose.connect('mongodb://localhost:27017/eGardening');
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
 
 const assert = require('assert');
 
@@ -17,6 +28,64 @@ const it = (desc, fn) => {
   }
 };
 
-it('should return the sum of two numbers', () => {
-  assert.strictEqual(obj.sum(5, 10), 15);
-});
+(async () => {
+
+  var plantsFromFunction
+  var plantsFromMongoDB 
+
+  plantsFromFunction = await Plants.returnPlants("Beginner")
+  plantsFromMongoDB = await Plant.find({"level":"Beginner"}).then((plants) => {return plants})
+  it('should return the same plants from Beginner', () => {
+    assert.strictEqual(plantsFromFunction.toString(), plantsFromMongoDB.toString())
+  });
+
+  plantsFromFunction = await Plants.returnPlants("Intermediate")
+  plantsFromMongoDB = await Plant.find({"level":"Intermediate"}).then((plants) => {return plants})
+  it('should return the same plants from Intermediate', () => {
+    assert.strictEqual(plantsFromFunction.toString(), plantsFromMongoDB.toString())
+  });
+
+  plantsFromFunction = await Plants.returnPlants("Advanced")
+  plantsFromMongoDB = await Plant.find({"level":"Advanced"}).then((plants) => {return plants})
+  it('should return the same plants from Advanced', () => {
+    assert.strictEqual(plantsFromFunction.toString(), plantsFromMongoDB.toString())
+  });
+
+  plantsFromFunction = await Plants.returnPlants("Beginner")
+  plantsFromMongoDB = await Plant.find({"level":"Advanced"}).then((plants) => {return plants})
+  it('should not return the same because is compating plants from Beginner and Advanced', () => {
+    assert.notEqual(plantsFromFunction.toString(), plantsFromMongoDB.toString())
+  });
+
+  plantsFromFunction = await Plants.returnPlants("Intermediate")
+  plantsFromMongoDB = await Plant.find({"level":"Advanced"}).then((plants) => {return plants})
+  it('should not return the same because is compating plants from Intermediate and Advanced', () => {
+    assert.notEqual(plantsFromFunction.toString(), plantsFromMongoDB.toString())
+  });
+
+  plantsFromFunction = await Plants.returnPlants("Beginner")
+  plantsFromMongoDB = await Plant.find({"level":"Intermediate"}).then((plants) => {return plants})
+  it('should not return the same because is compating plants from Beginner and Intermediate', () => {
+    assert.notEqual(plantsFromFunction.toString(), plantsFromMongoDB.toString())
+  });
+
+  var login
+  login = await LoginUser.findUserAndComparePassword("andreea", "andreutza")
+  it('should return true because there is this user with this password in the database', () => {
+    assert.strictEqual(login, true)
+  });
+
+  login = await LoginUser.findUserAndComparePassword("andreea", "andreutz")
+  it("should return false because there is this user but does not have this password in database", () => {
+    assert.strictEqual(login, false)
+  });
+
+  login = await LoginUser.findUserAndComparePassword("andree", "andreutz")
+  it("should return 'Login failed!' because this user does not exist in database", () => {
+    assert.strictEqual(login, "Login failed!")
+  });
+
+})()
+
+
+

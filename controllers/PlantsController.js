@@ -2,37 +2,40 @@ const Plant = require("../models/Plant");
 var formidable = require('formidable');
 const fs = require("fs");
 
+
+function returnPlants(level){
+  return Plant.find({"level":level}).then((plants)=> {return plants;})
+}
+
 async function plantsForSpecificLevel(path, res){
     if(path.slice(-8)=="Beginner"){
-        await Plant.find({"level":"Beginner"}).then((plants)=>{
+      var plants=await returnPlants("Beginner");
           if(plants!=null){
             res.end(JSON.stringify(plants));  
           }
           else{
             res.end(JSON.stringify("Eroare"));  
           }
-        })
+  
       }
       else
       if(path.slice(-12)=="Intermediate"){
-        await Plant.find({"level":"Intermediate"}).then((plants)=>{
+        var plants=await returnPlants("Intermediate");
             if(plants!=null){
               res.end(JSON.stringify(plants));  
             }
             else{
               res.end(JSON.stringify("Eroare"));  
             }
-          })
       }
       else{
-        await Plant.find({"level":"Advanced"}).then((plants)=>{
+        var plants=await returnPlants("Advanced");
             if(plants!=null){
               res.end(JSON.stringify(plants));  
             }
             else{
               res.end(JSON.stringify("Eroare"));  
             }
-          })
     }
 }
 
@@ -83,5 +86,6 @@ async function addDynamicPlant(req, res, dirname){
 module.exports = {
     plantsForSpecificLevel,
     addDynamicPlant,
+    returnPlants
  }
  

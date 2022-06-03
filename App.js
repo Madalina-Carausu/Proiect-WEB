@@ -18,7 +18,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage('./scratch');
 }
 
-var ejs = require('ejs');
+//var ejs = require('ejs');
 
 mongoose.connect('mongodb://localhost:27017/eGardening');
 
@@ -144,7 +144,7 @@ const server = http.createServer((req, res) => {
     });
 
     req.on('end', async function (){
-      await LoginUser(body, res)
+      await LoginUser.loginUser(body, res)
       login=Number(localStorage.getItem("login"));
       admin=Number(localStorage.getItem("admin"));
       username=localStorage.getItem("username");
