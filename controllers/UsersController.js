@@ -5,7 +5,9 @@ const fs = require("fs");
 const ws = fs.createWriteStream("data.csv");
 const csvwriter = require('csv-writer')
 
-const Vonage = require('@vonage/server-sdk')
+const Vonage = require('@vonage/server-sdk');
+const Course = require("../models/Course");
+const { allCoursesFromAdvanced } = require("./CoursesController");
 
 const vonage = new Vonage({
   apiKey: "a1b28e8a",
@@ -17,13 +19,61 @@ function returnAllUsers(){
 }
 
 async function getAllUsers(req, res){
-    var users = await returnAllUsers();
-        if(users!=null){
-          res.end(JSON.stringify(users));  
-        }
-        else{
-          res.end(JSON.stringify("Eroare"));  
-        }
+  var users = await returnAllUsers();
+  if(users!=null){
+    res.end(JSON.stringify(users));  
+  }
+  else{
+    res.end(JSON.stringify("Eroare"));  
+  }
+}
+
+async function getFirstThreeUsers(req, res, level){
+  var length
+  if(level==1)
+    length = await Course.find({"level":"Beginner"}).then((courses)=>{ return courses.length})
+  else
+  if(level==2)
+    length = await Course.find({"level":"Intermediate"}).then((courses)=>{ return courses.length})
+  else
+    length = await Course.find({"level":"Advanced"}).then((courses)=>{ return courses.length})
+  await User.find().then((data)=>{
+    if(data!=null&&data!=undefined){
+      var name1="", name2="", name3="";
+      var points1=0, points2=0, points3=0;
+      for(let i=0;i<data.length;i++){
+          var value=0;
+          for(let j=0;j<data[i].tasks.length;j++){
+              if(data[i].tasks[j].task.substring(0, 5)=="task"+level)
+                  value=value+Number(data[i].tasks[j].value);
+          }
+          if(value!=0){
+              value=((value*100)/(4*length)).toFixed(2);
+              if(Number(value)>=Number(points1)){
+                  points3=points2;
+                  name3=name2;
+                  points2=points1;
+                  name2=name1;
+                  points1=value;
+                  name1=data[i].name;
+              }
+              else
+              if(Number(value)>=Number(points2)){
+                  points3=points2;
+                  name3=name2;
+                  points2=value;
+                  name2=data[i].name;
+              }
+              else
+              if(Number(value)>=Number(points3)){
+                  points3=value;
+                  name3=data[i].name;
+              }
+          } 
+      }
+      res.end(JSON.stringify({name1: name1, name2:name2, name3:name3, points1: points1, points2:points2, points3:points3 }));  
+    }
+  })
 }
 
 async function addTasksForPlants(body, res, image, username){
@@ -144,6 +194,7 @@ module.exports = {
     addTasksForPlants, 
     findUserByName,
     returnAllUsers,
-    extractAllUsers
+    extractAllUsers,
+    getFirstThreeUsers
  }
  

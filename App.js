@@ -108,7 +108,8 @@ const server = http.createServer((req, res) => {
   let parsedURL = url.parse(req.url, true);
 
   let path = parsedURL.path.replace(/^\/+|\/+$/g, "");
- 
+  //console.log("cookie",req.headers.cookie)
+  
   if(login==0){
     if (path == "") {
       path = "Proiect.html";
@@ -131,8 +132,9 @@ const server = http.createServer((req, res) => {
     Users.extractAllUsers(req, res)
   }
   else
-  if(path=="ranking"&&req.method=="GET"){
-    Users.getAllUsers(req, res);
+  if(path.substring(0, 7)=="ranking"&&req.method=="GET"){
+    const level=path.substring(7, path.length);
+    Users.getFirstThreeUsers(req, res, level);
   }
   else
   if(path.substring(0, 6)=="plant_"&&req.method=="POST"){
@@ -210,6 +212,7 @@ const server = http.createServer((req, res) => {
   }
   else
   if(path=="login_popup" && req.method=="POST"){
+    console.log("cookie",req.headers.cookie)
     path="Proiect.html";
     file = __dirname + "/views/" + path;  
     var body = '';                       
@@ -367,11 +370,6 @@ const server = http.createServer((req, res) => {
   } 
   
 });
-
-/*function modulePage() {
-  const template = fs.readFileSync('./views/modules/GeneralModule.ejs', 'utf8');
-  return ejs.render(template, {display:"titluuuuuuu", title1:"aaa", title2:"bbb", title3: "ccc", title4:"dddd", content1:"abcd", content2:"abcd", content3:"abcd", content4:"abcd", task1:"task1", task2:"task2", task3:"task3", task4:"task4"});
-}*/
 
 async function updateXML() {
   var result = await Users.returnAllUsers()

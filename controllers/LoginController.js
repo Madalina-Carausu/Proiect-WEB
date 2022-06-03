@@ -32,13 +32,18 @@ async function loginUser(body, res){
       else
         localStorage.setItem("admin", "0");
       response="Login succesfully!";
+      
       localStorage.setItem("username", username)
       localStorage.setItem("responseFromLogin", response)
       console.log(response)
+      
+      //const session="sesstion_id="+Math.random().toString(36).substring(2,20)+";  HttpOnly, Secure'";
+      //res.setHeader('Set-Cookie',session);
       res.writeHead(302, { "Location": "http://localhost:1234/Proiect_MyProfile.html" });
       res.end(response);
     }
     else{   
+      
       localStorage.setItem("login", "0");
       localStorage.setItem("admin", "0");
       response="Login failed!";
