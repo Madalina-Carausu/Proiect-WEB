@@ -576,6 +576,10 @@ h3 {
     margin-bottom: 40px;
     padding: 0;
 }
+.contact p{
+    font-size: 13px;
+    color: white;
+}
 
 
 /*--------------footer--------------*/
