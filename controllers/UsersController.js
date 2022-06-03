@@ -1,16 +1,20 @@
 const User = require("../models/User");
 const qs = require('querystring');
 
+function returnAllUsers(){
+    return User.find().then((users)=> {return users});
+}
+
 async function getAllUsers(req, res){
-    await User.find().then((users)=>{
+    var users = await returnAllUsers();
         if(users!=null){
           res.end(JSON.stringify(users));  
         }
         else{
           res.end(JSON.stringify("Eroare"));  
         }
-      })
 }
+
 
 async function addTasksForPlants(body, res, image, username){
     var post = qs.parse(body);
@@ -58,6 +62,7 @@ async function findUserByName(username, res){
 module.exports = {
     getAllUsers,
     addTasksForPlants, 
-    findUserByName
+    findUserByName,
+    returnAllUsers
  }
  

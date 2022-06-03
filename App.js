@@ -4,6 +4,8 @@ const http = require("http");
 const url = require("url");
 const fs = require("fs");
 const mongoose = require("mongoose");
+const RSS = require("rss");
+
 
 var SignUpUser = require("./controllers/SignUpController");
 var LoginUser = require("./controllers/LoginController");
@@ -20,13 +22,80 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 //var ejs = require('ejs');
 
-mongoose.connect('mongodb://localhost:27017/eGardening');
+mongoose.connect('mongodb://0.0.0.0:27017/eGardening');
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
   console.log("Connected successfully");
 });
+
+var blog = {
+  title: "eGardening",
+  description: "eGardening is a teaching website where one can find information about all kind of plants, sorted by their level of difficulty, tips and tricks and can ask questions",
+  author: "Carausu Ana-Madalina and Haiura Andreea-Isabela",
+  rankings_beginner: [{
+      author: "",
+      description: "First place",
+      score: "",
+      title:"First place",
+      categories: ['Beginner'],
+  }, {
+      author: "",
+      description: "Second place",
+      score: "",
+      title:"Second place",
+      categories: ['Beginner'],
+  }, {
+      author: "",
+      description: "Third place",
+      score: "",
+      title:"Third place",
+      categories: ['Beginner'],
+  }],
+
+  rankings_intermediate: [{
+    author: "",
+    description: "First place",
+    score: "",
+    title:"First place",
+    categories: ['Intermediate'],
+}, {
+    author: "",
+    description: "Second place",
+    score: "",
+    title:"Second place",
+    categories: ['Intermediate'],
+}, {
+    author: "",
+    description: "Third place",
+    score: "",
+    title:"Third place",
+    categories: ['Intermediate'],
+}],
+
+rankings_advanced: [{
+  author: "",
+  description: "First place",
+  score: "",
+  title:"First place",
+  categories: ['Advanced'],
+}, {
+  author: "",
+  description: "Second place",
+  score: "",
+  title:"Second place",
+  categories: ['Advanced'],
+}, {
+  author: "",
+  description: "Third place",
+  score: "",
+  title:"Third place",
+  categories: ['Advanced'],
+}]
+};
+
+updateXML();
 
 var response="";
 var response2="";
@@ -296,6 +365,192 @@ const server = http.createServer((req, res) => {
   const template = fs.readFileSync('./views/modules/GeneralModule.ejs', 'utf8');
   return ejs.render(template, {display:"titluuuuuuu", title1:"aaa", title2:"bbb", title3: "ccc", title4:"dddd", content1:"abcd", content2:"abcd", content3:"abcd", content4:"abcd", task1:"task1", task2:"task2", task3:"task3", task4:"task4"});
 }*/
+
+async function updateXML() {
+  var result = await Users.returnAllUsers()
+      if(result!=null){
+        var name1="", name2="", name3="";
+        var points1=0, points2=0, points3=0;
+        for(let i=0;i<result.length;i++){
+            var value=0;
+            for(let j=0;j<result[i].tasks.length;j++){
+                if(result[i].tasks[j].task.substring(0, 5)=="task1")
+                    value=value+Number(result[i].tasks[j].value);
+            }
+            if(value!=0){
+                value=((value*100)/(4*result.length)).toFixed(2);
+                if(value>=points1){
+                    points3=points2;
+                    name3=name2;
+                    points2=points1;
+                    name2=name1;
+                    points1=value;
+                    name1=result[i].name;
+                }
+                else
+                if(value>=points2){
+                    points3=points2;
+                    name3=name2;
+                    points2=value;
+                    name2=result[i].name;
+                }
+                else
+                if(value>=points3){
+                    points3=value;
+                    name3=result[i].name;
+                }
+            }
+            
+        }
+        if(name1 == "") name1 = "there is no person on this place yet"
+        if(name2 == "") name2 = "there is no person on this place yet"
+        if(name3 == "") name3 = "there is no person on this place yet"
+
+
+        blog.rankings_beginner[0].author = name1;
+        blog.rankings_beginner[1].author = name2;
+        blog.rankings_beginner[2].author = name3;
+
+        blog.rankings_beginner[0].score = points1;
+        blog.rankings_beginner[1].score = points2;
+        blog.rankings_beginner[2].score = points3;
+
+        name1="", name2="", name3="";
+        points1=0, points2=0, points3=0;  
+
+        for(let i=0;i<result.length;i++){
+          var value=0;
+          for(let j=0;j<result[i].tasks.length;j++){
+              if(result[i].tasks[j].task.substring(0, 5)=="task2")
+                  value=value+Number(result[i].tasks[j].value);
+          }
+          if(value!=0){
+              value=((value*100)/(4*result.length)).toFixed(2);
+              if(value>=points1){
+                  points3=points2;
+                  name3=name2;
+                  points2=points1;
+                  name2=name1;
+                  points1=value;
+                  name1=result[i].name;
+              }
+              else
+              if(value>=points2){
+                  points3=points2;
+                  name3=name2;
+                  points2=value;
+                  name2=result[i].name;
+              }
+              else
+              if(value>=points3){
+                  points3=value;
+                  name3=result[i].name;
+              }
+          }
+          
+        }
+        if(name1 == "") name1 = "there is no person on this place yet"
+        if(name2 == "") name2 = "there is no person on this place yet"
+        if(name3 == "") name3 = "there is no person on this place yet"
+
+        blog.rankings_intermediate[0].author = name1;
+        blog.rankings_intermediate[1].author = name2;
+        blog.rankings_intermediate[2].author = name3;
+
+        blog.rankings_intermediate[0].score = points1;
+        blog.rankings_intermediate[1].score = points2;
+        blog.rankings_intermediate[2].score = points3;
+
+        name1="", name2="", name3="";
+        points1=0, points2=0, points3=0; 
+
+        for(let i=0;i<result.length;i++){
+          var value=0;
+          for(let j=0;j<result[i].tasks.length;j++){
+              if(result[i].tasks[j].task.substring(0, 5)=="task3")
+                  value=value+Number(result[i].tasks[j].value);
+          }
+          if(value!=0){
+            value=((value*100)/(4*result.length)).toFixed(2);
+            if(value>=points1){
+                points3=points2;
+                name3=name2;
+                points2=points1;
+                name2=name1;
+                points1=value;
+                name1=result[i].name;
+            }
+            else
+            if(value>=points2){
+                points3=points2;
+                name3=name2;
+                points2=value;
+                name2=result[i].name;
+            }
+            else
+            if(value>=points3){
+                points3=value;
+                name3=result[i].name;
+            }
+          }
+          
+        }  
+        if(name1 == "") name1 = "there is no person on this place yet"
+        if(name2 == "") name2 = "there is no person on this place yet"
+        if(name3 == "") name3 = "there is no person on this place yet"
+
+        blog.rankings_advanced[0].author = name1;
+        blog.rankings_advanced[1].author = name2;
+        blog.rankings_advanced[2].author = name3;
+
+        blog.rankings_advanced[0].score = points1;
+        blog.rankings_advanced[1].score = points2;
+        blog.rankings_advanced[2].score = points3;
+    }
+    const feed = new RSS({
+      title: blog.title,
+      description: blog.description,
+      author: blog.author,
+      language: 'en',
+      categories: ['Beginner','Intermediate','Advanced'],
+      feed_url: 'localhost:1234/rss.xml',
+      site_url: 'localhost:1234/Proiect.html',
+      managingEditor: 'Carausu Ana-Madalina and Haiura Andreea-Isabela',
+      webMaster: 'Carausu Ana-Madalina and Haiura Andreea-Isabela',
+    });
+    for (const ranking of blog.rankings_beginner) {
+      feed.item({
+          author: ranking.author,
+          description: ranking.description,
+          score: ranking.score,
+          title: ranking.title,
+          categories: ranking.categories
+      });
+    }
+      for (const ranking of blog.rankings_intermediate) {
+        feed.item({
+            author: ranking.author,
+            description: ranking.description,
+            score: ranking.score,
+            title: ranking.title,
+            categories: ranking.categories
+        });
+      }
+        for (const ranking of blog.rankings_advanced) {
+          feed.item({
+              author: ranking.author,
+              description: ranking.description,
+              score: ranking.score,
+              title: ranking.title,
+              categories: ranking.categories
+          });
+        }
+      
+    const xml = feed.xml({ indent: true });
+    fs.writeFileSync("feed.xml", xml);
+  
+}
+
 
 server.listen(1234, "localhost", () => {
   console.log("Listening on port 1234");

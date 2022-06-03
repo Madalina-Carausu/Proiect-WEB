@@ -25,6 +25,7 @@
     "formidable": "^2.0.1",
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.5",
-    "node-localstorage": "^2.2.1"
+    "node-localstorage": "^2.2.1",
+    "rss": "^1.2.2"
   }
 }
