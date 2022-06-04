@@ -12,13 +12,18 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
- plants: {     
-   type: Array,    
+ plants: {
+   type: Array,
    },
   tasks: {
     type: Array,
   },
+  session: {
+    type: String,
+  },
+  token: {
+    type: String,
+  },
 });
 const User = mongoose.model("users", UserSchema);
 module.exports = User;
-//module.exports = {User};

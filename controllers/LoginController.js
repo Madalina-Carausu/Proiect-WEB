@@ -19,37 +19,28 @@ async function findUserAndComparePassword(name, password){
 }
 
 async function loginUser(body, res){
-  
+
   var post = qs.parse(body);
   var name = post.name;
   var password = post.pswd;
   const cmp = await findUserAndComparePassword(name, password)
     if(cmp){
       const username=name;
-      localStorage.setItem("login", "1");
-      if(username=="admin")
-        localStorage.setItem("admin", "1");
-      else
-        localStorage.setItem("admin", "0");
       response="Login succesfully!";
-      
-      localStorage.setItem("username", username)
-      localStorage.setItem("responseFromLogin", response)
+      var session = Math.random().toString(36).substring(2,12);
+      var token = Math.random().toString(36).substring(2,12)
+      const cookie=session+token+username;
+      res.setHeader('Set-Cookie',"session="+cookie);
       console.log(response)
-      
-      //const session="sesstion_id="+Math.random().toString(36).substring(2,20)+";  HttpOnly, Secure'";
-      //res.setHeader('Set-Cookie',session);
+      await User.updateOne({name:username}, 
+            {'$set' : {session : session, token:token }});
       res.writeHead(302, { "Location": "http://localhost:1234/Proiect_MyProfile.html" });
       res.end(response);
     }
-    else{   
-      
-      localStorage.setItem("login", "0");
-      localStorage.setItem("admin", "0");
+    else{
       response="Login failed!";
-      localStorage.setItem("responseFromLogin", response)
       console.log(response)
-      res.writeHead(302, { "Location": "http://localhost:1234" });
+      res.writeHead(302, { "Location": "http://localhost:1234/" });
       res.end(response);
     }
 }

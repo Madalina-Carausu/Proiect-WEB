@@ -63,6 +63,12 @@
                         <p itemprop="description">You can offer answers to some of the user's questions.</p>
                     </div>  
                 </a>
+                <a href="Admin.html#get-CSV" class="lesson-col" itemprop="url">
+                    <div itemprop="hasPart" itemscope itemtype="https://schema.org/Course">
+                        <h3 itemprop="educationalLevel">Get CSV</h3>
+                        <p itemprop="description">You can download a CSV with the data from the database.</p>
+                    </div>  
+                </a>
             </div>
         
         </section>
@@ -87,7 +93,6 @@
               <label for="content1"><b>First paragraph content:</b></label>
               <input type="text" placeholder="Enter first paragraph content" name="content1" required>
               <label for="filename1"><b>Add an image related to the first paragraph:</b></label>
-              <!--<label for="myFile1" class="chooseFile">Choose File</label>-->
               <input type="file" id="myFile1" name="filename1" accept=".png" required>
 
                 <br><br><br>
@@ -96,7 +101,6 @@
               <label for="content2"><b>Second paragraph content:</b></label>
               <input type="text" placeholder="Enter second paragraph content" name="content2" required>
               <label for="filename2"><b>Add an image related to the second paragraph:</b></label>
-              <!--<label for="myFile2" class="chooseFile">Choose File</label>-->
               <input type="file" id="myFile2" name="filename2" accept=".png" required>
 
               <br><br><br>
@@ -105,7 +109,6 @@
               <label for="content3"><b>Third paragraph content:</b></label>
               <input type="text" placeholder="Enter third paragraph content" name="content3" required>
               <label for="filename3"><b>Add an image related to the third paragraph:</b></label>
-              <!--<label for="myFile3" class="chooseFile">Choose File</label>-->
               <input type="file" id="myFile3" name="filename3" accept=".png" required>
 
               <br><br><br>
@@ -114,7 +117,6 @@
               <label for="content4"><b>Fourth paragraph content:</b></label>
               <input type="text" placeholder="Enter fourth paragraph content" name="content4" required>
               <label for="filename4"><b>Add an image related to the fourth paragraph:</b></label>
-              <!--<label for="myFile4" class="chooseFile">Choose File</label>-->
               <input type="file" id="myFile4" name="filename4" accept=".png" required>
 
               <br><br><br>
@@ -146,7 +148,6 @@
               <input type="text" placeholder="Enter the name" name="name" required>
 
               <label for="filename_plant"><b>Add an image of the plant:</b></label>
-              <!--<label for="myFile_plant" class="chooseFile">Choose File</label>-->
               <input type="file" id="myFile_plant" name="filename_plant" accept=".png" required>
 
               <br><br><br>
@@ -175,6 +176,21 @@
               <button type="submit" class="btn">Post</button>
             </form>
         </div>
+
+        <br><br>
+        <div class="form-container">
+            <h1>Get a CSV</h1>
+            <form action="/extractCSVplants" method="post" class="extractCSV" id="get-CSV">
+                <button type="submit" class="btn">Extract CSV -> ID, NAME, PLANTS</button>
+            </form>
+            <form action="/extractCSVtasks" method="post" class="extractCSV">
+                <button type="submit" class="btn">Extract CSV -> ID, NAME, TASKS</button>
+            </form>
+            <form action="/extractCSVnames" method="post" class="extractCSV">
+                <button type="submit" class="btn">Extract CSV -> ID, NAME</button>
+            </form>
+        </div>
+        <br><br>
 
 
 <!--Footer-->

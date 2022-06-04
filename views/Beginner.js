@@ -10,12 +10,16 @@ const divBeginner = document.getElementById("divForBeginner");
 
 var person;
 
-fetch("username-database-response", { 
+fetch("username-database-response-tasks", { 
     mode: 'no-cors' 
 })  .then(response => {return response.json()})
     .then(data => {
         person=data;
-        fetch("courses/beginner", { 
+        console.log(person)
+        })
+        .catch(err => console.log(err));
+
+fetch("courses/beginner", { 
             mode: 'no-cors' 
         })  .then(response => {return response.json()})
             .then(data => {
@@ -128,8 +132,6 @@ fetch("username-database-response", {
                  }, 2000)
             })
             .catch(err => console.log(err));
-        })
-        .catch(err => console.log(err));
 
 fetch("get_login", { 
     mode: 'no-cors'

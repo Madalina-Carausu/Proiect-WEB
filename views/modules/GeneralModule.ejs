@@ -112,6 +112,7 @@
                     <input type="submit" class="submitClass">
                 </form>
             </p>
+        <p id="bottomText"> If you checked all the above requirements then you are ready for the <a href="Advanced2.html">next module</a>!</p>
         </div>
     </section>
 
@@ -143,7 +144,7 @@
     <script>
         var action = `<%= action %>`;
         const task = action.substring(1, action.length); 
-        fetch("username-database-response", { 
+        fetch("username-database-response-tasks", { 
             mode: 'no-cors'
         })  .then(response => {return response.json()})
             .then(data => {

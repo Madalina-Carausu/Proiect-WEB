@@ -35,7 +35,7 @@ function openForm() {
 }
 
 const divQuestions = document.getElementById("q_list");
-fetch("/questions/answered", { 
+fetch("questions/answered", { 
     mode: 'no-cors' // 'cors' by default
 })  .then(response => {return response.json()})
     .then(data => {

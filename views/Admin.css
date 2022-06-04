@@ -9,6 +9,16 @@ h2{
 .lesson{
     padding-top: 0%;
 }
+
+.lesson-col {
+    flex-basis: 20%;
+    background: #ffce7faa;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
 /* Form: */
 
 select{
@@ -104,6 +114,18 @@ select{
     margin-right: 30%;
     opacity: 0.8;
 }
+
+.extractCSV .btn{
+    background-color: #ff9832f4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    margin-bottom:2%;
+    margin-left: 30%;
+    margin-right: 30%;
+    opacity: 0.8;
+}
   
 /* Add some hover effects to buttons */
 .form-container .btn:hover {
@@ -126,15 +148,4 @@ select{
 .chooseFile:hover {
     background: rgba(55, 99, 89, 0.777);
 }
-
-/*
-#myFile_plant, #myFile1, #myFile2, #myFile3, #myFile4  {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}*/
-
 

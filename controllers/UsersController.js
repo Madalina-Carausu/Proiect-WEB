@@ -1,18 +1,22 @@
 const User = require("../models/User");
 const Plant = require("../models/Plant");
 const qs = require('querystring');
-const fs = require("fs");
-const ws = fs.createWriteStream("data.csv");
 const csvwriter = require('csv-writer')
 
 const Vonage = require('@vonage/server-sdk');
 const Course = require("../models/Course");
-const { allCoursesFromAdvanced } = require("./CoursesController");
 
 const vonage = new Vonage({
   apiKey: "a1b28e8a",
   apiSecret: "VgVXzEk3eoJ9DXfM"
 })
+
+function findUserInDatabaseUsingCookie(cookie){
+  var session=cookie.substring(0, 10)
+  var token=cookie.substring(10, 20)
+  var username=cookie.substring(20, cookie.length)
+  return User.findOne({name:username, token:token, session:session}).then((user)=> {if(user) return "Find!"; else return "Not fined!"});
+}
 
 function returnAllUsers(){
     return User.find().then((users)=> {return users});
@@ -128,10 +132,11 @@ async function addTasksForPlants(body, res, image, username){
     res.end();
 }
 
-async function findUserByName(username, res){
+async function findUserByNameAndGetTasks(username, res){
     await User.findOne({"name":username}).then((user)=>{
         if(user!=null){
-          res.end(JSON.stringify(user));  
+          var newUser = {"name":user.name, "tasks":user.tasks}
+          res.end(JSON.stringify(newUser));  
         }
         else{
           res.end(JSON.stringify("Eroare"));  
@@ -139,62 +144,149 @@ async function findUserByName(username, res){
     })
 }
 
-async function extractAllUsers(req, res){
-    var users = await returnAllUsers();
+async function findUserByNameAndGetTasksandPlants(username, res){
+  await User.findOne({"name":username}).then((user)=>{
+      if(user!=null){
+        var newUser = {"name":user.name, "tasks":user.tasks, "plants":user.plants}
+        res.end(JSON.stringify(newUser));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+  })
+}
 
-  
-var createCsvWriter = csvwriter.createObjectCsvWriter
-  
-// Passing the column names intp the module
-const csvWriter = createCsvWriter({
-  
-  // Output csv file name is geek_data
-  path: 'data.csv',
-  header: [
-  
-    // Title of the columns (column_names)
-    {id: 'id', title: 'ID'},
-    {id: 'name', title: 'NAME'},
-    {id: 'age', title: 'AGE'},
-  ]
-});
-  
-// Values for each column through an array
-const results = [
-  {
-    id: '7058',
-    name: 'Sravan Kumar Gottumukkala',
-    age: 22
-  }, {
-    id: '7004',
-    name: 'Sudheer',
-    age: 29
-  }, {
-    id: '7059',
-    name: 'Radha',
-    age: 45
-  },{
-    id: '7060',
-    name: 'vani',
-    age: 34
-  }
+async function extractAllUserPlants(res){
+  var users = await returnAllUsers();
+  var createCsvWriter = csvwriter.createObjectCsvWriter
     
-];
+  // Passing the column names intp the module
+  const csvWriter = createCsvWriter({
+    
+    // Output csv file name is geek_data
+    path: 'plants.csv',
+    header: [
+    
+      // Title of the columns (column_names)
+      {id: 'id', title: 'ID'},
+      {id: 'name', title: 'NAME'},
+      {id: 'plants', title: 'PLANTS'},
+    ]
+  });
+    
+  var results=[]
+  for(let i =0 ; i<users.length;i++){
+    var oneUserPlants=[]
+    for(let j=0;j<users[i].plants.length;j++){
+      oneUserPlants.push({image: users[i].plants[j].image})
+    }
+    const oneUser = {
+      id: users[i].id,
+      name: users[i].name,
+      plants: JSON.stringify(oneUserPlants)
+    }
+    results.push(oneUser)
+  }
 
     csvWriter
-  .writeRecords(results)
-  .then(()=> console.log('Data uploaded into csv successfully'));
+      .writeRecords(results)
+      .then(()=> console.log('Data uploaded into csv successfully'));
 
-    res.writeHead(302, { "Location": "http://localhost:1234/Admin.html"});
+    res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#get-CSV"});
     res.end();
+}
+
+async function extractAllUserTasks(res){
+  var users = await returnAllUsers();
+  var createCsvWriter = csvwriter.createObjectCsvWriter
+    
+  // Passing the column names intp the module
+  const csvWriter = createCsvWriter({
+    
+    // Output csv file name is geek_data
+    path: 'tasks.csv',
+    header: [
+    
+      // Title of the columns (column_names)
+      {id: 'id', title: 'ID'},
+      {id: 'name', title: 'NAME'},
+      {id: 'tasks', title: 'TASKS'},
+    ]
+  });
+    
+  var results=[]
+  for(let i =0 ; i<users.length;i++){
+    var oneUserTasks=[]
+    for(let j=0;j<users[i].tasks.length;j++){
+      oneUserTasks.push({task: users[i].tasks[j].task})
+    }
+    const oneUser = {
+      id: users[i].id,
+      name: users[i].name,
+      tasks: JSON.stringify(oneUserTasks)
+    }
+    results.push(oneUser)
+  }
+
+    csvWriter
+      .writeRecords(results)
+      .then(()=> console.log('Data uploaded into csv successfully'));
+
+    res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#get-CSV"});
+    res.end();
+}
+
+async function extractAllUserNames(res){
+  var users = await returnAllUsers();
+  var createCsvWriter = csvwriter.createObjectCsvWriter
+    
+  // Passing the column names intp the module
+  const csvWriter = createCsvWriter({
+    
+    // Output csv file name is geek_data
+    path: 'names.csv',
+    header: [
+    
+      // Title of the columns (column_names)
+      {id: 'id', title: 'ID'},
+      {id: 'name', title: 'NAME'},
+    ]
+  });
+    
+  var results=[]
+  for(let i =0 ; i<users.length;i++){
+    const oneUser = {
+      id: users[i].id,
+      name: users[i].name,
+    }
+    results.push(oneUser)
+  }
+
+    csvWriter
+      .writeRecords(results)
+      .then(()=> console.log('Data uploaded into csv successfully'));
+
+    res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#get-CSV"});
+    res.end();
+}
+
+function findUserInDatabaseUsingCookie(cookie){
+  var session=cookie.substring(0, 10)
+  var token=cookie.substring(10, 20)
+  var username=cookie.substring(20, cookie.length)
+  return User.findOne({name:username, token:token, session:session}).then((user)=> {if(user) return "Find!"; else return "Not fined!"});
 }
 
 module.exports = {
     getAllUsers,
     addTasksForPlants, 
-    findUserByName,
+    findUserByNameAndGetTasks,
     returnAllUsers,
-    extractAllUsers,
-    getFirstThreeUsers
+    extractAllUserPlants,
+    extractAllUserTasks,
+    getFirstThreeUsers,
+    findUserInDatabaseUsingCookie,
+    findUserByNameAndGetTasksandPlants,
+    extractAllUserNames
  }
  

@@ -10,11 +10,15 @@ const divForAdvanced = document.getElementById("divForAdvanced");
 
 var person;
 
-fetch("username-database-response", { 
+fetch("username-database-response-tasks", { 
     mode: 'no-cors' 
 })  .then(response => {return response.json()})
     .then(data => {
         person=data;
+        
+        })
+        .catch(err => console.log(err));
+
         fetch("courses/advanced", { 
             mode: 'no-cors' 
         })  .then(response => {return response.json()})
@@ -128,8 +132,6 @@ fetch("username-database-response", {
                  }, 2000)
             })
             .catch(err => console.log(err));
-        })
-        .catch(err => console.log(err));
 
 fetch("get_login", { 
     mode: 'no-cors'

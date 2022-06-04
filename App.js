@@ -5,6 +5,8 @@ const url = require("url");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const RSS = require("rss");
+var LogoutUser = require("./controllers/LogoutController");
+
 
 
 var SignUpUser = require("./controllers/SignUpController");
@@ -102,37 +104,32 @@ updateXML();
 
 var response="";
 var response2="";
-var username="";
-var login=0;
-var admin=0;
+
 
 const server = http.createServer(async (req, res) => {
   let parsedURL = url.parse(req.url, true);
-
   let path = parsedURL.path.replace(/^\/+|\/+$/g, "");
-  console.log(req.url, path)
-  //console.log("cookie",req.headers.cookie)
   
-  if(login==0){
     if (path == "") {
-      path = "Proiect.html";
-    }
+    path = "Proiect.html";
   }
-  else{
-    if (path == "") {
-      path = "Proiect_MyProfile.html";
-    }
-    else
-      if (path == "Proiect.html") {
-        path = "Proiect_MyProfile.html";
-      }
-  }
-  
+
+  var cookie = getCookie(req)
+  if(cookie&&await Users.findUserInDatabaseUsingCookie(cookie)=="Find!"&&path=="Proiect.html")
+    path = "Proiect_MyProfile.html";
 
   let file = __dirname + "/views/" + path;
-
-  if(path === "extractCSV" && req.method === "POST"){
-    Users.extractAllUsers(req, res)
+  
+  if(path=="extractCSVnames"&& req.method=="POST"){
+    await Users.extractAllUserNames(res)
+  }
+  else
+  if(path=="extractCSVtasks"&& req.method=="POST"){
+    await Users.extractAllUserTasks(res)
+  }
+  else
+  if(path=="extractCSVplants"&& req.method=="POST"){
+    await Users.extractAllUserPlants(res)
   }
   else
   if(path.substring(0, 7) === "ranking" && req.method === "GET"){
@@ -151,7 +148,8 @@ const server = http.createServer(async (req, res) => {
     });
     
     req.on('end', async function () {
-      await Users.addTasksForPlants(body, res, image, username)
+      var cookie= getCookie(req);
+      await Users.addTasksForPlants(body, res, image, cookie.substring(20, cookie.length))
     })
   }
   else
@@ -173,22 +171,44 @@ const server = http.createServer(async (req, res) => {
   else
   if(path.slice(-9)=="get_login")
   {
-    const objectToSend = {"response": login, "username":username};
+    var login=0;
+    var cookie = getCookie(req)
+    if(await Users.findUserInDatabaseUsingCookie(cookie)=="Find!")
+      login=1;
+    const objectToSend = {"response": login, "username":cookie.substring(20, cookie.length)};
     const jsonContent = JSON.stringify(objectToSend);
     res.end(jsonContent);
-
   }
   else
   if(path.slice(-9)=="get_admin")
   {
+    var admin=0;
+    var cookie= getCookie(req)
+    if(cookie.substring(20, cookie.length)=="admin")
+      admin=1;
     const objectToSend = {"response": admin};
     const jsonContent = JSON.stringify(objectToSend);
     res.end(jsonContent);
   }
+
   else
   if(path.slice(-26)=="username-database-response"){
-    console.log("am intrat in asta")
+    var cookie= getCookie(req);
+    var username = cookie.substring(20, cookie.length)
     await Users.findUserByName(username, res)
+  }
+  else
+  if(path.slice(-43)=="username-database-response-tasks-and-plants")
+  {
+    var cookie= getCookie(req)
+    if(cookie)
+      await Users.findUserByNameAndGetTasksandPlants(cookie.substring(20, cookie.length), res)
+  }
+  else
+  if(path.slice(-32)=="username-database-response-tasks"){
+    var cookie= getCookie(req)
+    if(cookie)
+      await Users.findUserByNameAndGetTasks(cookie.substring(20, cookie.length), res)
   }
   else
   if(path == "courses/advanced" && req.method == "GET"){ //Advanced-response
@@ -279,15 +299,15 @@ const server = http.createServer(async (req, res) => {
   }
   else
   if(path=="questions" && req.method=="GET"){
-    Questions.getAllQuestions(res);
+    await Questions.getAllQuestions(res);
   }
   else
   if(path=="questions/notAnswered" && req.method=="GET"){
-    Questions.getNotAnsweredQuestions(res);
+    await Questions.getNotAnsweredQuestions(res);
   }
   else
   if(path=="questions/answered" && req.method=="GET"){
-    Questions.getQuestions(res);
+    await Questions.getQuestions(res);
   }
   else
   if(path=="questions/answer" && req.method == "UPDATE") 
@@ -324,15 +344,15 @@ const server = http.createServer(async (req, res) => {
 
     req.on('end', async function (){
       await LoginUser.loginUser(body, res)
-      login=Number(localStorage.getItem("login"));
-      admin=Number(localStorage.getItem("admin"));
-      username=localStorage.getItem("username");
-      response=localStorage.getItem("responseFromLogin")
+
     })
   }
   else
   if(path=="login_popup" && req.method=="GET"){
       if(response!=""){
+        var cookie= getCookie(req);
+        var username = cookie.substring(20, cookie.length)
+        console.log("user",usernames)
         const objectToSend = {"response": response, "username":username};
         response="";
         const jsonContent = JSON.stringify(objectToSend);
@@ -367,11 +387,20 @@ const server = http.createServer(async (req, res) => {
   }
   else
   if(path=="logout" && req.method=="POST"){
+    var body="";
+    req.on('data', function (data) {
+      body += data;
+      if (body.length > 1e6)
+          request.close();
+    });
+
+    req.on('end', async function () {
+      var cookie= getCookie(req)
+      await LogoutUser.logoutUser(cookie)
+    });
       response="";
       response2="";
-      admin = 0;
-      username="";
-      login=0;
+      res.setHeader('Set-cookie', 'session=; max-age=0');
       res.writeHead(302, { "Location": "http://" + 'localhost:1234' });
       res.end("success");
   }
@@ -394,6 +423,8 @@ const server = http.createServer(async (req, res) => {
     });
    
     req.on('end', async function () {
+      var cookie= getCookie(req);
+    var username = cookie.substring(20, cookie.length)
       await TaskUser(body, taskText, username, res)
     });
 
@@ -403,6 +434,8 @@ const server = http.createServer(async (req, res) => {
   else
   if(path == "form_questions" && req.method=="POST" ) {
     var body = '';
+    var cookie= getCookie(req);
+    var username = cookie.substring(20, cookie.length)
 
     if(username != "") {
 
@@ -413,6 +446,8 @@ const server = http.createServer(async (req, res) => {
       });
 
       req.on('end', async function () {
+        var cookie= getCookie(req);
+        var username = cookie.substring(20, cookie.length)
         await Questions.addQuestion(body, res, username)
       })
       
@@ -655,7 +690,26 @@ async function updateXML() {
     fs.writeFileSync("feed.xml", xml);
   
 }
+function getCookie(req){
+  var data=req.headers.cookie;
+    let i=0;
+    if(data!=undefined&&data!=null)
+    {
+      if(data.length>40)
+      {
+        while(data[i]!=";"&&i<data.length){
+          i++;
+        }
+        if(i<data.length)
+          i++;
+        return data.substring(i+9, data.length);
+      }
+      else
+      return req.headers.cookie.substring(8, req.headers.cookie.length);
+    }
+    return "";
 
+}
 
 server.listen(1234, "localhost", () => {
   console.log("Listening on port 1234");
