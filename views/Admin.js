@@ -29,7 +29,7 @@ fetch("get_admin", {
     .catch(err => console.log(err));
 
 const selectDiv = document.getElementById("chosen_question");
-fetch("get_questions", { 
+fetch("/questions/notAnswered", { 
     mode: 'no-cors'
 })  .then(response => {return response.json()})
     .then(data => {

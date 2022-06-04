@@ -39,7 +39,7 @@ fetch("username-database-response", {
         person=data;  
     
     var numberForBeginner=0;
-    fetch("Beginner-response", { 
+    fetch("courses/beginner", { 
         mode: 'no-cors' 
     })  .then(response => {return response.json()})
         .then(data => {
@@ -60,7 +60,7 @@ fetch("username-database-response", {
                 document.getElementById("my_level").insertAdjacentHTML("beforeend", "Beginner");
                 document.getElementById("my_percentage").insertAdjacentHTML("beforeend", numberForBeginner+"%");
 
-                fetch("Plants-Beginner", { 
+                fetch("plants/beginner", { 
                     mode: 'no-cors' 
                 })  .then(response => {return response.json()})
                     .then(data => {
@@ -105,7 +105,7 @@ fetch("username-database-response", {
                     })
                     .catch(err => console.log(err));
 
-                    fetch("Plants-Intermediate", { 
+                    fetch("plants/intermediate", { 
                         mode: 'no-cors' 
                     })  .then(response => {return response.json()})
                         .then(data => {
@@ -128,7 +128,7 @@ fetch("username-database-response", {
                             }
                         })
                         .catch(err => console.log(err));
-                        fetch("Plants-Advanced", { 
+                        fetch("plants/advanced", { 
                             mode: 'no-cors' 
                         })  .then(response => {return response.json()})
                             .then(data => {
@@ -154,7 +154,7 @@ fetch("username-database-response", {
             }
             else{
                 var numberForIntermediate=0;
-                fetch("Intermediate-response", { 
+                fetch("courses/intermediate", { 
                     mode: 'no-cors' 
                 })  .then(response => {return response.json()})
                     .then(data => {
@@ -170,7 +170,7 @@ fetch("username-database-response", {
                     if(numberForIntermediate!=100){
                         document.getElementById("my_level").insertAdjacentHTML("beforeend", "Intermediate");
                         document.getElementById("my_percentage").insertAdjacentHTML("beforeend", numberForIntermediate+"%");
-                        fetch("Plants-Beginner", { 
+                        fetch("plants/beginner", { 
                             mode: 'no-cors' 
                         })  .then(response => {return response.json()})
                             .then(data => {
@@ -203,7 +203,7 @@ fetch("username-database-response", {
                             })
                             .catch(err => console.log(err));
         
-                            fetch("Plants-Intermediate", { 
+                            fetch("plants/intermediate", { 
                                 mode: 'no-cors' 
                             })  .then(response => {return response.json()})
                                 .then(data => {
@@ -238,7 +238,7 @@ fetch("username-database-response", {
                                     }
                                 })
                                 .catch(err => console.log(err));
-                                fetch("Plants-Advanced", { 
+                                fetch("plants/advanced", { 
                                     mode: 'no-cors' 
                                 })  .then(response => {return response.json()})
                                     .then(data => {
@@ -264,7 +264,7 @@ fetch("username-database-response", {
                     }
                     else{
                         var numberForAdvanced=0;
-                        fetch("Advanced-response", { 
+                        fetch("/courses/advanced", { 
                             mode: 'no-cors' 
                         })  .then(response => {return response.json()})
                             .then(data => {
@@ -279,7 +279,7 @@ fetch("username-database-response", {
                             document.getElementById("my_level").insertAdjacentHTML("beforeend", "Advanced");
                             document.getElementById("my_percentage").insertAdjacentHTML("beforeend", numberForAdvanced+"%");
 
-                            fetch("Plants-Beginner", { 
+                            fetch("plants/beginner", { 
                                 mode: 'no-cors' 
                             })  .then(response => {return response.json()})
                                 .then(data => {
@@ -312,7 +312,7 @@ fetch("username-database-response", {
                                 })
                                 .catch(err => console.log(err));
             
-                                fetch("Plants-Intermediate", { 
+                                fetch("plants/intermediate", { 
                                     mode: 'no-cors' 
                                 })  .then(response => {return response.json()})
                                     .then(data => {
@@ -333,7 +333,7 @@ fetch("username-database-response", {
                                         }
                                     })
                                     .catch(err => console.log(err));
-                                    fetch("Plants-Advanced", { 
+                                    fetch("plants/advanced", { 
                                         mode: 'no-cors' 
                                     })  .then(response => {return response.json()})
                                         .then(data => {

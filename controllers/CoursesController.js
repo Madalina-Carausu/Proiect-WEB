@@ -3,6 +3,17 @@ const fs = require("fs");
 var ejs = require('ejs');
 var formidable = require('formidable');
 
+async function allCourses(res){
+  await Course.find().then((courses)=>{
+      if(courses!=null){
+        res.end(JSON.stringify(courses));  
+      }
+      else{
+        res.end(JSON.stringify("Eroare"));  
+      }
+    })
+}
+
 async function allCoursesFromAdvanced(res){
     await Course.find({"level":"Advanced"}).then((courses)=>{
         if(courses!=null){
@@ -108,7 +119,7 @@ async function specificDynamicCourseFromAdvanced(res, number){
     })
 }
 
-async function addDynamicCourse(req, res, dirname){//daca e aceeasi poza sa nu o mai adaug
+async function addDynamicCourse(req, res, dirname){
     var form = new formidable.IncomingForm();
     await form.parse(req, async function (err, fields, files) {
         var oldpath = files.filename1.filepath;
@@ -211,8 +222,79 @@ async function addDynamicCourse(req, res, dirname){//daca e aceeasi poza sa nu o
         });
     });
 }
+async function returnSpecificDynamicCourseFromAdvanced(res, number){
+  await Course.findOne({"level":"Advanced", "number" : number}).then((course)=>{
+      if(course!=null) {
+        var jsonCourse = JSON.stringify(course)
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.write(jsonCourse);
+        res.end();
+      }
+  })
+}
+async function returnSpecificDynamicCourseFromIntermediate(res, number){
+  await Course.findOne({"level":"Intermediate", "number" : number}).then((course)=>{
+      if(course!=null) {
+        var jsonCourse = JSON.stringify(course)
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.write(jsonCourse);
+        res.end();
+      }
+  })
+}
+async function returnSpecificDynamicCourseFromBeginner(res, number){
+  await Course.findOne({"level":"Beginner", "number" : number}).then((course)=>{
+      if(course!=null) {
+        var jsonCourse = JSON.stringify(course)
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.write(jsonCourse);
+        res.end();
+      }
+  })
+}
+
+async function deleteDynamicCourseBeginner(res, number, dirname){
+  await Course.deleteOne({"level":"Beginner"}, {"number":number});
+  var jsonCourse = JSON.stringify({"message" : "Deleted successfully"})
+  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.write(jsonCourse);
+  res.end();
+}
+async function deleteDynamicCourseIntermediate(res, number, dirname){
+  await Course.deleteOne({"level":"Intermediate"}, {"number":number});
+  var jsonCourse = JSON.stringify({"message" : "Deleted successfully"})
+  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.write(jsonCourse);
+  res.end();}
+async function deleteDynamicCourseAdvanced(res, number, dirname){
+  await Course.deleteOne({"level":"Advanced"}, {"number":number});
+  var jsonCourse = JSON.stringify({"message" : "Deleted successfully"})
+  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.write(jsonCourse);
+  res.end();}
+
+  async function updateDynamicCourseBeginner(res, number, dirname){
+    await Course.updateOne({"level":"Beginner", "number":number}, {"title4":"updated title"});
+    var jsonCourse = JSON.stringify({"message" : "Updated successfully"})
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.write(jsonCourse);
+    res.end();
+  }
+  async function updateDynamicCourseIntermediate(res, number, dirname){
+    await Course.updateOne({"level":"Intermediate", "number":number}, {"title4":"updated title"});
+    var jsonCourse = JSON.stringify({"message" : "Updated successfully"})
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.write(jsonCourse);
+    res.end();}
+  async function updateDynamicCourseAdvanced(res, number, dirname){
+    await Course.updateOne({"level":"Advanced", "number":number}, {"title4":"updated title"});
+    var jsonCourse = JSON.stringify({"message" : "Updated successfully"})
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.write(jsonCourse);
+    res.end();}
 
 module.exports = {
+    allCourses,
     allCoursesFromAdvanced,
     allCoursesFromIntermediate,
     allCoursesFromBeginner,
@@ -220,5 +302,14 @@ module.exports = {
     specificDynamicCourseFromIntermediate,
     specificDynamicCourseFromAdvanced,
     addDynamicCourse,
+    deleteDynamicCourseBeginner,
+    deleteDynamicCourseIntermediate,
+    deleteDynamicCourseAdvanced,
+    returnSpecificDynamicCourseFromBeginner,
+    returnSpecificDynamicCourseFromIntermediate,
+    returnSpecificDynamicCourseFromAdvanced,
+    updateDynamicCourseBeginner,
+    updateDynamicCourseIntermediate,
+    updateDynamicCourseAdvanced,
 }
  

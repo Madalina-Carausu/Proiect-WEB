@@ -15,7 +15,7 @@ fetch("username-database-response", {
 })  .then(response => {return response.json()})
     .then(data => {
         person=data;
-        fetch("Beginner-response", { 
+        fetch("courses/beginner", { 
             mode: 'no-cors' 
         })  .then(response => {return response.json()})
             .then(data => {

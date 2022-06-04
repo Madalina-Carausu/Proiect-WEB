@@ -15,6 +15,8 @@ var Plants = require("./controllers/PlantsController");
 var Questions = require("./controllers/QuestionsController")
 var Course = require("./controllers/CoursesController");
 const User = require("./models/User");
+const Question = require("./models/Question");
+const { dirname } = require("path");
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
@@ -104,10 +106,11 @@ var username="";
 var login=0;
 var admin=0;
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   let parsedURL = url.parse(req.url, true);
 
   let path = parsedURL.path.replace(/^\/+|\/+$/g, "");
+  console.log(req.url, path)
   //console.log("cookie",req.headers.cookie)
   
   if(login==0){
@@ -128,16 +131,16 @@ const server = http.createServer((req, res) => {
 
   let file = __dirname + "/views/" + path;
 
-  if(path=="extractCSV"&& req.method=="POST"){
+  if(path === "extractCSV" && req.method === "POST"){
     Users.extractAllUsers(req, res)
   }
   else
-  if(path.substring(0, 7)=="ranking"&&req.method=="GET"){
+  if(path.substring(0, 7) === "ranking" && req.method === "GET"){
     const level=path.substring(7, path.length);
     Users.getFirstThreeUsers(req, res, level);
   }
   else
-  if(path.substring(0, 6)=="plant_"&&req.method=="POST"){
+  if(path.substring(0, 6) ==="plant_"&&req.method=="POST"){
     
     var body = '';
     var image=path.substring(6, path.length);
@@ -152,8 +155,20 @@ const server = http.createServer((req, res) => {
     })
   }
   else
-  if(path.substring(0, 6)=="Plants"){
-    Plants.plantsForSpecificLevel(path, res)
+  if(path=="plants"){
+    await Plants.getAllPlants(res)
+  }
+  else
+  if(path.substring(0, 6)=="plants"){
+    await Plants.plantsForSpecificLevel(path, res)
+  }
+  else
+  if(path.substring(0, 6)=="plants" && req.method == "POST"){
+    await Plants.returnAddDynamicPlant(req, res, dirname)
+  }
+  else
+  if(path.substring(0, 6)=="plants" && req.method == "DELETE"){
+    await Plants.deletePlant(res, id)
   }
   else
   if(path.slice(-9)=="get_login")
@@ -172,43 +187,128 @@ const server = http.createServer((req, res) => {
   }
   else
   if(path.slice(-26)=="username-database-response"){
-    Users.findUserByName(username, res)
+    console.log("am intrat in asta")
+    await Users.findUserByName(username, res)
   }
   else
-  if(path=="Advanced-response"){
-    Course.allCoursesFromAdvanced(res)
+  if(path == "courses/advanced" && req.method == "GET"){ //Advanced-response
+    await Course.allCoursesFromAdvanced(res)
   }
   else
-  if(path=="Intermediate-response"){
-    Course.allCoursesFromIntermediate(res)
+  if(path=="courses/intermediate" && req.method == "GET"){//Intermediate-response
+    await Course.allCoursesFromIntermediate(res)
   }
   else
-  if(path=="Beginner-response")
+  if(path=="courses/beginner" && req.method == "GET") //Beginner-response
   {
-    Course.allCoursesFromBeginner(res)
+    await Course.allCoursesFromBeginner(res)
+  }
+  else
+  if(path.substring(0,17) == "courses/beginner/" && req.method=="GET")
+  {
+    var number = Number(path.substring(17, path.length));
+    await Course.returnSpecificDynamicCourseFromBeginner(res,number)
+  }
+  else
+  if(path.substring(0,21) == "courses/intermediate/" && req.method=="GET")
+  {
+    var number = Number(path.substring(21, path.length));
+    await Course.returnSpecificDynamicCourseFromIntermediate(res,number)
+  }
+  else
+  if(path.substring(0,17) == "courses/advanced/" && req.method=="GET")
+  {
+    var number = Number(path.substring(17, path.length));
+    await Course.returnSpecificDynamicCourseFromAdvanced(res,number)
+  }
+  else
+  if(path.substring(0,17) == "courses/beginner/" && req.method=="DELETE")
+  {
+    var number = Number(path.substring(17, path.length));
+    await Course.deleteDynamicCourseBeginner(res, number);
+  }
+  else
+  if(path.substring(0,21) == "courses/intermediate/" && req.method=="DELETE")
+  {
+    var number = Number(path.substring(21, path.length));
+    await Course.deleteDynamicCourseIntermediate(res, number);
+  }
+  else
+  if(path.substring(0,17) == "courses/advanced/" && req.method=="DELETE")
+  {
+    var number = Number(path.substring(17, path.length));
+    await Course.deleteDynamicCourseAdvanced(res, number);
+  }
+  else
+  if(path.substring(0,17) == "courses/beginner/" && req.method=="PATCH")
+  {
+    var number = Number(path.substring(17, path.length));
+    await Course.updateDynamicCourseBeginner(res, number);
+  }
+  else
+  if(path.substring(0,21) == "courses/intermediate/" && req.method=="PATCH")
+  {
+    var number = Number(path.substring(21, path.length));
+    await Course.updateDynamicCourseIntermediate(res, number);
+  }
+  else
+  if(path.substring(0,17) == "courses/advanced/" && req.method=="PATCH")
+  {
+    var number = Number(path.substring(17, path.length));
+    await Course.updateDynamicCourseAdvanced(res, number);
+  }
+  else
+  if(path=="courses" && req.method == "GET") //nu o folosim
+  {
+    await Course.allCourses(res)
   }
   else
   if(path.substring(0,8) == "Beginner" && req.method=="POST") {
     var number = Number(path.substring(8, path.length));
-    Course.specificDynamicCourseFromBeginner(res, number)
+    await Course.specificDynamicCourseFromBeginner(res, number)
   }
   else
   if(path.substring(0,12) == "Intermediate" && req.method=="POST") {
     var number = Number(path.substring(12, path.length));
-    Course.specificDynamicCourseFromIntermediate(res, number)
+    await Course.specificDynamicCourseFromIntermediate(res, number)
   }
   else
   if(path.substring(0,8) == "Advanced" && req.method=="POST") {
     var number = Number(path.substring(8, path.length));
-    Course.specificDynamicCourseFromAdvanced(res, number)
+    await Course.specificDynamicCourseFromAdvanced(res, number)
   }
   else
-  if(path=="get_questions" && req.method=="GET"){
+  if(path=="questions" && req.method=="GET"){
+    Questions.getAllQuestions(res);
+  }
+  else
+  if(path=="questions/notAnswered" && req.method=="GET"){
     Questions.getNotAnsweredQuestions(res);
   }
   else
-  if(path=="get_questions_and_answers" && req.method=="GET"){
+  if(path=="questions/answered" && req.method=="GET"){
     Questions.getQuestions(res);
+  }
+  else
+  if(path=="questions/answer" && req.method == "UPDATE") 
+  {
+    var body = '';
+
+    req.on('data', function (data) {
+        body += data;
+        if (body.length > 1e6)
+            request.close();
+    });
+
+    req.on('end', async function () {
+      await Questions.returnAnswerTheQuestion(body, res)
+    });
+  }
+  else
+  if(path.substring(0,9)=="questions" && req.method == "DELETE") 
+  {
+    var id = path.substring(17, path.length);
+    await Question.deleteDynamicCourseAdvanced(res, id);
   }
   else
   if(path=="login_popup" && req.method=="POST"){
