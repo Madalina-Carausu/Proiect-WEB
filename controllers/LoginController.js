@@ -8,6 +8,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 async function findUserAndComparePassword(name, password){
+
   return await User.findOne({name: name}).then(async (user)=>{
     if(user!=null){
       const cmp = await bcrypt.compare(password, user.password);
@@ -24,7 +25,7 @@ async function loginUser(body, res){
   var name = post.name;
   var password = post.pswd;
   const cmp = await findUserAndComparePassword(name, password)
-    if(cmp){
+    if(cmp==true){
       const username=name;
       response="Login succesfully!";
       var session = Math.random().toString(36).substring(2,12);

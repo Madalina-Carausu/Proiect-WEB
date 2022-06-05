@@ -5,10 +5,8 @@ const url = require("url");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const RSS = require("rss");
+
 var LogoutUser = require("./controllers/LogoutController");
-
-
-
 var SignUpUser = require("./controllers/SignUpController");
 var LoginUser = require("./controllers/LoginController");
 var TaskUser = require("./controllers/TaskController");
@@ -16,8 +14,6 @@ var Users = require("./controllers/UsersController");
 var Plants = require("./controllers/PlantsController");
 var Questions = require("./controllers/QuestionsController")
 var Course = require("./controllers/CoursesController");
-const User = require("./models/User");
-const Question = require("./models/Question");
 const { dirname } = require("path");
 
 if (typeof localStorage === "undefined" || localStorage === null) {
@@ -120,15 +116,15 @@ const server = http.createServer(async (req, res) => {
 
   let file = __dirname + "/views/" + path;
   
-  if(path=="extractCSVnames"&& req.method=="POST"){
+  if(path=="extractCSVnames"&& req.method=="GET"){
     await Users.extractAllUserNames(res)
   }
   else
-  if(path=="extractCSVtasks"&& req.method=="POST"){
+  if(path=="extractCSVtasks"&& req.method=="GET"){
     await Users.extractAllUserTasks(res)
   }
   else
-  if(path=="extractCSVplants"&& req.method=="POST"){
+  if(path=="extractCSVplants"&& req.method=="GET"){
     await Users.extractAllUserPlants(res)
   }
   else
@@ -190,7 +186,6 @@ const server = http.createServer(async (req, res) => {
     const jsonContent = JSON.stringify(objectToSend);
     res.end(jsonContent);
   }
-
   else
   if(path.slice(-26)=="username-database-response"){
     var cookie= getCookie(req);
@@ -328,11 +323,10 @@ const server = http.createServer(async (req, res) => {
   if(path.substring(0,9)=="questions" && req.method == "DELETE") 
   {
     var id = path.substring(17, path.length);
-    await Question.deleteDynamicCourseAdvanced(res, id);
+    await Questions.deleteQuestion(res, id);
   }
   else
   if(path=="login_popup" && req.method=="POST"){
-    console.log("cookie",req.headers.cookie)
     path="Proiect.html";
     file = __dirname + "/views/" + path;  
     var body = '';                       
@@ -352,7 +346,6 @@ const server = http.createServer(async (req, res) => {
       if(response!=""){
         var cookie= getCookie(req);
         var username = cookie.substring(20, cookie.length)
-        console.log("user",usernames)
         const objectToSend = {"response": response, "username":username};
         response="";
         const jsonContent = JSON.stringify(objectToSend);

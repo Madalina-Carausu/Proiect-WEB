@@ -4,7 +4,7 @@
         <description><![CDATA[eGardening is a teaching website where one can find information about all kind of plants, sorted by their level of difficulty, tips and tricks and can ask questions]]></description>
         <link>localhost:1234/Proiect.html</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 04 Jun 2022 04:11:11 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 04 Jun 2022 10:13:55 GMT</lastBuildDate>
         <atom:link href="localhost:1234/rss.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Carausu Ana-Madalina and Haiura Andreea-Isabela]]></author>
         <language><![CDATA[en]]></language>
@@ -25,28 +25,28 @@
             <description><![CDATA[Second place]]></description>
             <guid isPermaLink="false">Second place</guid>
             <category><![CDATA[Beginner]]></category>
-            <dc:creator><![CDATA[isabela]]></dc:creator>
+            <dc:creator><![CDATA[admin]]></dc:creator>
         </item>
         <item>
             <title><![CDATA[Third place]]></title>
             <description><![CDATA[Third place]]></description>
             <guid isPermaLink="false">Third place</guid>
             <category><![CDATA[Beginner]]></category>
-            <dc:creator><![CDATA[there is no person on this place yet]]></dc:creator>
+            <dc:creator><![CDATA[isabela]]></dc:creator>
         </item>
         <item>
             <title><![CDATA[First place]]></title>
             <description><![CDATA[First place]]></description>
             <guid isPermaLink="false">First place</guid>
             <category><![CDATA[Intermediate]]></category>
-            <dc:creator><![CDATA[andreea]]></dc:creator>
+            <dc:creator><![CDATA[admin]]></dc:creator>
         </item>
         <item>
             <title><![CDATA[Second place]]></title>
             <description><![CDATA[Second place]]></description>
             <guid isPermaLink="false">Second place</guid>
             <category><![CDATA[Intermediate]]></category>
-            <dc:creator><![CDATA[there is no person on this place yet]]></dc:creator>
+            <dc:creator><![CDATA[andreea]]></dc:creator>
         </item>
         <item>
             <title><![CDATA[Third place]]></title>
@@ -67,7 +67,7 @@
             <description><![CDATA[Second place]]></description>
             <guid isPermaLink="false">Second place</guid>
             <category><![CDATA[Advanced]]></category>
-            <dc:creator><![CDATA[there is no person on this place yet]]></dc:creator>
+            <dc:creator><![CDATA[admin]]></dc:creator>
         </item>
         <item>
             <title><![CDATA[Third place]]></title>

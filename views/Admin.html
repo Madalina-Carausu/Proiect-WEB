@@ -179,16 +179,10 @@
 
         <br><br>
         <div class="form-container">
-            <h1>Get a CSV</h1>
-            <form action="/extractCSVplants" method="post" class="extractCSV" id="get-CSV">
-                <button type="submit" class="btn">Extract CSV -> ID, NAME, PLANTS</button>
-            </form>
-            <form action="/extractCSVtasks" method="post" class="extractCSV">
-                <button type="submit" class="btn">Extract CSV -> ID, NAME, TASKS</button>
-            </form>
-            <form action="/extractCSVnames" method="post" class="extractCSV">
-                <button type="submit" class="btn">Extract CSV -> ID, NAME</button>
-            </form>
+            <h1 id="get-CSV">Get a CSV</h1>
+            <button onclick="handleCSVplants()" class="btn">Extract CSV -> ID, NAME, PLANTS</button>
+            <button onclick="handleCSVtasks()" class="btn">Extract CSV -> ID, NAME, TASKS</button>
+            <button onclick="handleCSVnames()" class="btn">Extract CSV -> ID, NAME</button>
         </div>
         <br><br>
 
@@ -208,6 +202,104 @@
 
 <!--JavaScript for Toggle Menu-->
     <script src="Admin.js">
+    </script>
+    <script>
+function handleCSVnames(){
+
+
+    fetch("extractCSVnames", { 
+        mode: 'no-cors',
+
+    })  .then(response => {return response.json()})
+       
+        .then(data => {
+            console.log("DA")
+            var rows = [
+                ["ID", "NAME"],
+                
+            ];
+            for(let i=0;i<data.length;i++){
+                rows[i+1]=[data[i].id, data[i].name]
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8," 
+                + rows.map(e => e.join(",")).join("\n");
+                var encodedUri = encodeURI(csvContent);
+            window.open(encodedUri);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "names.csv");
+            document.body.appendChild(link);
+            link.click();
+          
+            })
+        .catch(err => console.log(err)); 
+}
+
+
+function handleCSVplants(){
+
+
+fetch("extractCSVplants", { 
+    mode: 'no-cors',
+
+})  .then(response => {return response.json()})
+   
+    .then(data => {
+        console.log("DA")
+        var rows = [
+            ["ID", "NAME", "PLANTS"],
+        ];
+        for(let i=0;i<data.length;i++){
+            rows[i+1]=[data[i].id, data[i].name, data[i].plants]
+        }
+
+        let csvContent = "data:text/csv;charset=utf-8," 
+            + rows.map(e => e.join(",")).join("\n");
+            var encodedUri = encodeURI(csvContent);
+        window.open(encodedUri);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "plants.csv");
+        document.body.appendChild(link);
+        link.click();
+      
+        })
+    .catch(err => console.log(err)); 
+}
+
+function handleCSVtasks(){
+
+
+fetch("extractCSVtasks", { 
+    mode: 'no-cors',
+
+})  .then(response => {return response.json()})
+   
+    .then(data => {
+        console.log("DA")
+        var rows = [
+            ["ID", "NAME", "TASKS   "],
+            
+        ];
+        for(let i=0;i<data.length;i++){
+            rows[i+1]=[data[i].id, data[i].name, data[i].tasks]
+        }
+
+        let csvContent = "data:text/csv;charset=utf-8," 
+            + rows.map(e => e.join(",")).join("\n");
+            var encodedUri = encodeURI(csvContent);
+        window.open(encodedUri);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "tasks.csv");
+        document.body.appendChild(link);
+        link.click();
+      
+        })
+    .catch(err => console.log(err)); 
+}
+
     </script>
 </body>
 </html>

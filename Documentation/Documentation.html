@@ -124,7 +124,7 @@
             <section>
                 <h4>2.2 Product Functions</h4>
                 <p>
-                    The web application offers three level courses each of them having ten modules. The levels are: 
+                    The web application offers three level courses each of them having a few modules. The levels are: 
                     Beginner, Intermediate and Advanced. These modules include general information about gardening,
                     relevant images, tasks and pieces of advice. In this application the user can log in and have access 
                     a private profile where he can add what plants he would like to grow and the application will
@@ -176,9 +176,6 @@
                     <li>
                         create account: redirects to a sign up page;
                     </li>
-                    <li>
-                        forgot password: redirects to a forgot password page.
-                    </li>
                 </ul>
 
                 SignUp page:
@@ -201,15 +198,6 @@
                 Beginner page:
                 <ul>
                     <li>
-                        Garden Basics: redirects to Garden Basics page;
-                    </li>
-                    <li>
-                        Growing Zone: redirects to Growing Zone page;
-                    </li>
-                    <li>
-                        Garden Beds: redirects to Garden Beds page;
-                    </li>
-                    <li>
                         Module x: redirects to Module x page.
                     </li>
                 </ul>
@@ -231,10 +219,7 @@
                 My profile page:
                 <ul>
                     <li>
-                        add plant: adds a plant to the user’s virtual garden if it is available for his level;
-                    </li>
-                    <li>
-                        stop notifications: the user will no longer get notifications from the website.
+                        check task: adds a new task to the "done" state;
                     </li>
                 </ul>
 
@@ -256,7 +241,7 @@
                     <li>
                         Home page data flow.
                     </li>
-                    <img src="./diagrams/homePageDiagram.png" class="homeImage" alt="home page diagram image">
+                    <img src="./diagrams/homePageDiagram1.png" class="homeImage" alt="home page diagram image">
                     <li>
                         Other pages data flow (in this example the Q&A page).
                     </li>
@@ -281,6 +266,9 @@
                     <li>
                         User: user with an associated account that can have a profile and can see his progress.
                     </li>
+                    <li>
+                        Admin: the administrator of the website who can modify the courses, plants and can answer questions.
+                    </li>
                 </ul>
             </section>
 
@@ -295,9 +283,16 @@
             <section>
                 <h4>2.5 Design and Implementation Constraints</h4>
                 <p>
-                    e-Gardening uses html, css and javascript for its visualization engine and it will be developed in NodeJS. 
-                    It will store the data into two databases: one for the users passwords and one for the users profiles, 
-                    tips and tricks, information for the modules and questions and answers.
+                    e-Gardening uses html, css and javascript for its visualization engine and when it comes to backend part, it is written in Node.js. The information about users, courses and plants are being kept
+                    into the MongoDB database. It also uses libraries such as "nexmo" to send SMS to its users, RSS for the rss feed. As per the code formatting,
+                    we used MVC.
+                </p>
+            </section>
+            <section>
+                <h4>2.6 Security</h4>
+                <p>
+                    e-Gardening uses bcrypt library to encript its users passwords and generates new sessions for each new client. Moreover, it doesn't fetch unnecessary information
+                    and it doesn't fetch users passwords or confidential data.
                 </p>
             </section>
 
@@ -321,6 +316,11 @@
                     </figure>
 
                     <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Sign-up pop-up</figcaption>
+                        <img src="./screenshots/signUp.png" alt="Sign up screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
                         <figcaption>e-Gardening’s Beginner page</figcaption>
                         <img src="./screenshots/beginnerPage.png" alt="Beginner page screenshot" class="screenshot">
                     </figure>
@@ -341,13 +341,23 @@
                     </figure>
 
                     <figure typeof="sa:image">
+                        <figcaption>e-Gardening’sTips&Tricks Flowers page</figcaption>
+                        <img src="./screenshots/flowers.png" alt="Q&A page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
                         <figcaption>e-Gardening’s Q&A page</figcaption>
                         <img src="./screenshots/qaPage.png" alt="Q&A page screenshot" class="screenshot">
                     </figure>
 
                     <figure typeof="sa:image">
                         <figcaption>e-Gardening’s My profile page</figcaption>
-                        <img src="./screenshots/profilePage.png" alt="My profile page screenshot" class="profileImage">
+                        <img src="./screenshots/profilePage.png" alt="My profile page screenshot" class="screenshot">
+                    </figure>
+
+                    <figure typeof="sa:image">
+                        <figcaption>e-Gardening’s Admin page</figcaption>
+                        <img src="./screenshots/adminPage.png" alt="Admin page screenshot" class="screenshot">
                     </figure>
                    
                 </section>
@@ -362,7 +372,7 @@
             </section>
 
             <section>
-                <h4>3.4 Communications Interfaces</h4>
+                <h4>3.3 Communications Interfaces</h4>
                 <p>
                     e-Gardening requires Internet connection. The communication standard that is to be used is HTTP.
                 </p>
@@ -376,8 +386,8 @@
             <section>
                 <h4>4.1 Home page</h4>
                 <p>
-                    Guests and users can read a little about our courses, tips and tricks, questions and answers and 
-                    they can navigate to other linked pages.
+                    Guests and users can read about our courses, tips and tricks, questions and answers and 
+                    they cad adress questions as soon as they log in.
                 </p>
             </section>
 
@@ -477,9 +487,9 @@
             </section>
 
             <section>
-                <h4>4.14 Contact page</h4>
+                <h4>4.14 Admin page</h4>
                 <p>
-                    Guests and users can view the authors contact information.
+                    The website administrator can post a new course, plant or can answer some questions from the website, addressed by the users.
                 </p>
             </section>
 
@@ -526,6 +536,11 @@
                     <li>Q&A page</li>
                     <li>Semantics and metadata</li>
                     <li>Documentation</li>
+                    <li>Admin page</li>
+                    <li>Dynamic courses, plants and answers</li>
+                    <li>Dynamic questions</li>
+                    <li>Flux de date RSS</li>
+                    <li>REST API</li>
                 </ul>
                 <h4>Haiura Isabela:</h4>
                 <ul>
@@ -536,6 +551,11 @@
                     <li>Garden Beds page</li>
                     <li>Login pop-up</li>
                     <li>Documentation</li>
+                    <li>Login/Sign-up</li>
+                    <li>ajax</li>
+                    <li>Data export: csv</li>
+                    <li>MVC</li>
+                    <li>My profile with dynamic data</li>
                 </ul>
             </section>
         </section>

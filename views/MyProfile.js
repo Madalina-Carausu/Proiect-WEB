@@ -37,13 +37,11 @@ fetch("username-database-response-tasks-and-plants", {
 })  .then(response => {return response.json()})
     .then(data => {
         person=data;  
-    
     var numberForBeginner=0;
     fetch("courses/beginner", { 
         mode: 'no-cors' 
     })  .then(response => {return response.json()})
         .then(data => {
-
             var value=0;
             var title='';
             for(let i=0;i<person.tasks.length;i++){
@@ -163,9 +161,8 @@ fetch("username-database-response-tasks-and-plants", {
                             if(person.tasks[i].task.substring(0, 5)=="task2")
                                 value=value+Number(person.tasks[i].value);
                         }
-                        numberForIntermediate=((person.tasks.length*100)/(4*data.length)).toFixed(2);
-                    })
-                    .catch(err => console.log(err));
+                        numberForIntermediate=((value*100)/(4*data.length)).toFixed(2);
+                    
             
                     if(numberForIntermediate!=100){
                         document.getElementById("my_level").insertAdjacentHTML("beforeend", "Intermediate");
@@ -261,6 +258,7 @@ fetch("username-database-response-tasks-and-plants", {
                                         }
                                     })
                                     .catch(err => console.log(err));
+                                    
                     }
                     else{
                         var numberForAdvanced=0;
@@ -274,8 +272,7 @@ fetch("username-database-response-tasks-and-plants", {
                                         value=value+Number(person.tasks[i].value);
                                 }
                                 numberForAdvanced=((value*100)/(4*data.length)).toFixed(2);
-                            })
-                            .catch(err => console.log(err));
+                            
                             document.getElementById("my_level").insertAdjacentHTML("beforeend", "Advanced");
                             document.getElementById("my_percentage").insertAdjacentHTML("beforeend", numberForAdvanced+"%");
 
@@ -364,10 +361,15 @@ fetch("username-database-response-tasks-and-plants", {
                                                     }
 
                                                 }
+                                                
                                             }
                                         })
                                         .catch(err => console.log(err));
-                    }
+                                        
+                                    })
+                                    .catch(err => console.log(err));}
+                })
+                .catch(err => console.log(err));
             }
 
     })

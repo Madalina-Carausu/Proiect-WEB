@@ -10,7 +10,6 @@ function returnPlants(level){
 async function getAllPlants(res){
   await Plant.find().then((plants)=>{
       if(plants!=null){
-        console.log(plants)
         res.end(JSON.stringify(plants));  
       }
       else{

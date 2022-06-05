@@ -16,8 +16,7 @@ fetch("username-database-response-tasks", {
     .then(data => {
         person=data;
         console.log(person)
-        })
-        .catch(err => console.log(err));
+        
 
 fetch("courses/beginner", { 
             mode: 'no-cors' 
@@ -130,6 +129,8 @@ fetch("courses/beginner", {
                         }
                     });
                  }, 2000)
+                })
+                .catch(err => console.log(err));
             })
             .catch(err => console.log(err));
 

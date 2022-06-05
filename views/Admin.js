@@ -47,11 +47,7 @@ fetch("questions/notAnswered", {
             selectDiv.insertAdjacentHTML("beforeend", option);
         }
     })
-    .catch(err => console.log(err));    
+    .catch(err => console.log(err)); 
 
-/*
-$("#myFile_plant").change(function() {
-    filename = this.name;
-    console.log(filename);
-    });*/
+    
     

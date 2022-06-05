@@ -111,7 +111,7 @@ async function addTasksForPlants(body, res, image, username){
                 const to = "4"+phone
                 const text = 'Take care of your new plant -> '+display
 
-                /*vonage.message.sendSms(from, to, text, (err, responseData) => {
+                vonage.message.sendSms(from, to, text, (err, responseData) => {
                     if (err) {
                         console.log(err);
                     } else {
@@ -121,7 +121,7 @@ async function addTasksForPlants(body, res, image, username){
                             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
                         }
                     }
-                })*/
+                })
 
                 await User.updateOne({"name" : username}, 
                 {'$push' : {"plants":{ "image": image, "task1" : task1 , "task2" : task2 , "task3" : task3 }}})  
@@ -157,6 +157,7 @@ async function findUserByNameAndGetTasksandPlants(username, res){
 }
 
 async function extractAllUserPlants(res){
+
   var users = await returnAllUsers();
   var createCsvWriter = csvwriter.createObjectCsvWriter
     
@@ -192,11 +193,13 @@ async function extractAllUserPlants(res){
       .writeRecords(results)
       .then(()=> console.log('Data uploaded into csv successfully'));
 
-    res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#get-CSV"});
-    res.end();
+      res.writeHead(200, {'Content-Type': 'application/javascript; charset=utf-8'})
+      res.end(JSON.stringify(results));
 }
 
 async function extractAllUserTasks(res){
+
+
   var users = await returnAllUsers();
   var createCsvWriter = csvwriter.createObjectCsvWriter
     
@@ -227,11 +230,11 @@ async function extractAllUserTasks(res){
     }
     results.push(oneUser)
   }
-
     csvWriter
       .writeRecords(results)
       .then(()=> console.log('Data uploaded into csv successfully'));
-
+    res.writeHead(200, {'Content-Type': 'application/javascript; charset=utf-8'})
+    res.end(JSON.stringify(results));
     res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#get-CSV"});
     res.end();
 }
@@ -265,9 +268,8 @@ async function extractAllUserNames(res){
     csvWriter
       .writeRecords(results)
       .then(()=> console.log('Data uploaded into csv successfully'));
-
-    res.writeHead(302, { "Location": "http://localhost:1234/Admin.html#get-CSV"});
-    res.end();
+    res.writeHead(200, {'Content-Type': 'application/javascript; charset=utf-8'})
+    res.end(JSON.stringify(results));
 }
 
 function findUserInDatabaseUsingCookie(cookie){
@@ -287,6 +289,6 @@ module.exports = {
     getFirstThreeUsers,
     findUserInDatabaseUsingCookie,
     findUserByNameAndGetTasksandPlants,
-    extractAllUserNames
+    extractAllUserNames,
  }
  
